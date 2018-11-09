@@ -1,0 +1,44 @@
+body {
+    background-color: rgb(46, 49, 49);
+}
+
+.container {
+    padding-top: 30px;
+}
+
+.intro-row {
+    padding-bottom: 25px;
+}
+
+text, .title-text, .gen-text {
+    font-family: Consolas, courier;
+    fill: rgb(238, 238, 238);
+    color: rgb(238, 238, 238);
+}
+
+.title {
+    padding-left: 25px;
+}
+
+.placeholder-text {
+    font-style: italic;
+    fill: rgb(191, 191, 191);
+}
+
+.loading-placeholder {
+    padding-left: 180px;
+    padding-top: 75px;
+}
+
+.bfn-mdl-card.mdl-card {
+    min-height: 0px;
+    width: 256px;
+}
+
+.bfn-mdl-card > .mdl-card__title {
+    height: 50px;
+}
+/* 
+.bfn-mdl-card > .mdl-card__supporting-text {
+    height: 50px;
+} */

@@ -10,22 +10,26 @@ import itertools
 frmt = '%m-%d-%Y %H:%M:%S'
 idCounter = 0
 productStyles = ['style1', 'style2', 'style3', 'style4']
-userDemos = ['male-under-30', 'female-under-30', 'male-31-to-60', 'female-31-to-60', 'male-over-60', 'female-over-60']
-regions = ['us-west', 'us-east', 'asia', 'europe']
+ages = ['under-30', '31-to-60', 'over-60']
+genders = ['male', 'female']
+regions = ['us', 'asia', 'europe']
 nodes = [1, 2]
-allEventCombos = list(itertools.product(*[productStyles, userDemos, regions, nodes]))
-targetDemoEventCombos = list(itertools.product(*[productStyles, ['male-under-30', 'female-under-30'], ['us-west', 'us-east'], nodes]))
-usEventCombos = list(itertools.product(*[productStyles, userDemos, ['us-west', 'us-east'], nodes]))
-trendEventCombos = list(itertools.product(*[['style2'], userDemos, ['asia'], nodes]))
+allEventCombos = list(itertools.product(*[productStyles, ages, genders, regions, nodes]))
+targetDemoEventCombos = list(itertools.product(*[productStyles, ['under-30'], genders, ['us'], nodes]))
+usEventCombos = list(itertools.product(*[productStyles, ages, genders, ['us'], nodes]))
+europeEventCombos = list(itertools.product(*[productStyles, ages, genders, ['europe'], nodes]))
+asiaEventCombos = list(itertools.product(*[productStyles, ages, genders, ['europe'], nodes]))
+trendEventCombos = list(itertools.product(*[['style2'], ages, genders, ['asia'], nodes]))
 
 # Event class that contains the fields for our event messages. Essentially just
 # a simple constructor and an iterator
 class Event:
 
-    def __init__(self, id, productStyle, userDemo, region, node, stageNum, stageName, timestamp):
+    def __init__(self, id, productStyle, age, gender, region, node, stageNum, stageName, timestamp):
         self.id = id
         self.productStyle = productStyle
-        self.userDemo = userDemo
+        self.age = age
+        self.gender = gender
         self.region = region
         self.node = node
         self.stageNum = stageNum
@@ -33,7 +37,7 @@ class Event:
         self.timestamp = timestamp
 
     def __iter__(self):
-        return iter([self.id, self.productStyle, self.userDemo, self.region, self.node, self.stageNum, self.stageName, self.timestamp])
+        return iter([self.id, self.productStyle, self.age, self.gender, self.region, self.node, self.stageNum, self.stageName, self.timestamp])
 
 
 # Generates event activity for the specified hour.
@@ -45,7 +49,7 @@ class Event:
 #
 # Returns:
 #   events (list) - List of events that were generated
-def generateHourOfData(hourDt, productStyle, userDemo, region, node, avgMsgPerMin, stdMsgPerMin):
+def generateHourOfData(hourDt, productStyle, age, gender, region, node, avgMsgPerMin, stdMsgPerMin):
     # Generate an array with given average and std with size 59. This represents 
     # the number of messages per minute. 
     msgPerMinute = np.random.normal(loc=avgMsgPerMin, scale=stdMsgPerMin, size=59)
@@ -53,18 +57,19 @@ def generateHourOfData(hourDt, productStyle, userDemo, region, node, avgMsgPerMi
     # Iterate through all 59 minutes and generate the actual datetimes
     events = []
     for i, numMsgs in enumerate(msgPerMinute):
+        if (numMsgs < 0):
+            continue
+
         # Calculate the target minute within the hour
         startDt = hourDt + dt.timedelta(minutes=i)
 
         # The number of messages per minute has a decimal part.
         # Use decimal value as the probability of a message being generated.
-        if (numMsgs > 0):
-            if (numMsgs % 1 > 0):
-                # Choose between 0 an 1. If 1 (true), increment numMsgs.
-                # This will trigger the next block of code to generate 1 
-                # additional message
-                if(np.random.choice(2, p=[1-(numMsgs % 1), (numMsgs % 1)])):
-                    numMsgs += 1
+        if (numMsgs < 1):
+            # This will trigger the next block of code to generate 1 
+            # additional message
+            if (np.random.uniform(0, 1) < numMsgs % 1):
+                numMsgs += 1
         
         # Iterate for the number of messages that need to be created
         for _ in range(int(numMsgs)):
@@ -76,7 +81,7 @@ def generateHourOfData(hourDt, productStyle, userDemo, region, node, avgMsgPerMi
             # granularity at a seconds level, so this can be compeltely random.
             timestamp = rndm.random() * dt.timedelta(seconds=60) + startDt
 
-            newEvent = Event(idCounter, productStyle, userDemo, region, node, 1, "Order Received", dt.datetime.strftime(timestamp, frmt))
+            newEvent = Event(idCounter, productStyle, age, gender, region, node, 1, "Order Received", dt.datetime.strftime(timestamp, frmt))
             events.append(newEvent)
 
     return events
@@ -86,10 +91,13 @@ def generateBaselineMonth(monthDt, monthIdx):
     baseDt = monthDt.replace(day=1, hour=0)
     events = []
 
+    base = (monthIdx * 30 * 0.00005) + 0.001
+    dailyIncrement = 0
     for day in range(daysInMonth(baseDt)):
+        dailyIncrement += 0.00005
         for combo in allEventCombos:
             for hour in range(24):
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.03 * monthIdx, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], base + dailyIncrement, 0)
 
     return events
 
@@ -101,7 +109,19 @@ def generateTargetDemographicMonth(monthDt):
     for day in range(daysInMonth(baseDt)):
         for combo in targetDemoEventCombos:
             for hour in range(24):
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.08, 2)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.003, 0)
+
+    return events
+
+
+def generateEuropeMonth(monthDt):
+    baseDt = monthDt.replace(day=1, hour=0)
+    events = []
+
+    for day in range(daysInMonth(baseDt)):
+        for combo in europeEventCombos:
+            for hour in range(24):
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0003, 0)
 
     return events
 
@@ -115,14 +135,14 @@ def generateWorkdayMonth(monthDt):
         if ((baseDt + dt.timedelta(days=day)).weekday() < 5):
             for combo in usEventCombos:
             
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=8), combo[0], combo[1], combo[2], combo[3], 0.2, 0)
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=9), combo[0], combo[1], combo[2], combo[3], 0.35, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=8), combo[0], combo[1], combo[2], combo[3], combo[4], 0.003, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=9), combo[0], combo[1], combo[2], combo[3], combo[4], 0.004, 0)
 
                 for hour in range(10,15):
-                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.5, 0)
+                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.007, 0)
 
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=15), combo[0], combo[1], combo[2], combo[3], 0.35, 0)
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=16), combo[0], combo[1], combo[2], combo[3], 0.2, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=15), combo[0], combo[1], combo[2], combo[3], combo[4], 0.004, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=16), combo[0], combo[1], combo[2], combo[3], combo[4], 0.003, 0)
 
     return events
 
@@ -136,15 +156,15 @@ def generateHolidayMonth(monthDt):
             for hour in range(24):
                 # New Years Day
                 if (baseDt.month == 1 and day < 3):
-                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.2, 0)
+                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0015, 0)
 
                 # Christmas and New Years Eve
                 if (baseDt.month == 12 and day > 23):
-                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.2, 0)
+                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0015, 0)
 
                 # Thanksgiving
-                if (baseDt.month == 11 and day > 21 and day < 25):
-                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.1, 0)
+                if (baseDt.month == 11 and day > 21 and day < 26):
+                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0015, 0)
 
     return events
 
@@ -156,26 +176,30 @@ def generateStyleTrendMonth(monthDt):
     for combo in trendEventCombos:
         for hour in range(24):
             for day in range(10,20):
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.8, 1)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.03, 0)
 
-            events += generateHourOfData(baseDt + dt.timedelta(days=20, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.5, 4)
-            events += generateHourOfData(baseDt + dt.timedelta(days=21, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.1, 4)
-            events += generateHourOfData(baseDt + dt.timedelta(days=22, hours=hour), combo[0], combo[1], combo[2], combo[3], 0.02, 4)
-              
+            events += generateHourOfData(baseDt + dt.timedelta(days=20, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.015, 0)
+            events += generateHourOfData(baseDt + dt.timedelta(days=21, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.01, 0)
+            events += generateHourOfData(baseDt + dt.timedelta(days=22, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.005, 0)  
 
     return events
 
 
-# def generateDowntimeMonth(monthDt):
-#     baseDt = monthDt.replace(day=1, hour=0)
-#     events = []
+def generateAdCampaignMonth(monthDt):
+    baseDt = monthDt.replace(day=1, hour=0)
+    events = []
 
-#     for day in range(daysInMonth(baseDt)):
-#         for combo in allEventCombos:
-#             for hour in range(24):
+    dailyIncrement = 0
+    for day in range(daysInMonth(baseDt)):
+        dailyIncrement += 0.000033
+        for hour in range(24):
+            for combo in europeEventCombos:
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], dailyIncrement * 1.2, 0)
 
+            for combo in asiaEventCombos:
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], dailyIncrement, 0) 
 
-#     return events
+    return events
 
 
 def daysInMonth(targetDt):
@@ -208,14 +232,16 @@ def generateCsvFile(events, filename):
         for event in events:
             if (first):
                 first = False
-                wr.writerow(["id", "productStyle", "userDemo", "region", "node", "stageNum", "stageName", "timestamp"])
+                wr.writerow(["id", "productStyle", "age", "gender", "region", "node", "stageNum", "stageName", "timestamp"])
 
             wr.writerow(list(event))
 
         
+# print(np.random.normal(loc=0.0001, scale=1, size=59))
 
-startDt = dt.datetime.strptime("02-01-2018 00:00:00", frmt)
-for i in range(1):
+
+startDt = dt.datetime.strptime("11-01-2017 00:00:00", frmt)
+for i in range(3):
     monthEvents = []
     targetDt = startDt + dt.timedelta(days=i*32)
 
@@ -233,22 +259,30 @@ for i in range(1):
     # activity
     monthEvents += generateTargetDemographicMonth(targetDt)
 
+    # Slightly more Euro events just to help differentiate the regions
+    monthEvents += generateEuropeMonth(targetDt)
+
     # Generate events during the major holidays. 
     if (targetDt.month in [1, 11, 12]):
         monthEvents += generateHolidayMonth(targetDt)
 
-    # Generate a huge spike in events for product style2 from region asia. This is
-    # programmed to occur from days 10 to 22 in the target month. 
-    if (targetDt.month == 2):
+    if (targetDt.month == 1):
+        # Generate a huge spike in events for product style2 from region asia. This is
+        # programmed to occur from days 10 to 22 in the target month. 
         monthEvents += generateStyleTrendMonth(targetDt)
+
+        # Generate events for a simulated foreign ad campaign. The ad campaign increases events from
+        # europe and asia, but it is more successful in europe
+        monthEvents += generateAdCampaignMonth(targetDt)
 
     # Generate a period of downtime. Currently this will be harcoded on Feb 19. A
     # day within the trend spike. The insight will be that after the downtime, the trend
     # died down
-    downtimeDate = dt.datetime.strptime('02-19-2018', '%m-%d-%Y')
+    downtimeDate = dt.datetime.strptime('01-19-2018', '%m-%d-%Y')
     monthEvents = [event for event in monthEvents if dt.datetime.strptime(event.timestamp, frmt).date() != downtimeDate.date()]
-    # if (targetDt.month == 2):
-    #     monthEvents += generateDowntimeMonth(targetDt)
+    for combo in usEventCombos:
+        for hour in range(24):
+            monthEvents += generateHourOfData(downtimeDate, combo[0], combo[1], combo[2], combo[3], combo[4], 0.00002, 0)
 
     # monthEvents = generateStage(monthEvents, 1, "StageTwo", 30, 10)
     # monthEvents = generateStage(monthEvents, 2, "StageThree", 5, 75)
