@@ -2,26 +2,26 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-
-  <title>E-Commerce Dashboard</title>
-  <meta name="author" content="Renzee Reyes">
-
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css">
-  <link rel="stylesheet" type="text/css" href="style/main.css">
-
+	<meta charset="utf-8">
+	
+	<title>E-Commerce Dashboard</title>
+	<meta name="author" content="Renzee Reyes">
+	
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css">
+	<link rel="stylesheet" type="text/css" href="style/main.css">
+	
 </head>
 
 <body>
-	<div class="container">
-		<div class="row intro-row">
+	<div class="container-fluid">
+		<!-- <div class="row intro-row">
 			<div class="col-12">
-				<h2 class="title-text">W209 Final Project - E-Commerce Data Pipeline Dashboard</h2>
+				<h3 class="title-text">E-Commerce Data Pipeline Dashboard</h3>
 			</div>
-		</div>
-
+		</div> -->
+		
 		<div class="row loading-placeholder">
 			<div class="col-12">
 				<h2 class="gen-text placeholder-text loading-placeholder">
@@ -29,110 +29,291 @@
 				</h2>
 			</div>
 		</div>
-
+		
 		<div class="row bfn-header">
 			<div class="col-12">
-				<h3 class="gen-text title-text">At-a-Glance Summary Numbers</h3>
+				<h4 class="gen-text title-text">At-a-Glance</h4>
 			</div>
-
+			
 		</div>
-
+		
 		<div class="row bfn-content">
 			<div class="col-3">
-				<div class="bfn-mdl-card mdl-card">
-					<div class="mdl-card__title">
-						# of Records Received in Month
+				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title mdl-card--expand">
+						<h3 class="mdl-card__title-text">00000 records recieved this month</h3>
 					</div>
-
-					<div class="mdl-card__title">
-						<h1 class="mdl-card__title-text">000000</h1>
+					
+					<div class="mdl-card__supporting-text">
+						+0000 (+00%) since last month
 					</div>
-				</div>
-			</div>
-
-			<div class="col-3">
-				<div class="bfn-mdl-card mdl-card">
-					<div class="mdl-card__title">
-						# of Records Processed in Month
-					</div>
-
-					<div class="mdl-card__title">
-						<h1 class="mdl-card__title-text">000000</h1>
+					
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+							View Details
+						</a>
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="col-3">
-				<div class="bfn-mdl-card mdl-card">
-					<div class="mdl-card__title">
-						Avg. Time to Process in Month
+				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title mdl-card--expand">
+						<h2 class="mdl-card__title-text">00000 records processed this month</h2>
 					</div>
-
-					<div class="mdl-card__title">
-						<h1 class="mdl-card__title-text">000000</h1>
+					
+					<div class="mdl-card__supporting-text">
+						-0000 (-00%) since last month
+					</div>
+					
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+							View Details
+						</a>
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="col-3">
-				<div class="bfn-mdl-card mdl-card">
-					<div class="mdl-card__title">
-						Slowest Stage in Month (with Time to Process)
+				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title mdl-card--expand">
+						<h3 class="mdl-card__title-text">00 average days to process a record this month</h3>
 					</div>
-
-					<div class="mdl-card__title">
-						<h1 class="mdl-card__title-text">000000</h1>
+					
+					<div class="mdl-card__supporting-text">
+						-00 (-00%) since last month
+					</div>
+					
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+							View Details
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-3">
+				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title mdl-card--expand">
+						<h3 class="mdl-card__title-text">Style 0 is the highest seller this month</h3>
+					</div>
+					
+					<div class="mdl-card__supporting-text">
+						00 months in a row
+					</div>
+					
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+							View Details
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<hr>
-
+		
 		<div class="row stage-header">
 			<div class='col-12'>
-				<h3 class="gen-text title-text">Overview of Stage-to-Stage Performance</h3>
+				<h4 class="gen-text title-text">Stage-to-Stage Performance</h4>
 			</div>
 		</div>
-
-		<div class="row stage-selector">
-			<div class='offset-1 col-2'>
-				<h4 class="gen-text">Stage 1</h4>
+		
+		<!-- <div class="row stage-overview">
+			<div class='col-12'>
+				<div class="stage-overview-mdl-card mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<h2 class="mdl-card__title-text">Welcome</h2>
+					</div>
+					
+					<div class="mdl-card__supporting-text">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Mauris sagittis pellentesque lacus eleifend lacinia...
+					</div>
+					
+				</div>
 			</div>
+		</div> -->
+	</div>
 
+	<div class="container-fluid stage-container">
+		<div class="row flex-row flex-nowrap stage-selector">
 			<div class='col-2'>
-				<h4 class="gen-text">Stage 2</h4>
-			</div>
-
-			<div class='col-2'>
-				<h4 class="gen-text">Stage 3</h4>
-			</div>
-
-			<div class='col-2'>
-				<h4 class="gen-text">Stage 4</h4>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 1</a>
+				</div>
 			</div>
 			
 			<div class='col-2'>
-				<h4 class="gen-text">Stage 5</h4>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 2</a>
+				</div>
+			</div>
+			
+			<div class='col-2'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 3</a>
+				</div>
+			</div>
+			
+			<div class='col-2'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 4</a>
+				</div>
+			</div>
+			
+			<div class='col-2'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 5</a>
+				</div>
+			</div>
+
+			<div class='col-2'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 6</a>
+				</div>
+			</div>
+
+			<div class='col-2'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 7</a>
+				</div>
+			</div>
+
+			<div class='col-2'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+					</div>
+					<a class="card-link btn btn-light title-text">Stage 8</a>
+				</div>
 			</div>
 		</div>
-
-		<div class="row stage-dashboard">
-			<div class='col-12'>
-				<h3 class="gen-text title-text">Dashboard Panel 1</h3>
+	</div>
+		
+	<div class="container">
+		<div class="row stage-timeline">
+			<div class="col-12">
+				<h4 class="gen-text">Timeline</h4>
+				<div id="timeline"></div>
 			</div>
 		</div>
+		
+		<div class="row stage-detail">
+			<div class="col-5">
+				<h4 class="gen-text">Orders Received by Regions</h4>
+				<div class="barChart" id="carTypes"></div>
+			</div>
 
+			<div class="col-6">
+				<h4 class="gen-text">Orders Received by Style</h4>
+				<div class="barChart" id="gates"></div>
+			</div>
+		</div>
+		
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
+	
 	<script src="http://colorbrewer2.org/export/colorbrewer.js"></script>
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="js/main.js"></script>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/vega@4.3.0/build/vega.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc8/build/vega-lite.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.20.0/build/vega-embed.js"></script>
+	
+	<script src="js/timeSeriesChart.js"></script>
+	<script src="js/barChart.js"></script>
+	<script src="js/scatterPlot.js"></script>
+	<script src="js/streamGraph.js"></script>
+	
+	<!-- <script>
+		// Assign the specification to a local variable vlSpec.
+		var vlSpec = {
+			
+			"$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+			"width": 1000,
+			"height": 1000,
+			"data": {
+				"url": "data/data_compiled.json"
+			},
+			"hconcat": [{
+				"title": "Overall Count",
+				"mark": "line",
+				"encoding": {
+					"x": {
+						"field": "timestamp",
+						"timeUnit": "seconds",
+						"type": "temporal"
+					},
+					"y": {
+						"aggregate": "count",
+						"field": "id"
+					},
+					
+				}
+			},
+			{
+				"title": "Count By Stage",
+				"mark": "line",
+				"encoding": {
+					"x": {
+						"field": "timestamp",
+						"timeUnit": "seconds",
+						"type": "temporal"
+					},
+					"y": {
+						"aggregate": "count",
+						"field": "id"
+					},
+					"color": {
+						"field": "stageNum",
+						"type": "nominal"
+					}
+				}
+			}
+			]
+		};
+		
+		// Embed the visualization in the container with id `vis`
+		vegaEmbed("#vis", vlSpec);
+	</script> -->
+	
+	<script src="js/main.js"></script>
 </body>
 </html>
 

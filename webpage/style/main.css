@@ -1,6 +1,10 @@
 body {
-    background-color: rgb(46, 49, 49);
+    background-color: rgb(238, 238, 238);
 }
+
+/* .stage-selector {
+    background-color: rgb(244, 244, 244);
+} */
 
 .container {
     padding-top: 30px;
@@ -12,8 +16,12 @@ body {
 
 text, .title-text, .gen-text {
     font-family: Consolas, courier;
-    fill: rgb(238, 238, 238);
-    color: rgb(238, 238, 238);
+    fill: rgb(103, 128, 159);
+    color: rgb(103, 128, 159);
+}
+
+.title-text {
+    font-size: 20px;
 }
 
 .title {
@@ -32,13 +40,73 @@ text, .title-text, .gen-text {
 
 .bfn-mdl-card.mdl-card {
     min-height: 0px;
+    height: 200px;
     width: 256px;
 }
 
 .bfn-mdl-card > .mdl-card__title {
-    height: 50px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
 }
-/* 
-.bfn-mdl-card > .mdl-card__supporting-text {
-    height: 50px;
-} */
+
+.stage-overview-mdl-card.mdl-card {
+    width: 100%;
+}
+
+.stage-overview-mdl-card > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('../assets/demos/welcome_card.jpg') center / cover;
+}
+
+.stage-container > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+.stage-container > .row > .col-4 {
+    display: inline-block;
+    float: none;
+}
+
+.stage-card {
+    height: 200px;
+}
+
+.mdl-button-text {
+    color: rgb(238, 238, 238);
+}
+
+
+#timeline .line {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+
+#timeline .area {
+    /*fill: #969696;*/
+    fill: steelblue;
+}
+
+#timeline .attention {
+    background: yellow;
+    margin: -4px;
+    padding: 4px;
+}
+
+.barChart .bar {
+    fill: steelblue;
+}
+.barChart .x.axis path {
+    display: none;
+}
+#gates .x.axis text {
+    text-anchor: end;
+}
+
+#gates svg {
+    overflow: visible;
+}
+
