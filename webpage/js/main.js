@@ -1,7 +1,8 @@
 /* global d3, crossfilter, timeSeriesChart, barChart */
 
-// 2015-05-01 00:43:28
-var dateFmt = d3.timeParse("%m-%d-%Y %H:%M:%S");
+// Changing the time format to ISO
+// 2017-11-01T18:09
+var dateFmt = d3.timeParse("%Y-%m-%dT%H:%M:%S");
 
 var chartTimeline = timeSeriesChart()
   .width(1000)
@@ -15,7 +16,7 @@ var barChartRegion = barChart()
   .x(function (d) { return d.key;})
   .y(function (d) { return d.value;});
 
-d3.csv("data/events-2017.12.csv",
+d3.csv("data/data_stage1.csv",
   function (d) {
     // This function is applied to each row of the dataset
     d.Timestamp = dateFmt(d.timestamp);
