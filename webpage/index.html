@@ -9,6 +9,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css">
 	<link rel="stylesheet" type="text/css" href="style/main.css">
 	
@@ -41,29 +42,11 @@
 			<div class="col-3">
 				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
 					<div class="mdl-card__title mdl-card--expand">
-						<h3 class="mdl-card__title-text">00000 records recieved this month</h3>
+						<h3 class="mdl-card__title-text">31,522<br>records recieved this month</h3>
 					</div>
 					
-					<div class="mdl-card__supporting-text">
-						+0000 (+00%) since last month
-					</div>
-					
-					<div class="mdl-card__actions mdl-card--border">
-						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-							View Details
-						</a>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-3">
-				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title mdl-card--expand">
-						<h2 class="mdl-card__title-text">00000 records processed this month</h2>
-					</div>
-					
-					<div class="mdl-card__supporting-text">
-						-0000 (-00%) since last month
+					<div class="mdl-card__supporting-text bfn-supp-text-plus">
+						+7,636 (+32%) since last month
 					</div>
 					
 					<div class="mdl-card__actions mdl-card--border">
@@ -77,11 +60,11 @@
 			<div class="col-3">
 				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
 					<div class="mdl-card__title mdl-card--expand">
-						<h3 class="mdl-card__title-text">00 average days to process a record this month</h3>
+						<h3 class="mdl-card__title-text">28,122<br>records processed this month</h3>
 					</div>
 					
-					<div class="mdl-card__supporting-text">
-						-00 (-00%) since last month
+					<div class="mdl-card__supporting-text bfn-supp-text-minus">
+						-1,001 (-3.5%) since last month
 					</div>
 					
 					<div class="mdl-card__actions mdl-card--border">
@@ -95,11 +78,29 @@
 			<div class="col-3">
 				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
 					<div class="mdl-card__title mdl-card--expand">
-						<h3 class="mdl-card__title-text">Style 0 is the highest seller this month</h3>
+						<h3 class="mdl-card__title-text">4.3<br>avg. days to process a record this month</h3>
 					</div>
 					
-					<div class="mdl-card__supporting-text">
-						00 months in a row
+					<div class="mdl-card__supporting-text bfn-supp-text-plus">
+						-0.3 (-6.5%) since last month
+					</div>
+					
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+							View Details
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-3">
+				<div class="bfn-mdl-card mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title mdl-card--expand">
+						<h3 class="mdl-card__title-text">Style 2<br>is the highest seller this month</h3>
+					</div>
+					
+					<div class="mdl-card__supporting-text bfn-supp-text-plus">
+						2 months in a row
 					</div>
 					
 					<div class="mdl-card__actions mdl-card--border">
@@ -136,89 +137,96 @@
 
 	<div class="container-fluid stage-container">
 		<div class="row flex-row flex-nowrap stage-selector">
-			<div class='col-2'>
+			<div class='col-3'>
 				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<!-- <i class="card-image-top fas fa-tachometer-alt fa-5x"></i> -->
 					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+						<h2>####</h2>
 					</div>
-					<a class="card-link btn btn-light title-text">Stage 1</a>
-				</div>
-			</div>
-			
-			<div class='col-2'>
-				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-					</div>
-					<a class="card-link btn btn-light title-text">Stage 2</a>
-				</div>
-			</div>
-			
-			<div class='col-2'>
-				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-					</div>
-					<a class="card-link btn btn-light title-text">Stage 3</a>
-				</div>
-			</div>
-			
-			<div class='col-2'>
-				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-					</div>
-					<a class="card-link btn btn-light title-text">Stage 4</a>
-				</div>
-			</div>
-			
-			<div class='col-2'>
-				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-					</div>
-					<a class="card-link btn btn-light title-text">Stage 5</a>
+
+					<a onclick="stage1Click()" class="card-link btn btn-outline-primary title-text">Stage 1</a>
 				</div>
 			</div>
 
-			<div class='col-2'>
+			<div class="col-1 text-center">
+				<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
+			</div>
+			
+			<div class='col-3'>
 				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
 					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+
 					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+						<h2>####</h2>
 					</div>
-					<a class="card-link btn btn-light title-text">Stage 6</a>
+
+					<a onclick="stage2Click()" class="card-link btn btn-outline-primary title-text">Stage 2</a>
 				</div>
 			</div>
 
-			<div class='col-2'>
+			<div class="col-1 text-center">
+				<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
+			</div>
+			
+			<div class='col-3'>
 				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
 					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
 					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+						<h2>####</h2>
 					</div>
-					<a class="card-link btn btn-light title-text">Stage 7</a>
+
+					<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 3</a>
 				</div>
 			</div>
 
-			<div class='col-2'>
+			<div class="col-1 text-center">
+				<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
+			</div>
+			
+			<div class='col-3'>
 				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
 					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
 					<div class="card-body">
-						<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+						<h2>####</h2>
 					</div>
-					<a class="card-link btn btn-light title-text">Stage 8</a>
+					
+					<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 4</a>
+				</div>
+			</div>
+
+			<div class="col-1 text-center">
+				<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
+			</div>
+			
+			<div class='col-3'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<h2>####</h2>
+					</div>
+						
+					<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 5</a>
+				</div>
+			</div>
+
+			<div class="col-1 text-center">
+				<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
+			</div>
+
+			<div class='col-3'>
+				<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
+					<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+					<div class="card-body">
+						<h2>####</h2>
+					</div>
+						
+					<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 6</a>
 				</div>
 			</div>
 		</div>
 	</div>
 		
-	<div class="container">
+	<div class="container stage1-container">
 		<div class="row stage-timeline">
 			<div class="col-12">
 				<h4 class="gen-text">Timeline</h4>
@@ -237,7 +245,27 @@
 				<div class="barChart" id="gates"></div>
 			</div>
 		</div>
+	</div>
+
+	<div class="container stage2-container">
+		<div class="row stage-timeline">
+			<div class="col-12">
+				<h4 class="gen-text">Timeline</h4>
+				<div id="timeline2"></div>
+			</div>
+		</div>
 		
+		<div class="row stage-detail">
+			<div class="col-5">
+				<h4 class="gen-text">Orders Received by Regions</h4>
+				<div class="barChart" id="carTypes2"></div>
+			</div>
+
+			<div class="col-6">
+				<h4 class="gen-text">Orders Received by Style</h4>
+				<div class="barChart" id="gates2"></div>
+			</div>
+		</div>
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

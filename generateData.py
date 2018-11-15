@@ -7,7 +7,7 @@ import os
 import csv
 import itertools
 
-frmt = '%m-%d-%Y %H:%M:%S'
+frmt = '%Y-%m-%dT%H:%M:%S'
 idCounter = 0
 productStyles = ['style1', 'style2', 'style3', 'style4']
 ages = ['under-30', '31-to-60', 'over-60']
@@ -19,7 +19,7 @@ targetDemoEventCombos = list(itertools.product(*[productStyles, ['under-30'], ge
 usEventCombos = list(itertools.product(*[productStyles, ages, genders, ['us'], nodes]))
 europeEventCombos = list(itertools.product(*[productStyles, ages, genders, ['europe'], nodes]))
 asiaEventCombos = list(itertools.product(*[productStyles, ages, genders, ['europe'], nodes]))
-trendEventCombos = list(itertools.product(*[['style2'], ages, genders, ['asia'], nodes]))
+trendEventCombos = list(itertools.product(*[['style2'], ages, genders, ['us'], nodes]))
 
 # Event class that contains the fields for our event messages. Essentially just
 # a simple constructor and an iterator
@@ -91,10 +91,10 @@ def generateBaselineMonth(monthDt, monthIdx):
     baseDt = monthDt.replace(day=1, hour=0)
     events = []
 
-    base = (monthIdx * 30 * 0.00005) + 0.001
+    base = (monthIdx * 30 * 0.00002) + 0.001
     dailyIncrement = 0
     for day in range(daysInMonth(baseDt)):
-        dailyIncrement += 0.00005
+        dailyIncrement += 0.00002
         for combo in allEventCombos:
             for hour in range(24):
                 events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], base + dailyIncrement, 0)
@@ -109,7 +109,7 @@ def generateTargetDemographicMonth(monthDt):
     for day in range(daysInMonth(baseDt)):
         for combo in targetDemoEventCombos:
             for hour in range(24):
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.003, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.009, 0)
 
     return events
 
@@ -133,16 +133,16 @@ def generateWorkdayMonth(monthDt):
     # If date is a weekday, simulate a surge in activity during workdays hours
     for day in range(daysInMonth(baseDt)):
         if ((baseDt + dt.timedelta(days=day)).weekday() < 5):
-            for combo in usEventCombos:
+            for combo in allEventCombos:
             
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=8), combo[0], combo[1], combo[2], combo[3], combo[4], 0.003, 0)
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=9), combo[0], combo[1], combo[2], combo[3], combo[4], 0.004, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=8), combo[0], combo[1], combo[2], combo[3], combo[4], 0.001, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=9), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0015, 0)
 
                 for hour in range(10,15):
-                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.007, 0)
+                    events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.002, 0)
 
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=15), combo[0], combo[1], combo[2], combo[3], combo[4], 0.004, 0)
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=16), combo[0], combo[1], combo[2], combo[3], combo[4], 0.003, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=15), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0015, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=16), combo[0], combo[1], combo[2], combo[3], combo[4], 0.001, 0)
 
     return events
 
@@ -175,12 +175,12 @@ def generateStyleTrendMonth(monthDt):
 
     for combo in trendEventCombos:
         for hour in range(24):
-            for day in range(10,20):
+            for day in range(14,19):
                 events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.03, 0)
 
-            events += generateHourOfData(baseDt + dt.timedelta(days=20, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.015, 0)
-            events += generateHourOfData(baseDt + dt.timedelta(days=21, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.01, 0)
-            events += generateHourOfData(baseDt + dt.timedelta(days=22, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.005, 0)  
+            events += generateHourOfData(baseDt + dt.timedelta(days=19, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0008, 0)
+            events += generateHourOfData(baseDt + dt.timedelta(days=20, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0005, 0)
+            events += generateHourOfData(baseDt + dt.timedelta(days=21, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], 0.0003, 0)  
 
     return events
 
@@ -191,10 +191,10 @@ def generateAdCampaignMonth(monthDt):
 
     dailyIncrement = 0
     for day in range(daysInMonth(baseDt)):
-        dailyIncrement += 0.000033
+        dailyIncrement += 0.00003
         for hour in range(24):
             for combo in europeEventCombos:
-                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], dailyIncrement * 1.2, 0)
+                events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], dailyIncrement * 2.5, 0)
 
             for combo in asiaEventCombos:
                 events += generateHourOfData(baseDt + dt.timedelta(days=day, hours=hour), combo[0], combo[1], combo[2], combo[3], combo[4], dailyIncrement, 0) 
@@ -240,7 +240,7 @@ def generateCsvFile(events, filename):
 # print(np.random.normal(loc=0.0001, scale=1, size=59))
 
 
-startDt = dt.datetime.strptime("11-01-2017 00:00:00", frmt)
+startDt = dt.datetime.strptime("2017-11-01 00:00:00", frmt)
 for i in range(3):
     monthEvents = []
     targetDt = startDt + dt.timedelta(days=i*32)
@@ -278,11 +278,11 @@ for i in range(3):
     # Generate a period of downtime. Currently this will be harcoded on Feb 19. A
     # day within the trend spike. The insight will be that after the downtime, the trend
     # died down
-    downtimeDate = dt.datetime.strptime('01-19-2018', '%m-%d-%Y')
+    downtimeDate = dt.datetime.strptime('2018-01-19', '%Y-%m-%d')
     monthEvents = [event for event in monthEvents if dt.datetime.strptime(event.timestamp, frmt).date() != downtimeDate.date()]
     for combo in usEventCombos:
         for hour in range(24):
-            monthEvents += generateHourOfData(downtimeDate, combo[0], combo[1], combo[2], combo[3], combo[4], 0.00002, 0)
+            monthEvents += generateHourOfData(downtimeDate, combo[0], combo[1], combo[2], combo[3], combo[4], 0.00005, 0)
 
     # monthEvents = generateStage(monthEvents, 1, "StageTwo", 30, 10)
     # monthEvents = generateStage(monthEvents, 2, "StageThree", 5, 75)

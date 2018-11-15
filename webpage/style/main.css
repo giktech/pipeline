@@ -25,7 +25,7 @@ text, .title-text, .gen-text {
 }
 
 .title {
-    padding-left: 25px;
+    padding-left: 50px;
 }
 
 .placeholder-text {
@@ -48,7 +48,25 @@ text, .title-text, .gen-text {
     padding-top: 0px;
     padding-bottom: 0px;
     text-align: center;
+} 
+
+/* .bfn-mdl-card > .bfn-card-title-header {
 }
+
+.bfn-mdl-card > .bfn-card-title-text {
+} */
+
+.bfn-supp-text-plus {
+    color: rgb(46, 204, 113);
+}
+
+.bfn-supp-text-minus {
+    color: rgb(226, 106, 106);
+}
+
+/* .bfn-content {
+    padding-left: 50px;
+} */
 
 .stage-overview-mdl-card.mdl-card {
     width: 100%;
@@ -72,6 +90,10 @@ text, .title-text, .gen-text {
 
 .stage-card {
     height: 200px;
+}
+
+.stage-angle {
+    margin-top: 50px;
 }
 
 .mdl-button-text {
