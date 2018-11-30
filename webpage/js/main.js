@@ -2,7 +2,7 @@
 
 // Changing the time format to ISO
 // 2017-11-01T18:09
-var dateFmt = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+var dateFmt = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
 var chartTimeline = timeSeriesChart()
   .width(1000)
@@ -16,7 +16,54 @@ var barChartRegion = barChart()
   .x(function (d) { return d.key;})
   .y(function (d) { return d.value;});
 
-d3.csv("data/data_stage1.csv",
+var months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+
+d3.csv("data/ecommerce-ordersovertime-month.csv",
+    function(err, data) {
+        if (err) throw err;
+
+    // console.log(data[0])
+
+    data_timefiltered = data.map(function(row) {
+        return {"dt_month": row.dt_month, "str_month": months[row.dt_month - 1], "orders_ct_month": row.orders_ct_month}
+    });
+
+    // console.log(data_timefiltered)
+
+    var orders_barchart_init = barChartv2()
+        .width(1000)
+        .x(function(d) {
+            return d.str_month
+        })
+        .y(function(d) {
+            return d.orders_ct_month
+        })
+
+    var obar = d3.select("#orders-over-time")
+        .datum(data_timefiltered)
+        .call(orders_barchart_init)
+
+    // obar.select(".x.axis") 
+    //     .selectAll(".tick text")
+    //     .attr("transform", "translate(-8,-1) rotate(-45)");
+    }
+)
+
+d3.csv("data/events-stage1.csv",
   function (d) {
     // This function is applied to each row of the dataset
     d.Timestamp = dateFmt(d.timestamp);
