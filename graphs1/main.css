@@ -1,0 +1,30 @@
+body {
+	background-color: white;
+	color: black;
+}
+
+.area {
+			fill: teal;
+			stroke: none;
+		}
+
+.line {
+			fill: none;
+			stroke: teal;
+			stroke-width: 0.5;
+		}
+
+#chart1 .bar {
+			fill: grey;
+		}
+
+#chart2 .bar {
+	fill: grey;
+}
+
+
+#chart .attention {
+  background: yellow;
+  margin: -4px;
+  padding: 4px;
+}
