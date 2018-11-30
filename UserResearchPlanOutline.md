@@ -112,6 +112,8 @@ Scale: (1 Strongly disagree - 5 Strongly agree)
 8. I felt very confident using the system.
 9. I needed to learn a lot of things before I could get going with this system.
 
+Source: https://www.trymyui.com/sus-system-usability-scale
+
 1. What are your overall thoughts on the tool?
 
 2. Were there any tasks you found particularly challenging or non-intuitive? Please tell me more about those and any ideas for improvement you may have.
@@ -119,3 +121,4 @@ Scale: (1 Strongly disagree - 5 Strongly agree)
 3. Do you have any other suggestions or comments?
 
 4. Overall, how would you rate this tool?
+
