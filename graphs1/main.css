@@ -14,14 +14,6 @@ body {
 			stroke-width: 0.5;
 		}
 
-#chart1 .bar {
-			fill: grey;
-		}
-
-#chart2 .bar {
-	fill: grey;
-}
-
 
 #chart .attention {
   background: yellow;

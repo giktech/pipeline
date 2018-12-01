@@ -15,6 +15,12 @@ function barChart() {
     var onMouseOut = function() {};
     var onBrushed = function() {};
 
+  function invert(scale, x) {
+    var eachBand = scale.step();
+    var index = Math.round((x / eachBand));
+    return scale.domain()[index];
+  }
+
   function chart(selection) {
 	selection.each(function (data) {
 
@@ -26,6 +32,7 @@ function barChart() {
 	  var gEnter = svgEnter.append("g");
 	  gEnter.append("g").attr("class", "x axis");
 	  gEnter.append("g").attr("class", "y axis");
+    gEnter.append("g").attr("class", "brush");
 
 	  // Update the outer dimensions.
 	  svg.merge(svgEnter).attr("width", width)
@@ -61,14 +68,25 @@ function barChart() {
 	    .merge(bars)
 	      .attr("x", X)
 	      .attr("y", Y)
+        .attr("fill", function(d) {
+          var color = "grey";
+          // console.log(yValue(d));
+          if (+yValue(d) > 550) {
+            color = "darkred";
+          };
+            return color;
+        })
 	      .attr("width", xScale.bandwidth())
 	      .attr("height", function(d) { return innerHeight - Y(d); });
-
 	  bars.exit().remove();
 
-	  g.select(".brush")
+    // For extents, we pick up the top of inside to bottom
+	  var brush = g.select(".brush")
 	  	.call(d3.brushX()
-	  		.extent([0,0], [xScale.range()[1], yScale.range()[0]])
+	  		.extent([
+            [0,0],
+            [xScale.range()[1], yScale.range()[0]]
+        ])
 	  		.on("brush", brushed));
 
  	});
@@ -77,8 +95,21 @@ function barChart() {
 
 function brushed() {
 	if (!d3.event.sourceEvent) return; // Only transition after input.
-    if (!d3.event.selection) return; // Ignore empty selections.
-    var selection = d3.event.selection.map(xScale.invert); // Why are we inverting
+  if (!d3.event.selection) return; // Ignore empty selections.
+
+  var selectionRange = d3.event.selection.map(function (x) { 
+    return invert(xScale, x); 
+  });
+
+  // console.log(selectionRange);
+
+  var selection = xScale.domain().filter(function(x) {
+      return (xScale(selectionRange[0]) <= xScale(x)) && (xScale(x) <= xScale(selectionRange[1]));
+  });
+
+  // console.log(selection);
+
+  // Selection has the entire array of selected now
     onBrushed(selection);
 }
 

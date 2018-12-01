@@ -4,7 +4,7 @@ var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S.0000000");
 
 //Converting from CSV to new reduced object
 var rowConverter = function(d) {
-	var r =  ( { 
+	var r =  ( {
 		// customer_id: d.customer_id,
 		// product_price: d.product_price,
 		product_category: d.product_category,
@@ -32,7 +32,6 @@ var BarChart1 = barChart()
   .x(function (d) { return d.key; })
   .y(function (d) { return d.value; });
 
-
 var BarChart2 = barChart()
   .width(1000)
   .height(500)
@@ -53,7 +52,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
  //    csData.state = csData.dimension(function (d) { return d["customer_state"]; });
  //    csData.product = csData.dimension(function (d) { return d["product_category"]});
 
- 
+
 	// Grouping
 	// Delivery time by state
 	var dtByState = d3.nest()
@@ -67,8 +66,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 	sorta(dtByState);
 
-	// Grouping
-	// Delivery time by product
+
 	var dtByProductCat = d3.nest()
 						.key(function(d) { return d.product_category})
 						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
@@ -80,9 +78,55 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 
 	BarChart1.onBrushed(function(selected) {
-		dtByState.filter(selected);
-		update()
+
+		// We have the array of categories in our selection now
+		// console.log(selected);
+
+		// Show the products with the most delay in these states
+		// console.log(selected);
+
+		// filter. the dataset with selected
+		filteredByState = dataset.filter(function(d) {
+			return selected.includes(d.customer_state);
+		});
+
+		dtByProductCat = d3.nest()
+						.key(function(d) { return d.product_category})
+						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+							return d.delivery_time_hr;
+						}));})
+						.entries(filteredByState);
+
+		dtByProductCat = sorta(dtByProductCat).slice(-10);
+		update();
 	});
+
+
+
+	BarChart2.onBrushed(function(selected) {
+
+		// We have the array of categories in our selection now
+		// console.log(selected);
+
+		// Show the products with the most delay in these states
+		// console.log(selected);
+
+		// filter. the dataset with selected
+		filteredByProduct = dataset.filter(function(d) {
+			return selected.includes(d.product_category);
+		});
+
+		dtByState = d3.nest()
+						.key(function(d) { return d.customer_state})
+						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+							return d.delivery_time_hr;
+						}));})
+						.entries(filteredByProduct);
+
+		dtByState = sorta(dtByState);
+		update();
+	});
+
 
 	function update() {
 
