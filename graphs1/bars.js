@@ -68,9 +68,16 @@ function barChart() {
 	    .merge(bars)
 	      .attr("x", X)
 	      .attr("y", Y)
+        .attr("fill", function(d) {
+          var color = "grey";
+          // console.log(yValue(d));
+          if (+yValue(d) > 550) {
+            color = "darkred";
+          };
+            return color;
+        })
 	      .attr("width", xScale.bandwidth())
 	      .attr("height", function(d) { return innerHeight - Y(d); });
-
 	  bars.exit().remove();
 
     // For extents, we pick up the top of inside to bottom
@@ -94,13 +101,13 @@ function brushed() {
     return invert(xScale, x); 
   });
 
-  console.log(selectionRange);
+  // console.log(selectionRange);
 
   var selection = xScale.domain().filter(function(x) {
       return (xScale(selectionRange[0]) <= xScale(x)) && (xScale(x) <= xScale(selectionRange[1]));
   });
 
-  console.log(selection);
+  // console.log(selection);
 
   // Selection has the entire array of selected now
     onBrushed(selection);
