@@ -2,19 +2,19 @@
 
 // Changing the time format to ISO
 // 2017-11-01T18:09
-var dateFmt = d3.timeParse("%Y-%m-%d %H:%M:%S");
+// var dateFmt = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
-var chartTimeline = timeSeriesChart()
-  .width(1000)
-  .x(function (d) { return d.key;}) 
-  .y(function (d) { return d.value;});
-var barChartStyle = barChart()
-  .width(600)
-  .x(function (d) { return d.key;})
-  .y(function (d) { return d.value;});
-var barChartRegion = barChart()
-  .x(function (d) { return d.key;})
-  .y(function (d) { return d.value;});
+// var chartTimeline = timeSeriesChart()
+//   .width(1000)
+//   .x(function (d) { return d.key;}) 
+//   .y(function (d) { return d.value;});
+// var barChartStyle = barChart()
+//   .width(600)
+//   .x(function (d) { return d.key;})
+//   .y(function (d) { return d.value;});
+// var barChartRegion = barChart()
+//   .x(function (d) { return d.key;})
+//   .y(function (d) { return d.value;});
 
 var months = [
     'January',
@@ -32,188 +32,176 @@ var months = [
 ];
 
 
-d3.csv("data/ecommerce-ordersovertime-month.csv",
-    function(err, data) {
-        if (err) throw err;
+// d3.csv("data/ecommerce-ordersovertime-month.csv",
+//     function(err, data) {
+//         if (err) throw err;
+        
+//         // console.log(data[0])
+        
+//         data_timefiltered = data.map(function(row) {
+//             return {"dt_month": row.dt_month, "str_month": months[row.dt_month - 1], "orders_ct_month": row.orders_ct_month}
+//         });
+        
+//         // console.log(data_timefiltered)
+        
+//         var orders_barchart_init = barChartv2()
+//         .width(1000)
+//         .x(function(d) {
+//             return d.str_month
+//         })
+//         .y(function(d) {
+//             return d.orders_ct_month
+//         })
+        
+//         var obar = d3.select("#orders-over-time")
+//         .datum(data_timefiltered)
+//         .call(orders_barchart_init)
+        
+//         // obar.select(".x.axis") 
+//         //     .selectAll(".tick text")
+//         //     .attr("transform", "translate(-8,-1) rotate(-45)");
+//     }
+// )
 
-    // console.log(data[0])
+// 2018-05-10 09:11:00.0000000
+var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S.0000000");
 
-    data_timefiltered = data.map(function(row) {
-        return {"dt_month": row.dt_month, "str_month": months[row.dt_month - 1], "orders_ct_month": row.orders_ct_month}
-    });
+//Converting from CSV to new reduced object
+var rowConverter = function(d) {
+	var r =  ( {
+		// customer_id: d.customer_id,
+		// product_price: d.product_price,
+		product_category: d.product_category,
+		customer_state: d.customer_state,
+		// delivery_timestamp: parseTime(d.order_delivered_customer_date),
+		// purchase_timestamp: parseTime(d.order_purchase_timestamp),
+		delivery_time_hr: Math.round(
+			(parseTime(d.order_delivered_customer_date) - parseTime(d.order_purchase_timestamp))/(60*60*1000))
 
-    // console.log(data_timefiltered)
+	});
 
-    var orders_barchart_init = barChartv2()
-        .width(1000)
-        .x(function(d) {
-            return d.str_month
-        })
-        .y(function(d) {
-            return d.orders_ct_month
-        })
+	if (r.delivery_time_hr > 0)
+		return r;
+};
 
-    var obar = d3.select("#orders-over-time")
-        .datum(data_timefiltered)
-        .call(orders_barchart_init)
+var sorta = function(d) {
+	return d.sort(function(x,y) {
+		return d3.ascending(x.value, y.value)
+	});
+};
 
-    // obar.select(".x.axis") 
-    //     .selectAll(".tick text")
-    //     .attr("transform", "translate(-8,-1) rotate(-45)");
-    }
-)
+var BarChart1 = barChart()
+  .width(1000)
+  .height(500)
+  .x(function (d) { return d.key; })
+  .y(function (d) { return d.value; });
 
-d3.csv("data/events-stage1.csv",
-  function (d) {
-    // This function is applied to each row of the dataset
-    d.Timestamp = dateFmt(d.timestamp);
-    return d;
-  },
-  function (err, data) {
-    if (err) throw err;
+var BarChart2 = barChart()
+  .width(1000)
+  .height(500)
+  .x(function (d) { return d.key; })
+  .y(function (d) { return d.value; });
 
-    d3.select(".loading-placeholder")
-        .style("display", "none");
+d3.csv("data/ecommerce-combined.csv", rowConverter)
+	.then(function(data) {
 
-    d3.select(".viz-row")
-        .style("display", "flex");
+	//Copy data into global dataset
+	dataset = data;
+	// console.table(dataset);
 
-    var csData = crossfilter(data);
 
-    // We create dimensions for each attribute we want to filter by
-    csData.dimTime = csData.dimension(function (d) { return d.Timestamp; });
-    csData.dimRegion = csData.dimension(function (d) { return d.region; });
-    csData.dimProductStyle = csData.dimension(function (d) { return d.productStyle; });
+	// var csData = crossfilter(dataset);
 
-    // We bin each dimension
-    csData.timesByHour = csData.dimTime.group(d3.timeHour);
-    csData.regions = csData.dimRegion.group();
-    csData.styles = csData.dimProductStyle.group();
+ //    // We create dimensions for each attribute we want to filter by
+ //    csData.state = csData.dimension(function (d) { return d["customer_state"]; });
+ //    csData.product = csData.dimension(function (d) { return d["product_category"]});
 
-    chartTimeline.onBrushed(function (selected) {
-      csData.dimTime.filter(selected);
-      update();
-    });
 
-    barChartRegion.onMouseOver(function (d) {
-      csData.dimRegion.filter(d.key);
-      update();
-    }).onMouseOut(function () {
-      // Clear the filter
-      csData.dimRegion.filterAll();
-      update();
-    });
+	// Grouping
+	// Delivery time by state
+	var dtByState = d3.nest()
+						.key(function(d) { return d.customer_state})
+						//.key(function(d) {return d.product_category})
+						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+							return d.delivery_time_hr;
+						}));})
+						.entries(dataset);
 
-    barChartStyle.onMouseOver(function (d) {
-      csData.dimProductStyle.filter(d.key);
-      update();
-    }).onMouseOut(function () {
-      // Clear the filter
-      csData.dimProductStyle.filterAll();
-      update();
-    });
 
-    function update() {
-      d3.select("#timeline")
-        .datum(csData.timesByHour.all())
-        .call(chartTimeline);
+	sorta(dtByState);
 
-      d3.select("#carTypes")
-        .datum(csData.regions.all())
-        .call(barChartRegion);
 
-      d3.select("#gates")
-        .datum(csData.styles.all())
-        .call(barChartStyle)
-        .select(".x.axis") //Adjusting the tick labels after drawn
-        .selectAll(".tick text")
-        .attr("transform", "translate(-8,-1) rotate(-45)");
+	var dtByProductCat = d3.nest()
+						.key(function(d) { return d.product_category})
+						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+							return d.delivery_time_hr;
+						}));})
+						.entries(dataset);
 
-    }
+	sorta(dtByProductCat);
 
-    update();
-  }
-);
 
-d3.csv("data/events-stage2.csv",
-  function (d) {
-    // This function is applied to each row of the dataset
-    var isoFrmt = d3.timeParse("%Y-%m-%dT%H:%M:%S")
-    d.Timestamp = isoFrmt(d.timestamp);
-    return d;
-  },
-  function (err, data) {
-    if (err) throw err;
+	BarChart1.onBrushed(function(selected) {
 
-    d3.select(".loading-placeholder")
-        .style("display", "none");
+		// We have the array of categories in our selection now
+		// console.log(selected);
 
-    d3.select(".viz-row")
-        .style("display", "flex");
+		// Show the products with the most delay in these states
+		// console.log(selected);
 
-    var csData = crossfilter(data);
+		// filter. the dataset with selected
+		filteredByState = dataset.filter(function(d) {
+			return selected.includes(d.customer_state);
+		});
 
-    // We create dimensions for each attribute we want to filter by
-    csData.dimTime = csData.dimension(function (d) { return d.Timestamp; });
-    csData.dimRegion = csData.dimension(function (d) { return d.region; });
-    csData.dimProductStyle = csData.dimension(function (d) { return d.productStyle; });
+		dtByProductCat = d3.nest()
+						.key(function(d) { return d.product_category})
+						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+							return d.delivery_time_hr;
+						}));})
+						.entries(filteredByState);
 
-    // We bin each dimension
-    csData.timesByHour = csData.dimTime.group(d3.timeHour);
-    csData.regions = csData.dimRegion.group();
-    csData.styles = csData.dimProductStyle.group();
+		dtByProductCat = sorta(dtByProductCat).slice(-10);
+		update();
+	});
 
-    chartTimeline.onBrushed(function (selected) {
-      csData.dimTime.filter(selected);
-      update();
-    });
+	// BarChart2.onBrushed(function(selected) {
 
-    barChartRegion.onMouseOver(function (d) {
-      csData.dimRegion.filter(d.key);
-      update();
-    }).onMouseOut(function () {
-      // Clear the filter
-      csData.dimRegion.filterAll();
-      update();
-    });
+	// 	// We have the array of categories in our selection now
+	// 	// console.log(selected);
 
-    barChartStyle.onMouseOver(function (d) {
-      csData.dimProductStyle.filter(d.key);
-      update();
-    }).onMouseOut(function () {
-      // Clear the filter
-      csData.dimProductStyle.filterAll();
-      update();
-    });
+	// 	// Show the products with the most delay in these states
+	// 	// console.log(selected);
 
-    function update() {
-      d3.select("#timeline2")
-        .datum(csData.timesByHour.all())
-        .call(chartTimeline);
+	// 	// filter. the dataset with selected
+	// 	filteredByProduct = dataset.filter(function(d) {
+	// 		return selected.includes(d.product_category);
+	// 	});
 
-      d3.select("#carTypes2")
-        .datum(csData.regions.all())
-        .call(barChartRegion);
+	// 	dtByState = d3.nest()
+	// 					.key(function(d) { return d.customer_state})
+	// 					.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+	// 						return d.delivery_time_hr;
+	// 					}));})
+	// 					.entries(filteredByProduct);
 
-      d3.select("#gates2")
-        .datum(csData.styles.all())
-        .call(barChartStyle)
-        .select(".x.axis") //Adjusting the tick labels after drawn
-        .selectAll(".tick text")
-        .attr("transform", "translate(-8,-1) rotate(-45)");
+	// 	dtByState = sorta(dtByState);
+	// 	update();
+	// });
 
-    }
 
-    update();
-  }
-);
+	function update() {
 
-var stage1Click = function() {
-  $(".stage2-container").hide()
-  $(".stage1-container").show()
-}
+		d3.select("#chart1")
+		  .datum(dtByState)
+		  .call(BarChart1);
 
-var stage2Click = function() {
-  $(".stage1-container").hide()
-  $(".stage2-container").show()
-}
+		d3.select("#chart2")
+		  .datum(dtByProductCat)
+		  .call(BarChart2);
+
+	}
+
+	update();
+
+});

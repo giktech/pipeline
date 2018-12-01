@@ -219,3 +219,19 @@ line.hover-line {
     stroke-dasharray: 5 2;
 }
 
+
+/* Gaurav */
+#chart1 .bar {
+    fill: grey;
+}
+
+#chart2 .bar {
+fill: grey;
+}
+
+
+#chart .attention {
+background: yellow;
+margin: -4px;
+padding: 4px;
+}
