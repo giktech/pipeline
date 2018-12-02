@@ -1,3 +1,5 @@
+currentStyle = "default"
+
 d3.csv("data/ecommerce-productgrowth.csv")
 .then(function(data) {
     
@@ -10,11 +12,11 @@ d3.csv("data/ecommerce-productgrowth.csv")
     // console.log(data)
     // data = data.filter(d => d.product_category == "auto")
 
-    var outerWidth = 1250;
-    var outerHeight = 600;
+    var outerWidth = 1235;
+    var outerHeight = 650;
 
     // 2. Use the margin convention practice 
-    var margin = {top: 50, right: 50, bottom: 50, left: 50}
+    var margin = {top: 20, right: 50, bottom: 50, left: 100}
         , width = outerWidth - margin.left - margin.right // Use the window's width 
         , height = outerHeight - margin.top - margin.bottom; // Use the window's height
 
@@ -33,7 +35,7 @@ d3.csv("data/ecommerce-productgrowth.csv")
 
     // 6. Y scale will use the randomly generate number 
     var yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => +d.month_order_ct)]) // input 
+        .domain([0, d3.max(data, d => +d.month_order_ct + 200)]) // input 
         .rangeRound([height, 0]); // output 
 
     var zScale = d3.scaleLinear()
@@ -49,10 +51,25 @@ d3.csv("data/ecommerce-productgrowth.csv")
         .attr("transform", "translate(-45," + (height + 4) + ")")
         .call(xAxis); // Create an axis component with d3.axisBottom
 
+    svg.append("text")             
+        .attr("transform",
+              "translate(" + (width/2.2) + " ," + 
+                             (height + margin.top + 30)+ ")")
+        .style("text-anchor", "middle")
+        .text("Purchase Order Date");
+
     // 4. Call the y axis in a group tag
     svg.append("g")
         .attr("class", "axis y-axis")
         .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
+
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - (margin.left/1.5))
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("# of Purchase Orders"); 
     
     segmentedData = data.map(function(d) {
         segment = []
@@ -60,6 +77,8 @@ d3.csv("data/ecommerce-productgrowth.csv")
         segment.push({
             alltime_pctchange_rank: d.alltime_pctchange_rank,
             alltime_diff_rank: d.alltime_diff_rank,
+            alltime_order_ct_pctchange: d.alltime_order_ct_pctchange,
+            alltime_order_ct_diff: d.alltime_order_ct_diff,
             product_category: d.product_category,
             month: d.dt_priormonth,
             order_ct: d.priormonth_order_ct
@@ -68,6 +87,8 @@ d3.csv("data/ecommerce-productgrowth.csv")
         segment.push({
             alltime_pctchange_rank: d.alltime_pctchange_rank,
             alltime_diff_rank: d.alltime_diff_rank,
+            alltime_order_ct_pctchange: d.alltime_order_ct_pctchange,
+            alltime_order_ct_diff: d.alltime_order_ct_diff,
             product_category: d.product_category,
             month: d.dt_month,
             order_ct: d.month_order_ct
@@ -90,7 +111,7 @@ d3.csv("data/ecommerce-productgrowth.csv")
         .enter()
         .append("path")
         .attr("class", function(d) {
-            classString = "product-line " + d[0].product_category;
+            classString = "product-line " + "product-line-" +  d[0].product_category;
 
             if (d[0].alltime_diff_rank < 6) {
                 classString += " product-line-topnetgrowth"
@@ -100,29 +121,30 @@ d3.csv("data/ecommerce-productgrowth.csv")
         })
         .attr("d", line)
         .on("mouseover", function(d) {
-            d3.selectAll('.product-line')
+            svg.selectAll('.product-line')
                 .style("stroke", "rgb(210, 215, 211")
                 .style("stroke-width", 3)
                 .attr("opacity", 0.2);
+            
+            svg.selectAll(".product-circle")
+                .attr("opacity", 0.2)
+                .attr("r", 1)
 
-            d3.selectAll('.' + d[0].product_category)
+            svg.selectAll('.product-line-' + d[0].product_category)
                 .attr("opacity", 1)
-                .style("stroke-width", 5)
                 .style("stroke", function(d) { return zScale(Math.atan2(1, d[1]["order_ct"] - d[0]["order_ct"])); })
+                .style("stroke-width", 8)
+                .raise();
+
+            svg.selectAll(".product-circle-" + d[0].product_category)
+                .attr("opacity", 1)
+                .attr("r", 5)
+                .style("fill", "rgb(52, 73, 94)")
                 .raise();
 
             lineData = data.filter(function(ld) {
                 return ld.product_category == d[0].product_category
             });
-
-            svg.selectAll(".product-circle")
-                .data(lineData)
-                .enter()
-                .append("circle")
-                .attr("class", "product-circle")
-                .attr("cx", function(d, i) { return xScale(d.dt_month); })
-                .attr("cy", function(d, i) { return yScale(d.month_order_ct); })
-                .attr("r", 4);
 
             svg.selectAll(".product-circle-text-line1")
                 .data(lineData)
@@ -148,46 +170,120 @@ d3.csv("data/ecommerce-productgrowth.csv")
                     return circleText;
                 })
                 .raise()
+             
+            svg.append("text")
+                .datum(lineData)
+                .attr("class", "product-infobox-text")
+                .attr("x", width - 100)
+                .attr("y", 15)
+                .attr("text-anchor", "end")
+                .style("font-size", "16px")
+                .style("font-weight", "bold")
+                .text(d => "Product Category: " + d[0].product_category)
 
-            // svg.selectAll(".product-circle-text-line2")
-            //     .data(lineData)
-            //     .enter()
-            //     .append("text")
-            //     .attr("class", "product-circle-text product-circle-text-line2")
-            //     .attr("x", function(d) { return xScale(d.dt_month) + 8; })
-            //     .attr("y", function(d) { return yScale(d.month_order_ct) + 15; })
-            //     .text(function(d) {
-            //         if (d.priormonth_order_ct_diff == "NULL") {
-            //             return ""
-            //         } else {
-            //             return d.priormonth_order_ct_diff
-            //         }
-            //     })
-            //     .raise()
+            svg.append("text")
+                .datum(lineData)
+                .attr("class", "product-infobox-text")
+                .attr("x", width - 100)
+                .attr("y", 37)
+                .attr("text-anchor", "end")
+                .style("font-size", "16px")
+                .style("font-weight", "bold")
+                .text(function(d) {
+                    textString = "Net Growth in Purchase Orders: "
+                    if (d[0].alltime_order_ct_diff > 0) {
+                        textString += "+"
+                    }
+                    textString += d[0].alltime_order_ct_diff + " (";
+                    if (d[0].alltime_order_ct_diff > 0) {
+                        textString += "+"
+                    }
+                    textString += Math.round(d[0].alltime_order_ct_pctchange) + "%)"
+                    return textString
+                });
+            
         })
         .on("mouseout", function(d) {
-            d3.selectAll(".product-line")
-                .attr("opacity", 1)
-                .style("stroke", "rgb(210, 215, 211)")
-                .style("stroke-width", 3)
+            if (currentStyle == "default") {
+                purchaseLineChartDefaultStyle();
+            } else if (currentStyle == "growth") {
+                purchaseLineChartGrowthStyle();
+            }
 
-            d3.selectAll(".product-line-topnetgrowth")
-                .attr("opacity", 1)
-                .style("stroke", "rgb(52, 73, 94)")
-                .style("stroke-width", 6)
-                .raise();
+            svg.selectAll('.product-line-' + d[0].product_category)
+                // .transition()
+                .attr("opacity", function(e) {
+                    if (currentStyle == "growth") {
+                        return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
+                    }
 
-            d3.selectAll(".product-circle")
+                    return 1;
+                })
+                .style("stroke", function(e) {
+                    if (currentStyle == "growth") {
+                        return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
+                    }
+
+                    return "rgb(75, 119, 190)"
+                })
+                .style("stroke-width", function(e) {
+                    if (currentStyle == "growth") {
+                        return (d[0].alltime_diff_rank < 6) ? 6 : 3;
+                    }
+
+                    return 3
+                });
+
+            svg.selectAll(".product-circle-" + d[0].product_category)
+                // .transition()
+                .attr("opacity", function(e) {
+                    if (currentStyle == "growth") {
+                        return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
+                    }
+
+                    return 1;
+                })
+                .attr("r", function(e) {
+                    if (currentStyle == "growth") {
+                        return (d[0].alltime_diff_rank < 6) ? 3 : 1;
+                    }
+
+                    return 1
+                })
+                .style("fill", function(e) {
+                    if (currentStyle == "growth") {
+                        return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
+                    }
+
+                    return "rgb(75, 119, 190)"
+                });
+
+            svg.selectAll(".product-circle-text")
                 .remove()
 
-            d3.selectAll(".product-circle-text")
+            svg.selectAll(".product-infobox-text")
                 .remove()
         });
 
     d3.selectAll('.product-line-topnetgrowth')
         .raise();
 
-   
+    svg.selectAll(".product-circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", function(d) {
+            classString = "product-circle " + "product-circle-" + d.product_category;
+
+            if (d.alltime_diff_rank < 6) {
+                classString += " product-circle-topnetgrowth"
+            }
+
+            return classString;
+        })
+        .attr("cx", function(d, i) { return xScale(d.dt_month); })
+        .attr("cy", function(d, i) { return yScale(d.month_order_ct); })
+        .attr("r", 1);
 
     
     
@@ -208,3 +304,57 @@ d3.csv("data/ecommerce-productgrowth.csv")
     //     .selectAll(".tick text")
     //     .attr("transform", "translate(-8,-1) rotate(-45)");
 });
+
+
+var purchaseLineChartDefaultStyle = function() {
+    currentStyle = "default";
+
+    d3.selectAll('.product-line')
+        // .transition()
+        .attr("opacity", 1)
+        .style("stroke", "rgb(75, 119, 190)")
+        .style("stroke-width", 3);
+
+    d3.selectAll('.product-line-topnetgrowth')
+        // .transition()
+        .attr("opacity", 1)
+        .style("stroke", "rgb(75, 119, 190)")
+        .style("stroke-width", 3);
+
+    d3.selectAll('.product-circle-topnetgrowth')
+        // .transition()
+        .attr("opacity", 1)
+        .attr("r", 1)
+        .style("fill", "rgb(75, 119, 190)");
+        
+    d3.selectAll('.product-circle')
+        // .transition()
+        .attr("opacity", 1)
+        .attr("r", 1)
+        .style("fill", "rgb(75, 119, 190)");
+}
+
+var purchaseLineChartGrowthStyle = function() {
+    currentStyle = "growth"
+
+    d3.selectAll('.product-line')
+        // .transition()
+        .attr("opacity", 0.1);
+
+    d3.selectAll('.product-line-topnetgrowth')
+        // .transition()
+        .attr("opacity", 1)
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
+
+    d3.selectAll(".product-circle")
+        // .transition()
+        .attr("opacity", 0.1);
+
+    d3.selectAll('.product-circle-topnetgrowth')
+        // .transition()
+        .attr("opacity", 1)
+        .attr("r", 3)
+        .style("fill", "rgb(52, 73, 94)");
+
+}
