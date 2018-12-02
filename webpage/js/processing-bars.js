@@ -70,9 +70,9 @@ function barChart() {
             .attr("y", Y)
           .attr("fill", function(d) {
             var color = "grey";
-            console.log(yValue(d));
+            //console.log(yValue(d));
             if (+yValue(d) > 550) {
-              color = "darkred";
+              color = "#E15759";
             };
               return color;
           })
