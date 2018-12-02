@@ -74,7 +74,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	sorta(dtByProductCat);
+	dtByProductCat = sorta(dtByProductCat).slice(-20);
 
 
 	BarChart1.onBrushed(function(selected) {
@@ -97,35 +97,36 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(filteredByState);
 
-		dtByProductCat = sorta(dtByProductCat).slice(-10);
+		dtByProductCat = sorta(dtByProductCat).slice(-20);
+
 		update();
 	});
 
 
 
-	BarChart2.onBrushed(function(selected) {
+	// BarChart2.onBrushed(function(selected) {
 
-		// We have the array of categories in our selection now
-		// console.log(selected);
+	// 	// We have the array of categories in our selection now
+	// 	// console.log(selected);
 
-		// Show the products with the most delay in these states
-		// console.log(selected);
+	// 	// Show the products with the most delay in these states
+	// 	// console.log(selected);
 
-		// filter. the dataset with selected
-		filteredByProduct = dataset.filter(function(d) {
-			return selected.includes(d.product_category);
-		});
+	// 	// filter. the dataset with selected
+	// 	filteredByProduct = dataset.filter(function(d) {
+	// 		return selected.includes(d.product_category);
+	// 	});
 
-		dtByState = d3.nest()
-						.key(function(d) { return d.customer_state})
-						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
-							return d.delivery_time_hr;
-						}));})
-						.entries(filteredByProduct);
+	// 	dtByState = d3.nest()
+	// 					.key(function(d) { return d.customer_state})
+	// 					.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+	// 						return d.delivery_time_hr;
+	// 					}));})
+	// 					.entries(filteredByProduct);
 
-		dtByState = sorta(dtByState);
-		update();
-	});
+	// 	dtByState = sorta(dtByState);
+	// 	update();
+	// });
 
 
 	function update() {
@@ -140,6 +141,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 	}
 
+	// Start rendering the graphics
 	update();
 
 });

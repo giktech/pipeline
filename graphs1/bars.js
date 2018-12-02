@@ -72,7 +72,7 @@ function barChart() {
           var color = "grey";
           // console.log(yValue(d));
           if (+yValue(d) > 550) {
-            color = "darkred";
+            color = "#E15759";
           };
             return color;
         })
