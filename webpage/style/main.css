@@ -1,216 +1,41 @@
-/*From Template */
 body {
     font-size: .875rem;
+    background-color: rgb(238, 238, 238);
 }
 
-.feather {
-    width: 16px;
-    height: 16px;
-    vertical-align: text-bottom;
-}
-
-/*
-* Sidebar
-*/
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100; /* Behind the navbar */
-    padding: 48px 0 0; /* Height of navbar */
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
-
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-    .sidebar-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-    }
-}
-
-.sidebar-heading {
-    font-size: .75rem;
-    text-transform: uppercase;
-}
-
-/*
-* Content
-*/
-
-[role="main"] {
-    padding-top: 48px; /* Space for fixed navbar */
+.gen-text {
+    font-family: Consolas, courier;
+    fill: rgb(103, 128, 159);
+    color: rgb(103, 128, 159);
 }
 
 /*
 * Navbar
 */
 
-
 .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
-
-body {
-    background-color: rgb(238, 238, 238);
+.product-line {
+    stroke: rgb(210, 215, 211);
+    stroke-width: 3;
 }
 
-/* .stage-selector {
-    background-color: rgb(244, 244, 244);
-} */
-
-.container {
-    padding-top: 30px;
+.product-line-topnetgrowth {
+    stroke: rgb(52, 73, 94);
+    stroke-width: 6;
 }
 
-.intro-row {
-    padding-bottom: 25px;
+.product-circle {
+    fill: rgb(52, 73, 94);
+    pointer-events: none;
 }
 
-text, .title-text, .gen-text {
-    font-family: Consolas, courier;
-    fill: rgb(103, 128, 159);
-    color: rgb(103, 128, 159);
-}
-
-.title-text {
-    font-size: 20px;
-}
-
-.title {
-    padding-left: 50px;
-}
-
-.placeholder-text {
-    font-style: italic;
-    fill: rgb(191, 191, 191);
-}
-
-.loading-placeholder {
-    padding-left: 180px;
-    padding-top: 75px;
-}
-
-.bfn-mdl-card.mdl-card {
-    min-height: 0px;
-    height: 200px;
-    width: 256px;
-}
-
-.bfn-mdl-card > .mdl-card__title {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    text-align: center;
-} 
-
-/* .bfn-mdl-card > .bfn-card-title-header {
-}
-
-.bfn-mdl-card > .bfn-card-title-text {
-} */
-
-.bfn-supp-text-plus {
-    color: rgb(46, 204, 113);
-}
-
-.bfn-supp-text-minus {
-    color: rgb(226, 106, 106);
-}
-
-/* .bfn-content {
-    padding-left: 50px;
-} */
-
-.stage-overview-mdl-card.mdl-card {
-    width: 100%;
-}
-
-.stage-overview-mdl-card > .mdl-card__title {
-    color: #fff;
-    height: 176px;
-    background: url('../assets/demos/welcome_card.jpg') center / cover;
-}
-
-.stage-container > .row {
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-.stage-container > .row > .col-4 {
-    display: inline-block;
-    float: none;
-}
-
-.stage-card {
-    height: 200px;
-}
-
-.stage-angle {
-    margin-top: 50px;
-}
-
-.stage1-container {
-    display: none;
-}
-
-.stage2-container {
-    display: none;
-}
-
-.mdl-button-text {
-    color: rgb(238, 238, 238);
-}
-
-
-#timeline .line {
-    fill: none;
-    stroke: #000;
-    stroke-width: 1.5px;
-}
-
-#timeline .area {
-    /*fill: #969696;*/
-    fill: steelblue;
-}
-
-#timeline .attention {
-    background: yellow;
-    margin: -4px;
-    padding: 4px;
-}
-
-.barChart .bar {
-    fill: steelblue;
-}
-.barChart .x.axis path {
-    display: none;
-}
-
-#gates .x.axis text {
-    text-anchor: end;
-}
-#gates svg {
-    overflow: visible;
-}
-
-#gates2 .x.axis text {
-    text-anchor: end;
-}
-#gates2 svg {
-    overflow: visible;
+.product-circle-text-line1 {
+    pointer-events: none;
 }
 
 line.hover-line {
@@ -218,7 +43,6 @@ line.hover-line {
     stroke-width: 1.5;
     stroke-dasharray: 5 2;
 }
-
 
 /* Gaurav */
 #chart1 .bar {
