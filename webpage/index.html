@@ -13,417 +13,124 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-dark fixed-top bg-dark p-1 shadow">
-		<a class="navbar navbar-brand col-2" href="#">E-Commerce Dashoard</a>
+	<nav class="navbar navbar-dark bg-dark p-1 shadow">
+		<a class="navbar navbar-brand col-2" href="#">E-Commerce Dashboard</a>
 	</nav>
 	
 	<div class="container-fluid">
 		<div class="row">
-			<nav class="col-1 d-none d-md-block bg-light sidebar">
-				<div class="sidebar-sticky">
-					<h6 class="p-3">Filters</h6>
-				</div>
-			</nav>
-			
-			<div main role="main" class="col-11 ml-auto px-4">
+			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Overview</h1>
 				</div>
+			</div>
+		</div>
 
-				<h4 class="gen-text">Orders Over Time</h4>
-				<div class="barChart" id="orders-over-time"></div>
+		<div class="row">
+			<div class="offset-1 col-11">
+				<div class='tableauPlaceholder' id='viz1543635655502' style='position: relative'>
+					<noscript>
+						<a href='#'>
+							<img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;su&#47;summary_dashboard&#47;Dashboard1&#47;1_rss.png' style='border: none' />
+						</a>
+					</noscript>
+					<object class='tableauViz'  width='100%' style='display:none;'>
+						<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+						<param name='embed_code_version' value='3' />
+						<param name='site_root' value='' />
+						<param name='name' value='summary_dashboard&#47;Dashboard1' />
+						<param name='tabs' value='no' />
+						<param name='toolbar' value='yes' />
+						<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;su&#47;summary_dashboard&#47;Dashboard1&#47;1.png' />
+						<param name='animate_transition' value='yes' />
+						<param name='display_static_image' value='yes' />
+						<param name='display_spinner' value='yes' />
+						<param name='display_overlay' value='yes' />
+						<param name='display_count' value='yes' />
+						<param name='filter' value='publish=yes' />
+					</object>
+				</div>
+				
+				<script type='text/javascript'>
+					var divElement = document.getElementById('viz1543635655502'); 
+					var vizElement = divElement.getElementsByTagName('object')[0]; 
+					// vizElement.style.width = '1200px'; 
+					vizElement.style.height = '1050px'; 
+					var scriptElement = document.createElement('script'); 
+					scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
+					vizElement.parentNode.insertBefore(scriptElement, vizElement);               
+				</script>
+			</div>
+		</div>
 
-				<!-- <div class="container overview-container">
-					<div class="row orders-timeline">
-						<div class="col-12">
-							
-						</div>
-					</div>
-				</div> -->
-
-
-
+		<div class="row">
+			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Stages</h1>
+					<h1 class="h2">Purchases</h1>
 				</div>
-
-
-
-				<!-- <ul class="nav nav-tabs p-4">
-					<li class="nav-item">
-						<a class="nav-link active" href="#">Active</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-				</ul> -->
-
-				<span class="stage-container">
-					<div class="row flex-row flex-nowrap stage-selector">
-						<div class='col-3'>
-							<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-								<!-- <i class="card-image-top fas fa-tachometer-alt fa-5x"></i> -->
-								<div class="card-body">
-									<h2>####</h2>
-								</div>
-								
-								<a onclick="stage1Click()" class="card-link btn btn-outline-primary title-text">Stage 1</a>
-							</div>
-						</div>
-						
-						<div class="col-1 text-center">
-							<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
-						</div>
-						
-						<div class='col-3'>
-							<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-								<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-								
-								<div class="card-body">
-									<h2>####</h2>
-								</div>
-								
-								<a onclick="stage2Click()" class="card-link btn btn-outline-primary title-text">Stage 2</a>
-							</div>
-						</div>
-						
-						<div class="col-1 text-center">
-							<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
-						</div>
-						
-						<div class='col-3'>
-							<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-								<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-								<div class="card-body">
-									<h2>####</h2>
-								</div>
-								
-								<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 3</a>
-							</div>
-						</div>
-						
-						<div class="col-1 text-center">
-							<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
-						</div>
-						
-						<div class='col-3'>
-							<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-								<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-								<div class="card-body">
-									<h2>####</h2>
-								</div>
-								
-								<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 4</a>
-							</div>
-						</div>
-						
-						<div class="col-1 text-center">
-							<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
-						</div>
-						
-						<div class='col-3'>
-							<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-								<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-								<div class="card-body">
-									<h2>####</h2>
-								</div>
-								
-								<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 5</a>
-							</div>
-						</div>
-						
-						<div class="col-1 text-center">
-							<i class="fas fa-5x fa-angle-double-right stage-angle"></i>
-						</div>
-						
-						<div class='col-3'>
-							<div class="card text-center stage-card shadow-sm p-3 mb-3 bg-white rounded">
-								<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-								<div class="card-body">
-									<h2>####</h2>
-								</div>
-								
-								<a onclick="return false;" class="card-link btn btn-outline-primary title-text">Stage 6</a>
-							</div>
-						</div>
-					</div>
-				</span>
-				
-				<h2>Section title</h2>
-				<div class="table-responsive">
-					<table class="table table-striped table-sm">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1,001</td>
-								<td>Lorem</td>
-								<td>ipsum</td>
-								<td>dolor</td>
-								<td>sit</td>
-							</tr>
-							<tr>
-								<td>1,002</td>
-								<td>amet</td>
-								<td>consectetur</td>
-								<td>adipiscing</td>
-								<td>elit</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>Integer</td>
-								<td>nec</td>
-								<td>odio</td>
-								<td>Praesent</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>libero</td>
-								<td>Sed</td>
-								<td>cursus</td>
-								<td>ante</td>
-							</tr>
-							<tr>
-								<td>1,004</td>
-								<td>dapibus</td>
-								<td>diam</td>
-								<td>Sed</td>
-								<td>nisi</td>
-							</tr>
-							<tr>
-								<td>1,005</td>
-								<td>Nulla</td>
-								<td>quis</td>
-								<td>sem</td>
-								<td>at</td>
-							</tr>
-							<tr>
-								<td>1,006</td>
-								<td>nibh</td>
-								<td>elementum</td>
-								<td>imperdiet</td>
-								<td>Duis</td>
-							</tr>
-							<tr>
-								<td>1,007</td>
-								<td>sagittis</td>
-								<td>ipsum</td>
-								<td>Praesent</td>
-								<td>mauris</td>
-							</tr>
-							<tr>
-								<td>1,008</td>
-								<td>Fusce</td>
-								<td>nec</td>
-								<td>tellus</td>
-								<td>sed</td>
-							</tr>
-							<tr>
-								<td>1,009</td>
-								<td>augue</td>
-								<td>semper</td>
-								<td>porta</td>
-								<td>Mauris</td>
-							</tr>
-							<tr>
-								<td>1,010</td>
-								<td>massa</td>
-								<td>Vestibulum</td>
-								<td>lacinia</td>
-								<td>arcu</td>
-							</tr>
-							<tr>
-								<td>1,011</td>
-								<td>eget</td>
-								<td>nulla</td>
-								<td>Class</td>
-								<td>aptent</td>
-							</tr>
-							<tr>
-								<td>1,012</td>
-								<td>taciti</td>
-								<td>sociosqu</td>
-								<td>ad</td>
-								<td>litora</td>
-							</tr>
-							<tr>
-								<td>1,013</td>
-								<td>torquent</td>
-								<td>per</td>
-								<td>conubia</td>
-								<td>nostra</td>
-							</tr>
-							<tr>
-								<td>1,014</td>
-								<td>per</td>
-								<td>inceptos</td>
-								<td>himenaeos</td>
-								<td>Curabitur</td>
-							</tr>
-							<tr>
-								<td>1,015</td>
-								<td>sodales</td>
-								<td>ligula</td>
-								<td>in</td>
-								<td>libero</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</main>
+			</div>
 		</div>
-		
-		
-		<!-- <div class="row stage-overview">
-			<div class='col-12'>
-				<div class="stage-overview-mdl-card mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title">
-						<h2 class="mdl-card__title-text">Welcome</h2>
-					</div>
-					
-					<div class="mdl-card__supporting-text">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Mauris sagittis pellentesque lacus eleifend lacinia...
-					</div>
-					
-				</div>
-			</div>
-		</div> -->
 
-		<div class="container stage1-container">
-			<div class="row stage-timeline">
-				<div class="col-12">
-					<h4 class="gen-text">Timeline</h4>
-					<div id="timeline"></div>
-				</div>
+		<div class="row">
+			<div class="col-9 px-0">
+					<div id="product-growth"></div>
 			</div>
+
+			<div class="col-3 px-0">
+				<h2>Explanation text goes here...</h2>
+			</div>
+		</div>
 			
-			<div class="row stage-detail">
-				<div class="col-5">
-					<h4 class="gen-text">Orders Received by Regions</h4>
-					<div class="barChart" id="carTypes"></div>
+		<div class="row">
+			<div class="col-12">
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2">Order Processing</h1>
 				</div>
+			</div>
+		</div>	
+		
+		<div class="row">
+			<div class="col-12">
+				<div id="text1">
+					<p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR>The charts below show the order delivery time for each state (chart 1) and each product category (chart 2). Delivery timelines outside the normal range (0-500 hours) are in red. </p>
+				</div>
+				<div id="chart1"></div>
+				<div id="text2">
+					<p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR>Highlighting a part of above chart (i.e. selecting states) chooses product categories that have the biggest delivery times in the chart below </p>
+				</div>
+				<div id="chart2"></div>
+				<div id="text3">
+					<p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR> The brush on chart1 (to select states) can be dragged on both edges.It can also be moved horizontally through the span of the chart. Reloading the page will reset both the charts to original form. </p>
+				</div>
+				<div id="chart1"></div>
+				<div id="chart2"></div>
+			</div>
+		</div>	
 				
-				<div class="col-6">
-					<h4 class="gen-text">Orders Received by Style</h4>
-					<div class="barChart" id="gates"></div>
-				</div>
-			</div>
-		</div>
-
-		<div class="container stage2-container">
-			<div class="row stage-timeline">
-				<div class="col-12">
-					<h4 class="gen-text">Timeline</h4>
-					<div id="timeline2"></div>
-				</div>
-			</div>
-			
-			<div class="row stage-detail">
-				<div class="col-5">
-					<h4 class="gen-text">Orders Received by Regions</h4>
-					<div class="barChart" id="carTypes2"></div>
-				</div>
 				
-				<div class="col-6">
-					<h4 class="gen-text">Orders Received by Style</h4>
-					<div class="barChart" id="gates2"></div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	
-	
+				
+				
+				
+				
+				
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script> -->
+	<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"> </script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
 	
-	<script src="http://colorbrewer2.org/export/colorbrewer.js"></script>
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-	
-	
-	<script src="https://cdn.jsdelivr.net/npm/vega@4.3.0/build/vega.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc8/build/vega-lite.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.20.0/build/vega-embed.js"></script>
-	
-	<script src="js/timeSeriesChart.js"></script>
-	<script src="js/barChart.js"></script>
-	<script src="js/barChart-v2.js"></script>
-	<script src="js/scatterPlot.js"></script>
-	<script src="js/streamGraph.js"></script>
-	
-	<!-- <script>
-		// Assign the specification to a local variable vlSpec.
-		var vlSpec = {
-			
-			"$schema": "https://vega.github.io/schema/vega-lite/v3.json",
-			"width": 1000,
-			"height": 1000,
-			"data": {
-				"url": "data/data_compiled.json"
-			},
-			"hconcat": [{
-				"title": "Overall Count",
-				"mark": "line",
-				"encoding": {
-					"x": {
-						"field": "timestamp",
-						"timeUnit": "seconds",
-						"type": "temporal"
-					},
-					"y": {
-						"aggregate": "count",
-						"field": "id"
-					},
-					
-				}
-			},
-			{
-				"title": "Count By Stage",
-				"mark": "line",
-				"encoding": {
-					"x": {
-						"field": "timestamp",
-						"timeUnit": "seconds",
-						"type": "temporal"
-					},
-					"y": {
-						"aggregate": "count",
-						"field": "id"
-					},
-					"color": {
-						"field": "stageNum",
-						"type": "nominal"
-					}
-				}
-			}
-			]
-		};
-		
-		// Embed the visualization in the container with id `vis`
-		vegaEmbed("#vis", vlSpec);
-	</script> -->
-	
-	<script src="js/main.js"></script>
+	<!-- <script src="js/barChart-v2.js"></script> -->
+	<script src="js/processing-text.js"></script>
+	<script src="js/processing-bars.js"></script>	
+	<script src="js/processing-main.js"></script>
+
+	<script src="js/purchases-main.js"></script>
+
 </body>
 </html>
 

@@ -14,8 +14,7 @@ body {
 			stroke-width: 0.5;
 		}
 
-
-#chart1 .attention {
+#chart1	.attention {
   background: yellow;
   margin: -4px;
   padding: 4px;

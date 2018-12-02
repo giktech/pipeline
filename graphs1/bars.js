@@ -113,7 +113,7 @@ function brushed() {
     onBrushed(selection);
 }
 
-// The x-accessor for the path generator; xScale ∘ xValue.
+  // The x-accessor for the path generator; xScale ∘ xValue.
   function X(d) {
     return xScale(xValue(d));
   }

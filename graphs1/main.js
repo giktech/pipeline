@@ -5,12 +5,12 @@ var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S.0000000");
 //Converting from CSV to new reduced object
 var rowConverter = function(d) {
 	var r =  ( {
-		// customer_id: d.customer_id,
-		// product_price: d.product_price,
+		customer_id: d.customer_id,
+		roduct_price: d.product_price,
 		product_category: d.product_category,
 		customer_state: d.customer_state,
-		// delivery_timestamp: parseTime(d.order_delivered_customer_date),
-		// purchase_timestamp: parseTime(d.order_purchase_timestamp),
+		delivery_timestamp: parseTime(d.order_delivered_customer_date),
+		purchase_timestamp: parseTime(d.order_purchase_timestamp),
 		delivery_time_hr: Math.round(
 			(parseTime(d.order_delivered_customer_date) - parseTime(d.order_purchase_timestamp))/(60*60*1000))
 
