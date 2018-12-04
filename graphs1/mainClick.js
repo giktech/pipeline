@@ -40,14 +40,7 @@ var BarChart2 = barChart()
   .height(600)
   .margin(chart2M)
   .x(function (d) { return d.value; })
-  .y(function (d) { return d.key; })
-  .onMouseOver(function(d) {
-      console.log(d);
-      update();
-    })
-  .onMouseOut(function() {
-      update();
-    }) ;
+  .y(function (d) { return d.key; });
 
 var chart3M = {top: 40, right: 40, bottom: 40, left: 200};
 
@@ -83,7 +76,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	dtByCustomer = sorta(dtByCustomer).slice(0,20);
+	dtByCustomer = sorta(dtByCustomer).slice(0,15);
 
 
 	// Grouping
@@ -97,7 +90,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						.entries(dataset);
 
 
-	sorta(dtByState);
+	dtByState = sorta(dtByState).slice(0,15);
 
 
 	var dtByProductCat = d3.nest()
@@ -107,34 +100,34 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	dtByProductCat = sorta(dtByProductCat).slice(0,20);
+	dtByProductCat = sorta(dtByProductCat).slice(0,15);
 
 
 
-	BarChart1.onBrushed(function(selected) {
+	// BarChart1.onBrushed(function(selected) {
 
-		// We have the array of categories in our selection now
-		// console.log(selected);
+	// 	// We have the array of categories in our selection now
+	// 	// console.log(selected);
 
-		// Show the products with the most delay in these states
-		// console.log(selected);
+	// 	// Show the products with the most delay in these states
+	// 	// console.log(selected);
 
-		// filter. the dataset with selected
-		filteredByState = dataset.filter(function(d) {
-			return selected.includes(d.customer_state);
-		});
+	// 	// filter. the dataset with selected
+	// 	filteredByState = dataset.filter(function(d) {
+	// 		return selected.includes(d.customer_state);
+	// 	});
 
-		dtByProductCat = d3.nest()
-						.key(function(d) { return d.product_category})
-						.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
-							return d.delivery_time_hr;
-						}));})
-						.entries(filteredByState);
+	// 	dtByProductCat = d3.nest()
+	// 					.key(function(d) { return d.product_category})
+	// 					.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+	// 						return d.delivery_time_hr;
+	// 					}));})
+	// 					.entries(filteredByState);
 
-		dtByProductCat = sorta(dtByProductCat).slice(0, 20);
+	// 	dtByProductCat = sorta(dtByProductCat).slice(0, 20);
 
-		update();
-	});
+	// 	update();
+	// });
 
 
 	// BarChart2.onBrushed(function(selected) {

@@ -33,7 +33,7 @@ function barChart() {
 	  gEnter.append("g").attr("class", "x axis");
 	  gEnter.append("g").attr("class", "y axis");
     // Moving it after making the bars. That way its easier to use with the bars
-    gEnter.append("g").attr("class", "brush");
+    // gEnter.append("g").attr("class", "brush");
 
 	  // Update the outer dimensions.
 	  svg.merge(svgEnter).attr("width", width)
@@ -99,64 +99,67 @@ function barChart() {
         .on("mouseover", function(d) {
 
           //Get this bar's x/y values, then augment for the tooltip
-          //var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.bandwidth() / 2;
-          var xPosition = parseFloat(d3.select(this).attr("x"))/2 + innerWidth/2;
-          var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2;
+          // console.log(this);
+          var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2 + 2;
+          var xPosition = parseFloat(d3.select(this).attr("x"));
+          var widthNow = parseFloat(d3.select(this).attr("width"));
 
           //Create the tooltip label
-          svg.append("text")
+          g.append("text")
              .attr("id", "tooltip")
-             .attr("x", xPosition)
+             .attr("x", xPosition + widthNow + 20)
              .attr("y", yPosition)
              .attr("text-anchor", "middle")
              .attr("font-family", "sans-serif")
              .attr("font-size", "11px")
              .attr("font-weight", "bold")
-             .attr("fill", "black")
+             .attr("fill", "grey")
              .text(d.value);
 
          })
+
          .on("mouseout", function() {
          
-            //Remove the tooltip
+          //Remove the tooltip
             d3.select("#tooltip").remove();
-          });
+
+        });
 
 	  bars.exit().remove();
 
     // gEnter.append("g").attr("class", "brush");
 
     // For extents, we pick up the top of inside to bottom
-	  var brush = g.select(".brush")
-	  	.call(d3.brushY()
-	  		.extent([
-            [0,0],
-            [xScale.range()[1], yScale.range()[1]]
-        ])
-	  		.on("brush", brushed));
+	  // var brush = g.select(".brush")
+	  // 	.call(d3.brushY()
+	  // 		.extent([
+   //          [0,0],
+   //          [xScale.range()[1], yScale.range()[1]]
+   //      ])
+	  // 		.on("brush", brushed));
     });
 
 };
 
-function brushed() {
-  if (!d3.event.sourceEvent) return; // Only transition after input.
-  if (!d3.event.selection) return; // Ignore empty selections.
+// function brushed() {
+//   if (!d3.event.sourceEvent) return; // Only transition after input.
+//   if (!d3.event.selection) return; // Ignore empty selections.
 
-  var selectionRange = d3.event.selection.map(function (y) { 
-    return invert(yScale, y); 
-  });
+//   var selectionRange = d3.event.selection.map(function (y) { 
+//     return invert(yScale, y); 
+//   });
 
-  console.log(selectionRange);
+//   console.log(selectionRange);
 
-  var selection = yScale.domain().filter(function(y) {
-      return (yScale(selectionRange[0]) <= yScale(y)) && (yScale(y) <= yScale(selectionRange[1]));
-  });
+//   var selection = yScale.domain().filter(function(y) {
+//       return (yScale(selectionRange[0]) <= yScale(y)) && (yScale(y) <= yScale(selectionRange[1]));
+//   });
 
-  console.log(selection);
+//   console.log(selection);
 
-  // Selection has the entire array of selected now
-    onBrushed(selection);
-}
+//   // Selection has the entire array of selected now
+//     onBrushed(selection);
+// }
 
 
   // The x-accessor for the path generator; xScale ∘ xValue.

@@ -1,21 +1,51 @@
-body {
-	background-color: white;
-	color: black;
+svg {
+  font: 10px sans-serif;
 }
 
-.area {
-			fill: teal;
-			stroke: none;
-		}
-
-.line {
-			fill: none;
-			stroke: teal;
-			stroke-width: 0.5;
-		}
-
-#chart1	.attention {
-  background: yellow;
-  margin: -4px;
-  padding: 4px;
+.bar {
+  clip-path: url(#clip);
+  fill-opacity: .6;
 }
+  
+.subBar { 
+  fill: gray;
+  opacity: 0.5;
+}
+
+.axis path,
+.axis line {
+  display: none;
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.y .axis line {
+	display: none;
+	fill: none;
+}
+
+.x .axis line {
+	fill: none;
+	stroke: #e0e0e0;
+	shape-rendering: crispEdges;
+}
+
+.y .axis path {
+	display: none;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.resize {
+      display: inline !important; /* show when empty */
+      fill: #7A7A7A;
+      fill-opacity: 1;
+      stroke: #7A7A7A;
+      stroke-width: 2px;
+    }
+
