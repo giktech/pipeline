@@ -19,20 +19,41 @@ body {
     font-size: 1.25rem;
 }
 
+.market-row-body {
+    height: 2500px
+}
+
+.market-text-intro {
+    padding-top: 170px;
+    height: 750px;
+}
+
+.market-text-growth {
+    height: 600px;
+}
+
+.market-text-season {
+    height: 600px;
+}
+
 .product-line {
-    stroke: rgb(210, 215, 211);
+    stroke: rgb(75, 119, 190);
     stroke-width: 3;
 }
 
-.product-line-topnetgrowth {
+/* .product-line-topnetgrowth {
     stroke: rgb(52, 73, 94);
     stroke-width: 6;
-}
+} */
 
 .product-circle {
-    fill: rgb(52, 73, 94);
+    fill: rgb(75, 119, 190);
     pointer-events: none;
 }
+
+/* .product-circle-topnetgrowth {
+    fill: rgb(52, 73, 94);
+} */
 
 .product-circle-text-line1 {
     pointer-events: none;
