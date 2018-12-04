@@ -11,9 +11,14 @@ function barChart() {
     xScale = d3.scaleLinear(),
     yScale = d3.scaleBand().padding(0.1);
 
-    var onMouseOver = function() {};
-    var onMouseOut = function() {};
-    var onBrushed = function() {};
+  var onMouseOver = function() {};
+  var onMouseOut = function() {};
+  var onBrushed = function() {};
+  var onClicked = function() {};
+
+  var duration = 2000;
+
+  var t = d3.transition().duration(duration);
 
   function invert(scale, y) {
     var eachBand = scale.step();
@@ -82,9 +87,11 @@ function barChart() {
 	  var bars = g.selectAll(".bar")
 	    .data(function (d) { return d; });
 
-	  bars.enter().append("rect")
+	  bars.enter()
+        .append("rect")
 	      .attr("class", "bar")
 	    .merge(bars)
+      // For easing in new elements
 	      .attr("x", +0)
 	      .attr("y", Y)
         .attr("fill", function(d) {
@@ -99,7 +106,7 @@ function barChart() {
         .on("mouseover", function(d) {
 
           //Get this bar's x/y values, then augment for the tooltip
-          // console.log(this);
+          console.log(this);
           var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2 + 2;
           var xPosition = parseFloat(d3.select(this).attr("x"));
           var widthNow = parseFloat(d3.select(this).attr("width"));
@@ -123,7 +130,11 @@ function barChart() {
           //Remove the tooltip
             d3.select("#tooltip").remove();
 
-        });
+        })
+        .on("click", handleClick);
+
+    bars.transition(t).ease(d3.easeLinear).delay(100);
+
 
 	  bars.exit().remove();
 
@@ -139,6 +150,10 @@ function barChart() {
 	  // 		.on("brush", brushed));
     });
 
+};
+
+function handleClick(d, i) {
+  onClicked(d.key);
 };
 
 // function brushed() {
@@ -217,6 +232,12 @@ function barChart() {
   chart.onBrushed = function(_) {
     if (!arguments.length) return onBrushed;
     onBrushed = _;
+    return chart;
+  };
+
+  chart.onClicked = function(_) {
+    if (!arguments.length) return onClicked;
+    onClicked = _;
     return chart;
   };
 
