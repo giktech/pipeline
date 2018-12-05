@@ -36,6 +36,10 @@ body {
     height: 600px;
 }
 
+.market-text-list {
+    padding-left: 20px;
+}
+
 .product-line {
     stroke: rgb(75, 119, 190);
     stroke-width: 3;

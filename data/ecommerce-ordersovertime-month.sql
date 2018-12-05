@@ -19,9 +19,9 @@ SELECT DISTINCT
 	--YEAR(ym.dt) AS dt_year
 	--,COUNT(cmb.order_id) OVER (PARTITION BY YEAR(ym.dt)) AS orders_ct_year
 	MONTH(ym.dt) AS dt_month
-	,COUNT(cmb.order_id) OVER (PARTITION BY MONTH(ym.dt)) AS orders_ct_month
+	,COUNT(cmb.order_id) OVER (PARTITION BY YEAR(ym.dt), MONTH(ym.dt)) AS orders_ct_month
 	--,DATEPART(WW, ym.dt) AS dt_week
-	--,COUNT(cmb.order_id) OVER (PARTITION BY DATEPART(ww, ym.dt)) AS orders_ct_week
+	--,COUNT(cmb.order_id) OVER (PARTITION BY YEAR(ym.dt), DATEPART(ww, ym.dt)) AS orders_ct_week
 	--,ym.dt AS dt_day
 	--,COUNT(cmb.order_id) OVER (PARTITION BY ym.dt) AS orders_ct_day
 FROM #yyyy_mm ym
