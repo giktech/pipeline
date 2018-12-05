@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <link rel= "stylesheet" type = "text/css" href= "allGraphs.css">
+        <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"> </script>
+        <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+    </head>
+
+    <body>
+        <div id="text1">
+            <p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR>The charts below show the order delivery time for each state (chart 1) and each product category (chart 2). Delivery timelines outside the normal range (0-500 hours) are in red. </p>
+        </div>
+        <div id="chart1"></div>
+        <div id="text2">
+            <p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR>Clicking on a bar in Chart 1 shows its average processing time. It also limits the data in chart 2 to that state only. </p>
+        </div>
+        <div id="chart2"></div>
+        <div id="text3">
+            <p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR>TBD </p>
+        </div>
+        <div id="chart3"></div>
+        <div id="text4">
+            <p font-family="sans-serif" font-size="30px" fill="grey" align=justify> <BR> TBD </BR></p>
+        </div>
+        <div id="chart4"></div>
+        <script src="donut.js"></script>
+        <script src="barsClick.js"></script>   
+        <script src="mainDonut1.js"></script>
+    </body>
+
+</html>
