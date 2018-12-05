@@ -26,33 +26,45 @@ var sorta = function(d) {
 	});
 };
 
+var duration = 1000;
+var t = d3.transition().duration(duration);
+
 var BarChart1 = barChart()
-  .width(800)
+  .width(900)
   .height(600)
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
 
+// For the donut
+
+// var timerInterval = 1500;
+
+// var donut1 = donutChart()
+//     .width(960)
+//     .height(500)
+//     .transTime(750) // length of transitions in ms
+//     .cornerRadius(3) // sets how rounded the corners are on each slice
+//     .padAngle(0.015) // effectively dictates the gap between slices
+//     .variable('value')
+//     .category('key');
+
+// var i = 0;
+
+
 var chart2M = {top: 40, right: 40, bottom: 40, left: 200};
 
 var BarChart2 = barChart()
-  .width(800)
+  .width(900)
   .height(600)
   .margin(chart2M)
   .x(function (d) { return d.value; })
-  .y(function (d) { return d.key; })
-  .onMouseOver(function(d) {
-      console.log(d);
-      update();
-    })
-  .onMouseOut(function() {
-      update();
-    }) ;
+  .y(function (d) { return d.key; });
 
 var chart3M = {top: 40, right: 40, bottom: 40, left: 200};
 
 var BarChart3 = barChart()
-  .width(800)
+  .width(900)
   .height(600)
   .margin(chart3M)
   .x(function (d) { return d.value; })
@@ -83,7 +95,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	dtByCustomer = sorta(dtByCustomer).slice(0,20);
+	dtByCustomer = sorta(dtByCustomer).slice(0,15);
 
 
 	// Grouping
@@ -97,7 +109,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						.entries(dataset);
 
 
-	sorta(dtByState);
+	dtByState = sorta(dtByState).slice(0,15);
 
 
 	var dtByProductCat = d3.nest()
@@ -111,7 +123,32 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 
 
-	BarChart1.onBrushed(function(selected) {
+	// BarChart1.onBrushed(function(selected) {
+
+	// 	// We have the array of categories in our selection now
+	// 	// console.log(selected);
+
+	// 	// Show the products with the most delay in these states
+	// 	// console.log(selected);
+
+	// 	// filter. the dataset with selected
+	// 	filteredByState = dataset.filter(function(d) {
+	// 		return selected.includes(d.customer_state);
+	// 	});
+
+	// 	dtByProductCat = d3.nest()
+	// 					.key(function(d) { return d.product_category})
+	// 					.rollup( function(v) { return Math.round(d3.mean(v, function(d) {
+	// 						return d.delivery_time_hr;
+	// 					}));})
+	// 					.entries(filteredByState);
+
+	// 	dtByProductCat = sorta(dtByProductCat).slice(0, 20);
+
+	// 	update();
+	// });
+
+	BarChart1.onClicked(function(selected) {
 
 		// We have the array of categories in our selection now
 		// console.log(selected);
@@ -179,6 +216,10 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 		d3.select("#chart3")
 		  .datum(dtByCustomer)
 		  .call(BarChart3);
+
+		// donut.data(dtByProductPriceCat);
+		// d3.select("#chart4")
+		// 	.call(donut)
 
 	};
 

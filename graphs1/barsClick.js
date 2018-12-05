@@ -11,9 +11,14 @@ function barChart() {
     xScale = d3.scaleLinear(),
     yScale = d3.scaleBand().padding(0.1);
 
-    var onMouseOver = function() {};
-    var onMouseOut = function() {};
-    var onBrushed = function() {};
+  var onMouseOver = function() {};
+  var onMouseOut = function() {};
+  var onBrushed = function() {};
+  var onClicked = function() {};
+
+  var duration = 2000;
+
+  var t = d3.transition().duration(duration);
 
   function invert(scale, y) {
     var eachBand = scale.step();
@@ -33,7 +38,7 @@ function barChart() {
 	  gEnter.append("g").attr("class", "x axis");
 	  gEnter.append("g").attr("class", "y axis");
     // Moving it after making the bars. That way its easier to use with the bars
-    gEnter.append("g").attr("class", "brush");
+    // gEnter.append("g").attr("class", "brush");
 
 	  // Update the outer dimensions.
 	  svg.merge(svgEnter).attr("width", width)
@@ -82,9 +87,11 @@ function barChart() {
 	  var bars = g.selectAll(".bar")
 	    .data(function (d) { return d; });
 
-	  bars.enter().append("rect")
+	  bars.enter()
+        .append("rect")
 	      .attr("class", "bar")
 	    .merge(bars)
+      // For easing in new elements
 	      .attr("x", +0)
 	      .attr("y", Y)
         .attr("fill", function(d) {
@@ -99,64 +106,75 @@ function barChart() {
         .on("mouseover", function(d) {
 
           //Get this bar's x/y values, then augment for the tooltip
-          //var xPosition = parseFloat(d3.select(this).attr("x")) + xScale.bandwidth() / 2;
-          var xPosition = parseFloat(d3.select(this).attr("x"))/2 + innerWidth/2;
-          var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2;
+          console.log(this);
+          var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2 + 2;
+          var xPosition = parseFloat(d3.select(this).attr("x"));
+          var widthNow = parseFloat(d3.select(this).attr("width"));
 
           //Create the tooltip label
-          svg.append("text")
+          g.append("text")
              .attr("id", "tooltip")
-             .attr("x", xPosition)
+             .attr("x", xPosition + widthNow + 20)
              .attr("y", yPosition)
              .attr("text-anchor", "middle")
              .attr("font-family", "sans-serif")
              .attr("font-size", "11px")
              .attr("font-weight", "bold")
-             .attr("fill", "black")
+             .attr("fill", "grey")
              .text(d.value);
 
          })
+
          .on("mouseout", function() {
          
-            //Remove the tooltip
+          //Remove the tooltip
             d3.select("#tooltip").remove();
-          });
+
+        })
+        .on("click", handleClick);
+
+    bars.transition(t).ease(d3.easeLinear).delay(100);
+
 
 	  bars.exit().remove();
 
     // gEnter.append("g").attr("class", "brush");
 
     // For extents, we pick up the top of inside to bottom
-	  var brush = g.select(".brush")
-	  	.call(d3.brushY()
-	  		.extent([
-            [0,0],
-            [xScale.range()[1], yScale.range()[1]]
-        ])
-	  		.on("brush", brushed));
+	  // var brush = g.select(".brush")
+	  // 	.call(d3.brushY()
+	  // 		.extent([
+   //          [0,0],
+   //          [xScale.range()[1], yScale.range()[1]]
+   //      ])
+	  // 		.on("brush", brushed));
     });
 
 };
 
-function brushed() {
-  if (!d3.event.sourceEvent) return; // Only transition after input.
-  if (!d3.event.selection) return; // Ignore empty selections.
+function handleClick(d, i) {
+  onClicked(d.key);
+};
 
-  var selectionRange = d3.event.selection.map(function (y) { 
-    return invert(yScale, y); 
-  });
+// function brushed() {
+//   if (!d3.event.sourceEvent) return; // Only transition after input.
+//   if (!d3.event.selection) return; // Ignore empty selections.
 
-  console.log(selectionRange);
+//   var selectionRange = d3.event.selection.map(function (y) { 
+//     return invert(yScale, y); 
+//   });
 
-  var selection = yScale.domain().filter(function(y) {
-      return (yScale(selectionRange[0]) <= yScale(y)) && (yScale(y) <= yScale(selectionRange[1]));
-  });
+//   console.log(selectionRange);
 
-  console.log(selection);
+//   var selection = yScale.domain().filter(function(y) {
+//       return (yScale(selectionRange[0]) <= yScale(y)) && (yScale(y) <= yScale(selectionRange[1]));
+//   });
 
-  // Selection has the entire array of selected now
-    onBrushed(selection);
-}
+//   console.log(selection);
+
+//   // Selection has the entire array of selected now
+//     onBrushed(selection);
+// }
 
 
   // The x-accessor for the path generator; xScale ∘ xValue.
@@ -214,6 +232,12 @@ function brushed() {
   chart.onBrushed = function(_) {
     if (!arguments.length) return onBrushed;
     onBrushed = _;
+    return chart;
+  };
+
+  chart.onClicked = function(_) {
+    if (!arguments.length) return onClicked;
+    onClicked = _;
     return chart;
   };
 
