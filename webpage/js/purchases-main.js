@@ -12,7 +12,7 @@ d3.csv("data/ecommerce-productgrowth.csv")
     // console.log(data)
     // data = data.filter(d => d.product_category == "auto")
 
-    var outerWidth = 1235;
+    var outerWidth = 1035;
     var outerHeight = 650;
 
     // 2. Use the margin convention practice 
@@ -116,6 +116,8 @@ d3.csv("data/ecommerce-productgrowth.csv")
             if (d[0].alltime_diff_rank < 6) {
                 classString += " product-line-topnetgrowth"
             }
+
+            classString += " " + d[0].dt_month
 
             return classString;
         })

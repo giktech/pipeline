@@ -96,7 +96,6 @@ SELECT
 	,priormonth_order_ct_diff
 	,priormonth_order_ct_pctchange
 	,alltime_order_ct_pctchange
-	,alltime_order_ct_pctchange_old
 	,alltime_order_ct_diff
 	,DENSE_RANK() OVER (ORDER BY alltime_order_ct_pctchange DESC, product_category) AS alltime_pctchange_rank
 	,DENSE_RANK() OVER (ORDER BY alltime_order_ct_diff DESC, product_category) AS alltime_diff_rank
