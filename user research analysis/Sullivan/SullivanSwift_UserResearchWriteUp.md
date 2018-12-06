@@ -7,7 +7,7 @@ For the following user tests, I used this Google Form as a guide and to take not
 
 A PDF version can be found here: [W209 User Research Form - Google Forms.pdf](https://github.com/giktech/pipeline/blob/master/user%20research%20analysis/Sullivan/W209%20User%20Research%20Form%20-%20Google%20Forms.pdf)
 
-Complete, raw results of this Google Form can be found here: [Results](https://github.com/giktech/pipeline/blob/master/user%20research%20analysis/w209_userresearch_results.csv)
+Complete results of this Google Form can be found here: [Results](https://github.com/giktech/pipeline/blob/master/user%20research%20analysis/w209_userresearch_results.csv)
 
 Note: Not all tasks included in the form are filled in for each user. This is due to the varying timelines of our different group members and the availability of the particiants. In some cases, data included in the spreadsheet is outdated as we opted to update one of our views and its tasks before testing was completed as the change was substantial and feedback on the new view took precedence. As such, my report below will focus primarily on only one visualization in the project. Where possible, likert scale questions may contain n>2, indiciating where my groupmates were able to complete my tasks. 
 
