@@ -1,4 +1,4 @@
-# User Research Outline
+# User Research Writeup and Results
 Sullivan Swift
 
 ## Discussion Guide
@@ -7,7 +7,7 @@ For the following user tests, I used this Google Form as a guide and to take not
 
 A PDF version can be found here: [W209 User Research Form - Google Forms.pdf](https://github.com/giktech/pipeline/blob/master/user%20research%20analysis/Sullivan/W209%20User%20Research%20Form%20-%20Google%20Forms.pdf)
 
-Complete, raw results of this Google Form can be found here: [Link to GitHub]
+Complete, raw results of this Google Form can be found here: [Results](https://github.com/giktech/pipeline/blob/master/user%20research%20analysis/w209_userresearch_results.csv)
 
 Note: Not all tasks included in the form are filled in for each user. This is due to the varying timelines of our different group members and the availability of the particiants. In some cases, data included in the spreadsheet is outdated as we opted to update one of our views and its tasks before testing was completed as the change was substantial and feedback on the new view took precedence. As such, my report below will focus primarily on only one visualization in the project. Where possible, likert scale questions may contain n>2, indiciating where my groupmates were able to complete my tasks. 
 
@@ -18,7 +18,7 @@ Note: Not all tasks included in the form are filled in for each user. This is du
 |01|25|Female|White|
 |02|25|Male|White|
 
-## General Notes:
+## Overall Interview Notes:
 
 Users were more competent than expected in using Tableau and general explorations dashboards. Neither work with these tools such as Tableau or interactive charts on a regular basis, but both were very capable in quickly finding and picking up the machenics of the visualization. This will likely bias the results of my research against the general public since the general public will have less exposure to visualizations and will need more support in exploring the dashboard. However, the overall usecase of a dashboard like this is aimed at executives and those who will be more familiar with the operations of the company and will also likely receive training in using tools like this one. The users' abilities to work with the visualization without direction likely helped us to focus on finer details and refinement, rather than focusing on what instructions should be included for use of the tool.
 
@@ -59,12 +59,12 @@ One used the selection tool (click and drag over multiple points) to select mult
 |---|---|
 |Number Correct|34|
 |Number Incorrect|13|
-|Number Missing|19 |
+|Number Missing|19|
 
 |Number of Tasks||
 |---|---|
 |Total number of tasks per user|11|
-|Total number of tasks completed|47 |
+|Total number of tasks completed|47|
 
 |Percent Correct/Incorrect||
 |---|---|
@@ -77,7 +77,9 @@ One used the selection tool (click and drag over multiple points) to select mult
 
 ![Task Correct/Incorrect/Missing Counts](charts/task_assessment.png)
 
-### System Usabilility Scale
+The View 1 Tasks acheived a 71% completion rate, with just over 70% of the completed tasks being answered correctly. Each user completed approximately 11 questions across the 3 tasks outlined above.
+
+## System Usabilility Scale & Debriefing
 
 Usability Scale Source: https://www.trymyui.com/sus-system-usability-scale
 (Item 1 excluded)
@@ -86,11 +88,15 @@ Average Score: 32.75 / 45
 
 ![System Usability Scores by Item, not accounting for reverse coding](charts/sus.png)
 
+We borrowing the System Usabilty Scale linked above to aid in assisting our analysis. The first Item on the scale didn't make sense to ask within our context and so it was removed. 
+
 ### Overall Rating
 
 Average Overall Rating: 3.2 / 5
 
 ![Overall Rating Breakdown](charts/overall_rating.png)
+
+The results are quite polarized for the views overall (all three views of the final project considered), even though the mean is very close to a "neutral" 3. 3 out of 6 participants answered "4", equivalent to "Good".
 
 ## Priorities
 
