@@ -5,7 +5,7 @@ Sullivan Swift
 
 For the following user tests, I used this Google Form as a guide and to take notes: https://docs.google.com/forms/d/e/1FAIpQLSd85AWycdgv_f2UDgntZP8WpftjBFFSaZJrVkTkQ6rTAhnTdg/viewform
 
-A PDF version can be found here: 
+A PDF version can be found here: [W209 User Research Form - Google Forms.pdf](https://github.com/giktech/pipeline/blob/master/user%20research%20analysis/Sullivan/W209%20User%20Research%20Form%20-%20Google%20Forms.pdf)
 
 Complete, raw results of this Google Form can be found here: [Link to GitHub]
 
@@ -54,29 +54,25 @@ One used the selection tool (click and drag over multiple points) to select mult
 
 ![View 1 Task Challenges Ratings](charts/V1_Challenge.PNG)
 
-|||
+#### Questions Incorrect v. Questions Correct
+
 |---|---|
 |Number Correct|34|
 |Number Incorrect|13|
 |Number Missing|19 |
 
-|||
 |---|---|
 |Total number of tasks per user|11|
 |Total number of tasks completed|47 |
 
-|||
 |---|---|
 |Percent Correct|0.72|
 |Percent Incorrect|0.28 |
 
-|||
 |---|---|
 |Task Completion Rate|0.71|
 
 ![Task Correct/Incorrect/Missing Counts](charts/task_assessment.png)
-
-#### Questions Incorrect v. Questions Correct
 
 ### System Usabilility Scale
 
