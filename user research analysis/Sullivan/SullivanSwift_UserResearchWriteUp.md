@@ -55,20 +55,23 @@ One used the selection tool (click and drag over multiple points) to select mult
 ![View 1 Task Challenges Ratings](charts/V1_Challenge.PNG)
 
 #### Questions Incorrect v. Questions Correct
-
+|Count of Tasks||
 |---|---|
 |Number Correct|34|
 |Number Incorrect|13|
 |Number Missing|19 |
 
+|Number of Tasks||
 |---|---|
 |Total number of tasks per user|11|
 |Total number of tasks completed|47 |
 
+|Percent Correct/Incorrect||
 |---|---|
 |Percent Correct|0.72|
 |Percent Incorrect|0.28 |
 
+|Completion Rate||
 |---|---|
 |Task Completion Rate|0.71|
 
