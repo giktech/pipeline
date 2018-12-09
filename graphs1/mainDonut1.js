@@ -38,18 +38,20 @@ var BarChart1 = barChart()
 
 // For the donut
 
-// var timerInterval = 1500;
+var timerInterval = 1500;
 
-// var donut1 = donutChart()
-//     .width(960)
-//     .height(500)
-//     .transTime(750) // length of transitions in ms
-//     .cornerRadius(3) // sets how rounded the corners are on each slice
-//     .padAngle(0.015) // effectively dictates the gap between slices
-//     .variable('value')
-//     .category('key');
+var donut1 = donutChart()
+    .width(960)
+    .height(500)
+    .transTime(750) // length of transitions in ms
+    .cornerRadius(3) // sets how rounded the corners are on each slice
+    .padAngle(0.015) // effectively dictates the gap between slices
+    .variable('value')
+    .category('key');
 
-// var i = 0;
+var i = 0;
+
+var table1 = chartTable();
 
 
 var chart2M = {top: 40, right: 40, bottom: 40, left: 200};
@@ -87,7 +89,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
     // Grouping
     // Grouping by customer
-    var dtByCustomer = d3.nest()
+    var revByCustomer = d3.nest()
 						.key(function(d) { return d.customer_id})
 						//.key(function(d) {return d.product_category})
 						.rollup( function(v) { return Math.round(d3.sum(v, function(d) {
@@ -95,7 +97,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	dtByCustomer = sorta(dtByCustomer).slice(0,15);
+	revByCustomer = sorta(revByCustomer).slice(0,15);
 
 
 	// Grouping
@@ -121,6 +123,17 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 	dtByProductCat = sorta(dtByProductCat).slice(0,20);
 
+
+	var revByProductCat = d3.nest()
+						.key(function(d) { return d.product_category})
+						.rollup( function(v) { return Math.round(d3.sum(v, function(d) {
+							return d.product_price;
+						}));})
+						.entries(dataset);
+
+		revByProductCat = sorta(revByProductCat).slice(0, 15);
+
+	var filteredByCustomer = [];
 
 
 	// BarChart1.onBrushed(function(selected) {
@@ -157,7 +170,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 		// console.log(selected);
 
 		// filter. the dataset with selected
-		filteredByState = dataset.filter(function(d) {
+		var filteredByState = dataset.filter(function(d) {
 			return selected.includes(d.customer_state);
 		});
 
@@ -171,6 +184,35 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 		dtByProductCat = sorta(dtByProductCat).slice(0, 20);
 
 		update();
+	});
+
+	BarChart3.onClicked(function(selected) {
+
+		// We have the array of customers in our selection
+		// console.log(selected);
+
+
+		// filter. the dataset with selected
+		filteredByCustomer = dataset.filter(function(d) {
+			return selected.includes(d.customer_id);
+		});
+
+		// console.log(filteredByCustomer);
+
+		revByProductCat = d3.nest()
+						.key(function(d) { return d.product_category})
+						.rollup( function(v) { return Math.round(d3.sum(v, function(d) {
+							return d.product_price;
+						}));})
+						.entries(filteredByCustomer);
+
+		revByProductCat = sorta(revByProductCat).slice(0, 15);
+
+		// console.log(revByProductCat);
+
+		// Do not want to repaint the donut as its only one customer
+		// This paints the table
+		updateCustomer();
 	});
 
 
@@ -211,21 +253,27 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 	};
 
-	function updateCustomer() {
+	function Customer() {
 
 		d3.select("#chart3")
-		  .datum(dtByCustomer)
+		  .datum(revByCustomer)
 		  .call(BarChart3);
 
-		// donut.data(dtByProductPriceCat);
-		// d3.select("#chart4")
-		// 	.call(donut)
+		donut1.data(revByProductCat);
+		d3.select("#chart4")
+			.call(donut1);
 
+	};
+
+	function updateCustomer() {
+		d3.select("#table3_1")
+			.call(table1);
+		table1.data(filteredByCustomer);
 	};
 
 	// Start rendering the graphics
 	update();
-	updateCustomer();
+	Customer();
 
 });
 

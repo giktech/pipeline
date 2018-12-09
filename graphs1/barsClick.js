@@ -122,7 +122,6 @@ function barChart() {
              .attr("font-weight", "bold")
              .attr("fill", "grey")
              .text(d.value);
-
          })
 
          .on("mouseout", function() {
