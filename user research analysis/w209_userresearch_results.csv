@@ -1,0 +1,182 @@
+Timestamp,id,consent,Tell me about this view.,v1_t1_challenge,Task 1 Additional Comments,1. Sao Paulo,sp_most_correct,sp_least_correct,2. Belo Horizonte,bh_most_correct,bh_least_correct,3. Salvador,s_most_correct,s_least_correct,4. Vitoria,v_most_correct,v_least_correct,v1_t2_challenge,Task 2 Additional Comments,What day did the spike occur on?,What were the total sales on that day? ,ts_correct,What was the most popular item category?,pop_category_correct,Which city had the fewest number of orders that day?,city_fewest_orders_correct,v1_t3_challenge,Task 3 Additional Comments,Tell me about this view,v2_t1_challenge,You are creating sales report for December 2017. Identify the number of orders for three different product categories,v2_t2_challenge,You need to decide one a product category to discontinue. Identify the product category with the least amount of orders for the latest month.,v2_t3_challenge,You want to bring in more tech products. Tell me how the tech product category is doing?,v2_t4_challenge,"In anticipation of the upcoming holiday season, you want to learn more about the trends last year. Tell me about the 2017 holiday season.",v2_t5_challenge,View 2 Additional Comments,Tell me about the view? ,v3_t1_challenge,Additional comments,Additional comments,What is the range of average order processing time across all the states? ,Which state has the worst average? What is the value?,Which state has the best average? What is the value?,What is the order processing time for MG and AM?,Which states have an out of range average processing time? ,v3_t2_challenge,Additional Comments,What is the range of average order processing time across all product categories? ,Which product category ships the fastest? Which one is the slowest?,What is the average delivery time for office furniture and home appliances?,Which product categories need more attention i.e. have an out of range processing time? ,v3_t3_challenge,Additional Comments,Which 2-3 products ship the slowest in the 3 lowest performing states? ,Which 2-3 products ship the slowest in the 2 highest performing states? ,Is there an outlier category that has bad delivery times in almost all the states? Which one is it? ,Is there a wide variation in delivery times of product categories among states? ,v3_t4_challenge,Additional Comments,sus_2,sus_3,sus_4,sus_5,sus_6,sus_7,sus_8,sus_9,sus_10,What are your overall thoughts on the tool?,Were there any tasks you found particularly challenging or non-intuitive? Please tell me more about those and any ideas for improvement you may have.,Were there any tasks you found particularly easy to perform? Please tell me more about those and why they were easier? ,Do you have any other suggestions or comments?,overall_rating,age,gender,race,Additional Notes and Observations,View 1 Priorities,View 2 Priorities,View 3 Priorities
+12/1/2018 18:17:47,sullivan-01,Yes,"noticed nov 24th
+where did the data come from? is it sales data for one or more companies? (so we will probably need better specification text)
+
+exploring the quarter data
+taking a while to reload the dataset when filtering on qtrs
+
+something happened on nov 24th that increased sales overall
+
+Vitoria is doing the worst
+
+tooltip for other charts is lacking - anything that would be helpful
+
+qtr filter allows for nonconsecutive selections - maybe make it so that it fills in gaps or limit to 1 selection if selected
+
+better explanation on the comparison charts ",2,,least popular: Books - general interest books,-99,1,least popular: Food,-99,1,least popular: Books - general interest books,-99,1,"least popular: Books - general interest books, home appliances, home construction",-99,1,2,"did filtering easily and correctly
+
+didn't noticed the city filter
+
+likes the exclude feature on the Tableau filters - but not a way to select multiple
+
+Told about the city filtering - would like this piece to be a drop down from the title of the chart
+- primarily used the charts to do filtering, liked being able to see the other cities along side (but isn't sure if there is a use case for it)",Nove 24,"65,881",1,"bed, bath and beyond (table)",1,Contagem,1,1,"read out total number of orders
+
+% of total sales to tooltip
+
+tasks with other things like exploring a particular's city's overall sales data
+
+third decimal point is being added for the product price",,,,,,,,,,,"what are the dark lines v the light lines?
+what are the lines?
+maybe a bit crowded",,,,,,,,,,,"Would not have known to do the brushing thing - but recognizes the cross hairs symbol means to to something
+
+unclear how much of a bar has to be highlighted for it to be counted? could use color highlighting
+
+data set has a typo - home ""confort""
+
+bottom chart axis labels are getting off
+
+Wish I could click on just one bar to view, hard to select one bar with the brush",,,,,,,,,,,,,1,5,1,4,2,4,1,4,4,"Fairly easy to use, fairly easy to understand. ",The brush interaction was not intuitive off the bat. Maybe a description of how to use the graph would be nice to have. I would like it to highlight the bars I've selected in another color to give me more confidence in the bottom table. There were also no tooltips to help bridge the gap between the two tables.,,More colors in the last two graphs.,4,25,Female,White,,,,
+12/4/2018 21:00:41,sullivan-02,Yes,"second thing in the tooltip is gone
+
+not sure what ""order"" means - there's order count and there's sales but what are they and how are they different? should have some indication of what the money part is
+
+noticed the differences for order count v how much sales were
+
+add something about dollar amount",2,2 instead of 1 because if they want to compare the product categories it's harder to match them,most: health & beauty least: books (did not use the sorting button),1,1,"most: bed, bath tables. least: food",1,1,most: health & beauty least: books ,1,1,"most:  bed, bath table least: tie: home construction/home appliances & books",1,1,1,,"Nov 24th 2017, used the qtrs filter ",65881,1,"bed, bath table",1,contagem,1,1,used drag to filter by a section of sales,,,,,,,,,,,"green for growth, red for negative between timepoints. 
+
+the plain view is confusing - not sure what's going on before highlighting the lines
+
+unclear that they were different product categories
+
+hard to select clustered lines
+
+when the module scrolls and highlights a few - I feel like you shouldn't be able to interact with the ones that are like, transparent in the background  because it's then hard to tell if you're highlighting the right one. One way to fix that might be that the bold ones don't go away when you're highlighting something",,,"this is in hours, but it doesn't say that on the axis
+
+shows which states deliver the fastest and slowest, and the second is the same but with the product categories
+
+red highlights those that are outside of the normal range - assumed that the states were worse processing time on average ",,200 -650,RR - with ~675 the graph doesn't show the max value,SP ~210,MG: ~275 AM: ~600,"PA, AL, AM, AP, RR",3,"ascending order was easy, color coding was easy - more like a 1, but reading the actual value was a struggle",~130-500,fastest: arts and craft slowest: office furniture,"office: 500 hours, home appliances: ~325","I guess office furniture? it's right at the upper level, since 500 hours is supposedly normal, but it takes the longest ",,"had some trouble matching the product categories
+
+there were no colors on the second graph",food and drinks; interpreted lowest performing states as those with longest shipping time,office furniture and fashion shoes,"I think it's office furniture, but I guess I'd have to look state  by state to really see - so no. I'd say no. there are some that are worse than others, but I can't identify the top outlier that's common among all states",Yes,3,"everything disappeared on the second chart when user selected last bar on the right
+
+brush was more convenient than I thought it would be, but it was hard to learn. 
+
+reading off the y values was challenging.
+
+y axis isn't labeled with hours and i had to read the describing text
+
+""I'm not sure what I'm actually seeing - maybe the 10 worst items when I do a brush select - I'm not seeing the whole range of items. Before there were like 60 and I only see 10 at a time when I select, that was a bit confusing.""
+
+tooltips might be useful?",1,3,1,4,3,4,2,4,1,Most of the interactivity was nice and easy to use. The plots for the second and third module were difficult to understand without substantial interaction.,"The plots for the second and third module were difficult to understand without substantial interaction.
+
+module 1 - the confusion in sales","the first module, there were some complaints I had - the confusion in sales. but it was more intuitive than the other ones. I was gonna figure out what they were going to do eventually by fiddling around with them, but I HAD to fiddle around with them.",,4,25,Male,White,,,,
+12/3/2018 19:43:51,Gaurav - 1,Yes,,-99,not able to unselect all cities in drop-down; would be helpful,health_beauty (high); books_general_interest(least),1,1,bed_bath_table(high); food(least),1,1,health_beauty(high); books_general_interest(least),1,1,health_beauty(high); books_general_interest(least),0,0,4,scroll bar not very evident and didn't realize there were items to scroll down to,Nov 24,6057,0,health_beauty,0,,-99,4,not very clear on city with least order ,,,,,,,,,,,"It would be helpful to show by state in graph-2, as that would help(when highlighted a particular bar in graph-1)",Graph 1- order delivery time and graph 2 - product category information,3,"Additional details can be included in graph-2 to indicate what it represents corresponding to graph-1; also state names are abbreviated and so, a legend would help",,range: 200 to 650 hours,RR and AP,SP,MG - 300 and AM - 600,"PA, AL, AM, AP and RR",1,Tool tip (value for each bar) would help; gets a bit harder to read for the right bars; highlighting seems to restrict the number of categories but the initial graph-2 shows for all categories across all states,135 to 500,arts_and_craftmansship,office furniture-500; home appliances-300,none,4,required a reload of the viz to check the range of time taken for all product categories; hard to read labels for product categories,"food, furniture_decor, drinks","office_furniture, fashion_shoes, home_appliances_2",office_furniture,Maybe,4,I cannot answer if there is wide variation in delivery times of product categories among states,-99,-99,-99,-99,-99,-99,-99,-99,-99,,,,,-99,,,,,,,
+12/4/2018 18:56:54,Gaurav - 2,Yes,View is about delivery time to various states. ...Data it the time it takes to deliver products to different states. There are certain states that are hard to deliver in. Some are easy so we see the whole range,4,Name of the states is not very clear. Marking was difficult to read. Hard to see if we can select the last bar. An improvement would be to show the states that are selected,,-99,-99,,-99,-99,,-99,-99,,-99,-99,3,,,,-99,,-99,,-99,4,,,3,,,,,,,,,,View is about delivery time to various states. ...Data it the time it takes to deliver products to different states. There are certain states that are hard to deliver in. Some are easy so we see the whole range,4,Graph one shows the delivery times in states. Difficult to see which ones are selected,Would be good to find out which states are selected. Labels would help also. ,210-680,"AP , RR 680",SP - 210,"MG-290, AM-610","PA, AL, AM, AP, RR",2,MOUSE OVER FOR HRS VALUE PER STATE WILL BE HELPFUL,140-500,arts,500,none,4,check data for delivery time,"food, furniture, drinks",office furniture and home comfort,none,Maybe,3,,2,3,2,2,3,5,3,2,2,It looks like work in progress,,"Reading off the displayed information, task 1",,2,,Female,Asian,,,,
+12/5/2018 16:22:52,Renzee - User Test 1,Yes,"- Notices chart titles
+- Recognizes layout, gives importance to top graph
+- Able to interpret 'Orders by Date', but notes that it feels condensed. 
+- Also notes that the large orders spike drowns out the rest of the graph.
+- Questions the meaning of the colors, mentions that there is no legend
+- Interprets the bar graphs fairly well
+- Confused by 'R$' convention, not entirely sure it represents money
+- User states that there is a lot of white space
+- Wasn't immediately apparent that the bar graphs were scrollable
+- Would like stronger visual link/relation between paired graphs. Noticed the color link, but wasn't enough to hint at pairing. Suggested a change to layout.
+- Didn't like the underscores in the product categories",2,"User rates a 2, but feels that he is more experienced with these types of viz.",Unable to answer,0,0,bed_bath_table; food,1,1,health_beauty; books_general_interest,1,1,bed_bath_table; books_general_interest,1,1,4,"- Difficulty with this task
+- Make it more apparent that the below data is filtered to selected city. (Axes auto scale, no filter indicator, etc)
+- Really difficult unclicking a city. Unable to unclick without guidance
+- Gets caught on overlapping colors (Belo same orange as Pet Food)
+- Confused about context switching between all cities and single cities
+- Trouble reading, but user has bad eyesight. Could adjust typography (font choice and font size)","Nov 25, 2017","1,917",0,Telephony,0,Barueri,1,2,- Felt a lot more intuitive,"- Graph is a timeline of orders over time
+- Caught on to hover action quickly
+- Intuitive for green for positive and red for negative
+- Flashing of moving through lines is harsh on eyes
+- Initially overwhelming",2,food-14; perfumery-241; furniture_decor-390 ,2,home_comfort,2,"electronic - positive net growth, but a recent downward trend",4,"Huge spikes in November, but a decline in December, probably related to Thanksgiving. ",2,"- Unable to find specific product category
+- When category was found, difficult to stay on","View is about delivery timelines, but didn't know until reading further. ",4,"- No labels, lost at the start
+- Assumes the x axis is for cities, just shortened
+- Identifies the importance of the red 
+- Cluttered
+- Text was easily lost for the user
+- Caught on to brush selection on own
+- Brush selection hard for end of graph",,"Graph broke, unable to answer","Graph broke, unable to answer",SP - ~200,285; 625,"PA, AL, AM, AP, RR",2,,250,"arts_crafts, office_furniture","490, unable to find",office furniture,3,,Unable to answer,Unable to answer,office furniture,No,4,,4,3,2,3,4,3,4,3,2,Helpful but ambiguous.,Using the selection on the third bar graph.,Visually identifying quantified information ,More linear application instead of open and ambiguous.,2,25,Male,"White, Native American or Alaska Native, Filipino, Mexican, Spanish","- The user often felt lost and unsure of the data he was looking at
+- The biggest point of frustration was the functionality. User was more understanding of design flaws, but issues with interactivity and function were particularly painful","Must Have
+- Stronger visual cues, links, or indicators between the paired graphs and their interactivity
+- Use unique colors for so that their is no overlap between the products and cities
+
+Should Have
+- Edit axes text and labels to be more appropriate and clear for audience. For example, using US currency notation for the revenue.
+
+Could Have
+-  Edit the product category names to use proper formatting (i.e. removing the underscores)
+
+Won't Have
+- Make it more apparent that the bar graphs are scroll-able. This is a 'won't have' just due to this being a limitation of Tableau and not something we can control.","Must Have
+- Add an easier way to find specific product categories
+- Make it obvious that the user should scroll to see more content
+
+Should Have
+- Modify on-hover transition to be less harsh
+-  Find a way to introduce the graph in a way that is less overwhelming
+
+Could Have
+- A better choice of colors
+
+Won't Have
+- Allow for adjusting x-axis time granularity","Must Have
+- Better introduction or text to the visualization to set context
+- Fix bugs with brush selection
+
+Should Have
+- A legend to describe the various elements of the graph such as axes, tick labels, and colors
+- Improved support text for the graphs
+
+Could Have
+- Make it easier to find the exact value of particular bars
+-  A stronger visual cue that a city is selected
+
+Won't Have
+- n/a"
+12/5/2018 23:16:53,Renzee - User Test 2,Yes,"- View is about total orders and sales by cities from 2017 to 2018
+- Notices the city categorization and the relationship with the products",3,"- Layout is easy to follow
+- Unsure what the purpose of the data and the viz though",healthy beauty; furniture,1,0,health beauty; home appliance,0,0,health beauty; home appliance,1,0,computers ;home appliance,0,1,4,"- Clicking on a city, it is difficult to tell that the product graphs changed",End of November 2017,"1,500",-99,musical instruments,-99,contagem,-99,4,- Wasn't obvious that the line could be clicked,"- View is about the number of purchase orders based on the purchase order date
+- Each line represents a different product
+- It shows percent increase and decrease of sales overtime",2,furniture-20; home constrution-39; pet-74,2,home comfort,1,"For computers, a spike in December 2017, but it went down over the next couple months.",3,"There are spikes in November 2017, but a lot of decreases in December",2,"- Noticed the text first, helping to interpret
+- The note about interactivity was helpful
+- The hover interaction helped provide more data
+- A lot of lines, can't tell which lines represent each product. Needs to be easier
+- Didn't know data would change when scrolling down","- View is about delivery times for each state and for each state, the product category delivery time",1,,,200 and 650,RR,SP,280; 620,"PA, AL, AM, AP, RR",1,,140 to 500,arts and craftsmanship; office furniture,500; 350,office furniture,3,"- Took a few seconds to find home appliances category. Had to rely on browser search function
+- Text is really small, hard to read
+- Confused about interactivity. Inclined to click on states, but that does nothing
+- Had to be instructed to figure out brush selection",food; furniture; drinks,office furniture; fashion; home appliance,office furniture,No,4,"- Got confused between high performance and low performance
+- Not obvious how the graph changes based on selection",4,3,1,4,2,2,3,1,2,"The beginning charts and data were easy to follow.  All data points had labels and the 2nd line graph showed specifics and visuals for each product.  However, when clicking on certain bars and lines, the data beneath would change and I wasn't sure what the new data was showing me.  I think this tool would be very helpful, although assistance would be needed in learning how to read the manipulated data.",I thought that the Order Processing section was the most challenging part of of the system.  I wasn't sure how to manipulate the graph and how the below chart (products) were changing based on the portion that was highlighted.  A suggestion would be to put a blurb or comment on the side summarizing the highlighted data.,"I thought the ""Exploring Market Trends through Purchase Order History"" was the most easiest to read.  Seeing the spikes on the graph made it more visually appealing.  I also liked the note on the side stating that this graph was interactive (I wouldn't have known otherwise).  I also like when I clicked on the line, it would show me specifics about that month with a direct number.  I didn't have to estimate the numbers.",none at this time,4,25,Female,Asian,,"Must Have
+- Make interactions more clear to the user, especially the clicking of elements
+
+Should Have
+- Fix sizing so that axes labels are not cut off
+
+Could Have
+- More informative on-hover tooltips. Possibly containing the information requested in the tasks
+
+Won't Have
+- n/a","Must have
+- Fix spacing on different resolutions and window sizes
+
+Should Have
+- A full list of product categories 
+
+Could Have
+- Find a way to make the bottom of the graph less cluttered
+
+Won't Have
+- n/a","Must Have
+- Improve readability by increasing font size
+- Make interactions more clear to the user
+
+Should Have
+- Improved brush selection, allowing to brush over the bars instead of the background
+
+Could Have
+- Color scale instead of color highlighting for order processing time range
+
+Won't Have
+- Geo-based map for states"
