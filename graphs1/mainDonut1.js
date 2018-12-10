@@ -29,9 +29,13 @@ var sorta = function(d) {
 var duration = 1000;
 var t = d3.transition().duration(duration);
 
+var chart1M = {top: 40, right: 40, bottom: 40, left: 250};
 var BarChart1 = barChart()
-  .width(900)
+  .width(700)
   .height(600)
+  .margin(chart1M)
+  .xAxisLabel("Processing time (Hrs)")
+  .yAxisLabel("States")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
@@ -41,8 +45,8 @@ var BarChart1 = barChart()
 var timerInterval = 1500;
 
 var donut1 = donutChart()
-    .width(960)
-    .height(500)
+    .width(850)
+    .height(400)
     .transTime(750) // length of transitions in ms
     .cornerRadius(3) // sets how rounded the corners are on each slice
     .padAngle(0.015) // effectively dictates the gap between slices
@@ -54,21 +58,25 @@ var i = 0;
 var table1 = chartTable();
 
 
-var chart2M = {top: 40, right: 40, bottom: 40, left: 200};
+var chart2M = {top: 40, right: 40, bottom: 40, left: 250};
 
 var BarChart2 = barChart()
-  .width(900)
+  .width(700)
   .height(600)
   .margin(chart2M)
+  .xAxisLabel("Processing Time(Hrs)")
+  .yAxisLabel("Product Categories")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-var chart3M = {top: 40, right: 40, bottom: 40, left: 200};
+var chart3M = {top: 40, right: 40, bottom: 40, left: 250};
 
 var BarChart3 = barChart()
-  .width(900)
+  .width(700)
   .height(600)
   .margin(chart3M)
+  .xAxisLabel("Total of Purchases ($)")
+  .yAxisLabel("Customer ID")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
@@ -121,7 +129,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	dtByProductCat = sorta(dtByProductCat).slice(0,20);
+	dtByProductCat = sorta(dtByProductCat).slice(0,15);
 
 
 	var revByProductCat = d3.nest()
@@ -131,7 +139,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-		revByProductCat = sorta(revByProductCat).slice(0, 15);
+		revByProductCat = sorta(revByProductCat).slice(0, 11);
 
 	var filteredByCustomer = [];
 
@@ -181,7 +189,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(filteredByState);
 
-		dtByProductCat = sorta(dtByProductCat).slice(0, 20);
+		dtByProductCat = sorta(dtByProductCat).slice(0, 15);
 
 		update();
 	});

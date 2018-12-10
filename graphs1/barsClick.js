@@ -11,6 +11,9 @@ function barChart() {
     xScale = d3.scaleLinear(),
     yScale = d3.scaleBand().padding(0.1);
 
+  var xAxisLabel = "Numbers";
+  var yAxisLabel = "Categories";
+
   var onMouseOver = function() {};
   var onMouseOut = function() {};
   var onBrushed = function() {};
@@ -54,35 +57,40 @@ function barChart() {
       .domain(data.map(yValue));
 
 	  g.select(".x.axis")
-      .attr("transform", "translate(0," + innerHeight + ")")
-      .call(d3.axisBottom(xScale))
+      .attr("transform", "translate(0," + (innerHeight + 5) + ")")
+      .call(d3.axisBottom(xScale)
+        .ticks(8))
       .selectAll("text")
 				.attr("y", 0)
-		    .attr("x", 9)
-		    //.attr("transform", "rotate(45)")
+		    .attr("x", 11)
+		    // .attr("transform", "rotate(30)")
 		    .style("text-anchor", "start");
 
-    // g.select(".x.axis")
-    //   .append("g")
-    //   .attr("class", "axislabel")
-    //   .append("text")
-    //   .attr("transform", "translate(" + (innerWidth/2) + "," + 40 + ")")
-    //   .style("text-anchor", "middle") 
-    //   .text("Category")
-    //   .attr("fill", "grey");
+    g.select(".x.axis")
+      .append("g")
+      .attr("class", "axislabel")
+      .append("text")
+      .attr("transform", "translate(" + (innerWidth/2) + "," + 30 + ")")
+      .style("text-anchor", "middle") 
+      .attr("font-size", "1.3em")
+      .attr("font-weight", "bold")
+      .text(xAxisLabel)
+      .attr("fill", "black");
 
 
 	  g.select(".y.axis")
 	      .call(d3.axisLeft(yScale));
 
-    // g.select(".y.axis")
-    //   .append("g")
-    //   .attr("class", "axisLabel")
-    //   .append("text")
-    //     .attr("transform", "translate(" + -(margin.left * 0.7) + "," + (innerHeight/2) + "), rotate(-90)")
-    //     .style("text-anchor", "middle")
-    //     .text("Categories")
-    //     .attr("fill", "grey");
+    g.select(".y.axis")
+      .append("g")
+      .attr("class", "axisLabel")
+      .append("text")
+        .attr("transform", "translate(" + -(margin.left * 0) + "," + -10 + ")")
+        .style("text-anchor", "middle")
+        .attr("font-size", "1.3em")
+        .attr("font-weight", "bold")
+        .text(yAxisLabel)
+        .attr("fill", "black");
 
 	  var bars = g.selectAll(".bar")
 	    .data(function (d) { return d; });
@@ -114,11 +122,11 @@ function barChart() {
           //Create the tooltip label
           g.append("text")
              .attr("id", "tooltip")
-             .attr("x", xPosition + widthNow + 20)
+             .attr("x", xPosition + widthNow + 25)
              .attr("y", yPosition)
              .attr("text-anchor", "middle")
              .attr("font-family", "sans-serif")
-             .attr("font-size", "11px")
+             .attr("font-size", "1.3em")
              .attr("font-weight", "bold")
              .attr("fill", "grey")
              .text(d.value);
@@ -240,5 +248,16 @@ function handleClick(d, i) {
     return chart;
   };
 
+  chart.xAxisLabel = function(_) {
+    if (!arguments.length) return xAxisLabel;
+    xAxisLabel = _;
+    return chart;
+  };
+
+chart.yAxisLabel = function(_) {
+    if (!arguments.length) return yAxisLabel;
+    yAxisLabel = _;
+    return chart;
+  };
   return chart;
 }

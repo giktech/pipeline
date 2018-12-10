@@ -15,6 +15,11 @@ function chartTable() {
             selection.selectAll('table').remove();
 
             var table = selection.append('table');
+
+            // Add a caption
+            table.append('caption')
+                .text("Transactions for selected customer")
+
                 // .attr('width', width + margin.left + margin.right)
                 // .attr('height', height + margin.top + margin.bottom);
                 // .append('g')

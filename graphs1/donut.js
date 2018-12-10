@@ -2,7 +2,7 @@ function donutChart() {
     var data = [],
         width,
         height,
-        margin = {top: 10, right: 10, bottom: 10, left: 10},
+        margin = {top: 20, right: 20, bottom: 20, left: 20},
         colour = d3.scaleOrdinal().range(d3.schemePaired), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
@@ -11,7 +11,8 @@ function donutChart() {
         updateDonutData,
         floatFormat = d3.format('.4r'),
         cornerRadius, // sets how rounded the corners are on each slice
-        percentFormat = d3.format(',.2%');
+        percentFormat = d3.format(',.2%'),
+        dollorFormat = d3.format('<$,');
 
     function chart(selection){
         selection.each(function() {
@@ -180,7 +181,7 @@ function donutChart() {
                         .attr('class', 'toolCircle')
                         .attr('dy', -15) // hard-coded. can adjust this to adjust text vertical alignment in tooltip
                         .html(toolTipHTML(data)) // add text to the circle.
-                        .style('font-size', '.7em')
+                        .style('font-size', '1.3em')
                         .style('text-anchor', 'middle'); // centres text in tooltip
 
                     svg.append('circle')
@@ -207,7 +208,7 @@ function donutChart() {
                 for (var key in data.data) {
 
                     // if value is a number, format it as a percentage
-                    var value = (!isNaN(parseFloat(data.data[key]))) ? percentFormat(data.data[key]) : data.data[key];
+                    var value = (!isNaN(parseFloat(data.data[key]))) ? dollorFormat(data.data[key]) : data.data[key];
 
                     // leave off 'dy' attr for first tspan so the 'dy' attr on text element works. The 'dy' attr on
                     // tspan effectively imitates a line break.
@@ -238,7 +239,7 @@ function donutChart() {
             }
 
             function updateLabelText(d) {
-                return d.data[category] + ': <tspan>' + percentFormat(d.data[variable]) + '</tspan>';
+                return d.data[category] + ': <tspan>' + dollorFormat(d.data[variable]) + '</tspan>';
             }
 
             // function that calculates transition path for label and also it's text anchoring
