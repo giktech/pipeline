@@ -118,6 +118,31 @@ line.hover-line {
     stroke-dasharray: 5 2;
 }
 
+/*
+* Processing
+*/ 
+
+.processing-row-body {
+    height: 2600px;
+}
+
+.processing-text-block {
+    padding-left: 80px;
+}
+
+.processing-text-intro {
+    padding-top: 180px;
+    height: 750px;
+}
+
+.processing-text-growth {
+    height: 550px;
+}
+
+.processing-text-season {
+    height: 550px;
+}
+
 /* 
 * Gaurav 
 */

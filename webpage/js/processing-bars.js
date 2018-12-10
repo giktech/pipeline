@@ -84,12 +84,12 @@ function barChart() {
     //     .text("Categories")
     //     .attr("fill", "grey");
 
-	  var bars = g.selectAll(".bar")
+	  var bars = g.selectAll(".processing-bar")
 	    .data(function (d) { return d; });
 
 	  bars.enter()
         .append("rect")
-	      .attr("class", "bar")
+	      .attr("class", "processing-bar")
 	    .merge(bars)
       // For easing in new elements
 	      .attr("x", +0)
