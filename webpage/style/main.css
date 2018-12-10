@@ -19,6 +19,55 @@ body {
     font-size: 1.25rem;
 }
 
+/*
+* Jumbotron
+*/
+
+.jumbotron {
+    padding-top: 150px;
+    height: 500px;
+}
+
+.lead {
+    padding-bottom: 40px;
+}
+
+/*
+* Overview
+*/ 
+
+.overview-row-body {
+    height: 2600px;
+}
+
+.overview-text-block {
+    padding-left: 80px;
+}
+
+.overview-text-intro {
+    padding-top: 180px;
+    height: 750px;
+}
+
+.overview-text-growth {
+    height: 550px;
+}
+
+.overview-text-season {
+    height: 550px;
+}
+
+/*
+* Market Trends
+*/
+
+/* .tableauPlaceholder {
+    width: 1300px; 
+    height: 800px; 
+    position: absolute;
+    left: 200px;
+} */
+
 .market-row-body {
     height: 2500px
 }
@@ -69,7 +118,9 @@ line.hover-line {
     stroke-dasharray: 5 2;
 }
 
-/* Gaurav */
+/* 
+* Gaurav 
+*/
 #chart1 .bar {
     fill: grey;
 }

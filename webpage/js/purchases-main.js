@@ -12,7 +12,8 @@ d3.csv("data/ecommerce-productgrowth.csv")
     // console.log(data)
     // data = data.filter(d => d.product_category == "auto")
 
-    var outerWidth = 1035;
+    var parentDiv = document.getElementById("product-growth")
+    var outerWidth = parentDiv.clientWidth;
     var outerHeight = 650;
 
     // 2. Use the margin convention practice 
