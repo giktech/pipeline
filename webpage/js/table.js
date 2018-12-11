@@ -22,8 +22,8 @@ function chartTable() {
 
 
             // Add a caption
-            table.append('caption')
-                .text("Transactions for selected customer");
+            // table.append('caption')
+            //     .text("Transactions for selected customer");
 
 
             var thead = table.append('thead');

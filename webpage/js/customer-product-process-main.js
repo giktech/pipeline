@@ -37,8 +37,8 @@ var t = d3.transition().duration(duration);
 
 var chart1M = {top: 40, right: 80, bottom: 40, left: 100};
 var BarChart1 = barChart()
-  .width(900)
-  .height(600)
+  .width(1000)
+  .height(800)
   .margin(chart1M)
   .xAxisLabel("Processing Time (Hrs)")
   .yAxisLabel("States")
@@ -51,7 +51,7 @@ var BarChart1 = barChart()
 var timerInterval = 1500;
 
 var donut1 = donutChart()
-    .width(1100)
+    .width(1000)
     .height(600)
     .transTime(750) // length of transitions in ms
     .cornerRadius(3) // sets how rounded the corners are on each slice
@@ -60,8 +60,8 @@ var donut1 = donutChart()
     .category('key');
 
 var donut2 = donutChart()
-    .width(1100)
-    .height(600)
+    .width(1200)
+    .height(800)
     .transTime(750) // length of transitions in ms
     .cornerRadius(3) // sets how rounded the corners are on each slice
     .padAngle(0.015) // effectively dictates the gap between slices
@@ -76,19 +76,19 @@ var table1 = chartTable();
 var chart2M = {top: 40, right: 80, bottom: 40, left: 220};
 
 var BarChart2 = barChart()
-  .width(900)
-  .height(700)
+  .width(1000)
+  .height(800)
   .margin(chart2M)
   .xAxisLabel("Processing Time(Hrs)")
   .yAxisLabel("Product Categories")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-var chart3M = {top: 40, right: 80, bottom: 40, left: 250};
+var chart3M = {top: 80, right: 100, bottom: 40, left: 350};
 
 var BarChart3 = barChart()
-  .width(900)
-  .height(700)
+  .width(1000)
+  .height(800)
   .margin(chart3M)
   .xAxisLabel("Total of Purchases ($)")
   .yAxisLabel("Customer ID")
@@ -300,9 +300,9 @@ var revByProductCata = d3.nest()
 		d3.select("#donut_products")
 			.call(donut1);
 
-		donut2.data(revByProductCata);
-		d3.select("#donut2_products")
-			.call(donut2);
+		// donut2.data(revByProductCata);
+		// d3.select("#donut2_products")
+		// 	.call(donut2);
 
 	};
 

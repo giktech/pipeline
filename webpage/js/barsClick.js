@@ -127,7 +127,7 @@ function barChart() {
           //Create the tooltip label
           g.append("text")
              .attr("id", "tooltip")
-             .attr("x", xPosition + widthNow + 20)
+             .attr("x", xPosition + widthNow + 25)
              .attr("y", yPosition)
              .attr("text-anchor", "middle")
              .attr("font-family", "sans-serif")
