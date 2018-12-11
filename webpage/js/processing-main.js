@@ -30,7 +30,7 @@ var duration = 1000;
 var t = d3.transition().duration(duration);
 
 var BarChart1 = barChart()
-  .width(900)
+  .width(650)
   .height(600)
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
@@ -55,7 +55,7 @@ var BarChart1 = barChart()
 var chart2M = {top: 40, right: 40, bottom: 40, left: 200};
 
 var BarChart2 = barChart()
-  .width(900)
+  .width(700)
   .height(600)
   .margin(chart2M)
   .x(function (d) { return d.value; })
@@ -70,7 +70,7 @@ var BarChart3 = barChart()
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-d3.csv("ecommerce-combined.csv", rowConverter)
+d3.csv("data/ecommerce-combined.csv", rowConverter)
 	.then(function(data) {
 
 	//Copy data into global dataset
