@@ -80,7 +80,7 @@ var BarChart3 = barChart()
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-d3.csv("ecommerce-combined.csv", rowConverter)
+d3.csv("data/ecommerce-combined.csv", rowConverter)
 	.then(function(data) {
 
 	//Copy data into global dataset

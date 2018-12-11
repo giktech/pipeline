@@ -1,5 +1,5 @@
 svg {
-  font: 12px sans-serif;
+  font: 10px sans-serif;
 }
 
 /*.bar {
@@ -8,11 +8,6 @@ svg {
 
 rect:hover {
 	fill: orange;
-}
-
-.axis text {
-  font-family: sans-serif;
-  font-size: 1.3rem;
 }
 
 .axis path,
@@ -51,7 +46,7 @@ rect:hover {
       stroke: #7A7A7A;
       stroke-width: 2px;
     }
-
+ß
  #tooltip {
  	display: inline;
  }
@@ -81,63 +76,6 @@ rect:hover {
     font-size: 16px;
     line-height: 20px;
 }*/
-
-/*body {
-    font-family: 'Roboto', sans-serif;
-    color: #333333;
-}*/
-
-/* For the donut */
-
-/* Add shadow effect to chart */
-svg {
-    -webkit-filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.3) );
-    filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.25) );
-}
-
-/*Styling for the lines connecting the labels to the slices*/
-polyline{
-    opacity: .3;
-    stroke: black;
-    stroke-width: 2px;
-    fill: none;
-    shape-rendering: geometricPrecision;
-}
-
-/* styling for the donut slices*/
-path {
-    shape-rendering: geometricPrecision;
-}
-
-/* Make the percentage on the text labels bold*/
-.labelName tspan {
-    font-style: normal;
-    font-weight: 600;
-}
-
-/* Size of label words, Italicise names. */
-.labelName {
-    font-size: 1.2em;
-    font-style: italic;
-}
-
-/* Padding between the rows, cells, text alignment under heading */
-td, th {
-  padding: 2px 4px;
-  text-align: center;
-}
-
-/*table {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-*/
-caption {
-  text-align: center;
-  font-weight: 800;
-  font-size: 1em;
-}
 
 
 
