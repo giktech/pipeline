@@ -29,12 +29,12 @@ var sorta = function(d) {
 var duration = 1000;
 var t = d3.transition().duration(duration);
 
-var chart1M = {top: 40, right: 40, bottom: 40, left: 250};
+var chart1M = {top: 40, right: 80, bottom: 40, left: 100};
 var BarChart1 = barChart()
-  .width(700)
+  .width(900)
   .height(600)
   .margin(chart1M)
-  .xAxisLabel("Processing time (Hrs)")
+  .xAxisLabel("Processing Time (Hrs)")
   .yAxisLabel("States")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
@@ -58,22 +58,22 @@ var i = 0;
 var table1 = chartTable();
 
 
-var chart2M = {top: 40, right: 40, bottom: 40, left: 250};
+var chart2M = {top: 40, right: 80, bottom: 40, left: 220};
 
 var BarChart2 = barChart()
-  .width(700)
-  .height(600)
+  .width(900)
+  .height(700)
   .margin(chart2M)
   .xAxisLabel("Processing Time(Hrs)")
   .yAxisLabel("Product Categories")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-var chart3M = {top: 40, right: 40, bottom: 40, left: 250};
+var chart3M = {top: 40, right: 80, bottom: 40, left: 250};
 
 var BarChart3 = barChart()
-  .width(700)
-  .height(600)
+  .width(900)
+  .height(700)
   .margin(chart3M)
   .xAxisLabel("Total of Purchases ($)")
   .yAxisLabel("Customer ID")
@@ -191,7 +191,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 		dtByProductCat = sorta(dtByProductCat).slice(0, 15);
 
-		update();
+		updateProcessCharts();
 	});
 
 	BarChart3.onClicked(function(selected) {
@@ -220,7 +220,7 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 
 		// Do not want to repaint the donut as its only one customer
 		// This paints the table
-		updateCustomer();
+		updateCustomerTable();
 	});
 
 
@@ -249,39 +249,44 @@ d3.csv("ecommerce-combined.csv", rowConverter)
 	// });
 
 
-	function update() {
+	function updateProcessCharts() {
 
-		d3.select("#chart1")
+		d3.select("#bar_states_process")
 		  .datum(dtByState)
 		  .call(BarChart1);
 
-		d3.select("#chart2")
+		d3.select("#bar_products_process")
 		  .datum(dtByProductCat)
 		  .call(BarChart2);
 
 	};
 
-	function Customer() {
+	function updateCustomer() {
 
-		d3.select("#chart3")
+		d3.select("#bar_customer_rev")
 		  .datum(revByCustomer)
 		  .call(BarChart3);
 
+	};
+
+	function updateProductCharts() {
+
 		donut1.data(revByProductCat);
-		d3.select("#chart4")
+		d3.select("#donut_products")
 			.call(donut1);
 
 	};
 
-	function updateCustomer() {
-		d3.select("#table3_1")
+	function updateCustomerTable() {
+		d3.select("#table_customer_trans")
 			.call(table1);
 		table1.data(filteredByCustomer);
 	};
 
 	// Start rendering the graphics
-	update();
-	Customer();
+	updateProductCharts();
+	updateCustomer()
+	updateProcessCharts();
 
 });
 

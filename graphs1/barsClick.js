@@ -57,7 +57,9 @@ function barChart() {
       .domain(data.map(yValue));
 
 	  g.select(".x.axis")
-      .attr("transform", "translate(0," + (innerHeight + 5) + ")")
+      // .attr("transform", "translate(0," + (innerHeight + 5) + ")")
+      // Removed any hardcoded value for responsiveness
+      .attr("transform", "translate(0," + (innerHeight) + ")")
       .call(d3.axisBottom(xScale)
         .ticks(8))
       .selectAll("text")
@@ -70,7 +72,8 @@ function barChart() {
       .append("g")
       .attr("class", "axislabel")
       .append("text")
-      .attr("transform", "translate(" + (innerWidth/2) + "," + 30 + ")")
+      .attr("transform", "translate(" + (innerWidth/2) + "," + margin.bottom * .75 + ")")
+      // .attr("dy", margin.bottom * .75)
       .style("text-anchor", "middle") 
       .attr("font-size", "1.3em")
       .attr("font-weight", "bold")
@@ -79,13 +82,15 @@ function barChart() {
 
 
 	  g.select(".y.axis")
+        //.attr("transform", "translate(0," + innerHeight + "%" + ")")
 	      .call(d3.axisLeft(yScale));
 
     g.select(".y.axis")
       .append("g")
       .attr("class", "axisLabel")
       .append("text")
-        .attr("transform", "translate(" + -(margin.left * 0) + "," + -10 + ")")
+      .attr("transform", "translate(0, "  + -10 + ")")
+        //.attr("transform", "translate(" + -(margin.left)  + "," + -10 + ")")
         .style("text-anchor", "middle")
         .attr("font-size", "1.3em")
         .attr("font-weight", "bold")
@@ -115,14 +120,14 @@ function barChart() {
 
           //Get this bar's x/y values, then augment for the tooltip
           console.log(this);
-          var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2 + 2;
+          var yPosition = parseFloat(d3.select(this).attr("y")) + yScale.bandwidth()/2;
           var xPosition = parseFloat(d3.select(this).attr("x"));
           var widthNow = parseFloat(d3.select(this).attr("width"));
 
           //Create the tooltip label
           g.append("text")
              .attr("id", "tooltip")
-             .attr("x", xPosition + widthNow + 25)
+             .attr("x", xPosition + widthNow + 20)
              .attr("y", yPosition)
              .attr("text-anchor", "middle")
              .attr("font-family", "sans-serif")

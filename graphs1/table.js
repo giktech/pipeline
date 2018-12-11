@@ -14,16 +14,17 @@ function chartTable() {
             // Remove the existing table and create a new one
             selection.selectAll('table').remove();
 
-            var table = selection.append('table');
+            var table = selection.append('table')
+                // .attr('width', width + margin.left + margin.right)
+                // .attr('height', height + margin.top + margin.bottom)
+                // .append('g')
+                //  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
 
             // Add a caption
             table.append('caption')
-                .text("Transactions for selected customer")
+                .text("Transactions for selected customer");
 
-                // .attr('width', width + margin.left + margin.right)
-                // .attr('height', height + margin.top + margin.bottom);
-                // .append('g')
-                //  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
             var thead = table.append('thead');
             var tbody = table.append('tbody');

@@ -36,8 +36,9 @@ function donutChart() {
 
             // this arc is used for aligning the text labels
             var outerArc = d3.arc()
-                .outerRadius(radius * 0.9)
+                .outerRadius(radius * 0.8)
                 .innerRadius(radius * 0.9);
+
             // ===========================================================================================
 
             // ===========================================================================================
@@ -47,7 +48,8 @@ function donutChart() {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
               .append('g')
-                .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+              // Changed this from just width/2
+                .attr('transform', 'translate(' + (width + margin.left + margin.right) / 2  + ',' + height / 2 + ')');
             // ===========================================================================================
 
             // ===========================================================================================
