@@ -22,6 +22,12 @@ var rowConverter = function(d) {
 
 var sorta = function(d) {
 	return d.sort(function(x,y) {
+		return d3.ascending(x.value, y.value)
+	});
+};
+
+var sortd = function(d) {
+	return d.sort(function(x,y) {
 		return d3.descending(x.value, y.value)
 	});
 };
@@ -31,8 +37,8 @@ var t = d3.transition().duration(duration);
 
 var chart1M = {top: 40, right: 80, bottom: 40, left: 100};
 var BarChart1 = barChart()
-  .width(900)
-  .height(600)
+  .width(1000)
+  .height(800)
   .margin(chart1M)
   .xAxisLabel("Processing Time (Hrs)")
   .yAxisLabel("States")
@@ -45,8 +51,17 @@ var BarChart1 = barChart()
 var timerInterval = 1500;
 
 var donut1 = donutChart()
-    .width(850)
-    .height(400)
+    .width(1000)
+    .height(600)
+    .transTime(750) // length of transitions in ms
+    .cornerRadius(3) // sets how rounded the corners are on each slice
+    .padAngle(0.015) // effectively dictates the gap between slices
+    .variable('value')
+    .category('key');
+
+var donut2 = donutChart()
+    .width(1200)
+    .height(800)
     .transTime(750) // length of transitions in ms
     .cornerRadius(3) // sets how rounded the corners are on each slice
     .padAngle(0.015) // effectively dictates the gap between slices
@@ -61,19 +76,19 @@ var table1 = chartTable();
 var chart2M = {top: 40, right: 80, bottom: 40, left: 220};
 
 var BarChart2 = barChart()
-  .width(900)
-  .height(700)
+  .width(1000)
+  .height(800)
   .margin(chart2M)
   .xAxisLabel("Processing Time(Hrs)")
   .yAxisLabel("Product Categories")
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-var chart3M = {top: 40, right: 80, bottom: 40, left: 250};
+var chart3M = {top: 80, right: 100, bottom: 40, left: 350};
 
 var BarChart3 = barChart()
-  .width(900)
-  .height(700)
+  .width(1000)
+  .height(800)
   .margin(chart3M)
   .xAxisLabel("Total of Purchases ($)")
   .yAxisLabel("Customer ID")
@@ -105,7 +120,7 @@ d3.csv("data/ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	revByCustomer = sorta(revByCustomer).slice(0,15);
+	revByCustomer = sortd(revByCustomer).slice(0,15);
 
 
 	// Grouping
@@ -119,7 +134,7 @@ d3.csv("data/ecommerce-combined.csv", rowConverter)
 						.entries(dataset);
 
 
-	dtByState = sorta(dtByState).slice(0,15);
+	dtByState = sortd(dtByState).slice(0,15);
 
 
 	var dtByProductCat = d3.nest()
@@ -129,10 +144,20 @@ d3.csv("data/ecommerce-combined.csv", rowConverter)
 						}));})
 						.entries(dataset);
 
-	dtByProductCat = sorta(dtByProductCat).slice(0,15);
+	dtByProductCat = sortd(dtByProductCat).slice(0,15);
 
 
 	var revByProductCat = d3.nest()
+						.key(function(d) { return d.product_category})
+						.rollup( function(v) { return Math.round(d3.sum(v, function(d) {
+							return d.product_price;
+						}));})
+						.entries(dataset);
+
+		revByProductCat = sortd(revByProductCat).slice(0, 11);
+
+
+var revByProductCata = d3.nest()
 						.key(function(d) { return d.product_category})
 						.rollup( function(v) { return Math.round(d3.sum(v, function(d) {
 							return d.product_price;
@@ -274,6 +299,10 @@ d3.csv("data/ecommerce-combined.csv", rowConverter)
 		donut1.data(revByProductCat);
 		d3.select("#donut_products")
 			.call(donut1);
+
+		// donut2.data(revByProductCata);
+		// d3.select("#donut2_products")
+		// 	.call(donut2);
 
 	};
 
