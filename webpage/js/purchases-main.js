@@ -1,4 +1,5 @@
 currentStyle = "default"
+currentProduct = "health_beauty"
 
 d3.csv("data/ecommerce-productgrowth.csv")
 .then(function(data) {
@@ -125,16 +126,14 @@ d3.csv("data/ecommerce-productgrowth.csv")
         .attr("d", line)
         .on("mouseover", function(d) {
             svg.selectAll('.product-line')
-                .style("stroke", "rgb(210, 215, 211")
-                .style("stroke-width", 3)
-                .attr("opacity", 0.2);
+                .style("visibility", "hidden");
             
             svg.selectAll(".product-circle")
-                .attr("opacity", 0.2)
-                .attr("r", 1)
+                .style("visibility", "hidden");
 
             svg.selectAll('.product-line-' + d[0].product_category)
                 .attr("opacity", 1)
+                .style("visibility", "visible")
                 .style("stroke", function(d) { return zScale(Math.atan2(1, d[1]["order_ct"] - d[0]["order_ct"])); })
                 .style("stroke-width", 8)
                 .raise();
@@ -142,6 +141,7 @@ d3.csv("data/ecommerce-productgrowth.csv")
             svg.selectAll(".product-circle-" + d[0].product_category)
                 .attr("opacity", 1)
                 .attr("r", 5)
+                .style("visibility", "visible")
                 .style("fill", "rgb(52, 73, 94)")
                 .raise();
 
@@ -211,55 +211,57 @@ d3.csv("data/ecommerce-productgrowth.csv")
                 purchaseLineChartDefaultStyle();
             } else if (currentStyle == "growth") {
                 purchaseLineChartGrowthStyle();
+            } else if (currentStyle == "selection") {
+                purchaseLineChartSelectionStyle($("#product-select").val());
             }
 
-            svg.selectAll('.product-line-' + d[0].product_category)
-                // .transition()
-                .attr("opacity", function(e) {
-                    if (currentStyle == "growth") {
-                        return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
-                    }
+            // svg.selectAll('.product-line-' + d[0].product_category)
+            //     // .transition()
+            //     .attr("opacity", function(e) {
+            //         if (currentStyle == "growth") {
+            //             return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
+            //         }
 
-                    return 1;
-                })
-                .style("stroke", function(e) {
-                    if (currentStyle == "growth") {
-                        return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
-                    }
+            //         return 1;
+            //     })
+            //     .style("stroke", function(e) {
+            //         if (currentStyle == "growth") {
+            //             return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
+            //         }
 
-                    return "rgb(75, 119, 190)"
-                })
-                .style("stroke-width", function(e) {
-                    if (currentStyle == "growth") {
-                        return (d[0].alltime_diff_rank < 6) ? 6 : 3;
-                    }
+            //         return "rgb(75, 119, 190)"
+            //     })
+            //     .style("stroke-width", function(e) {
+            //         if (currentStyle == "growth") {
+            //             return (d[0].alltime_diff_rank < 6) ? 6 : 3;
+            //         }
 
-                    return 3
-                });
+            //         return 3
+            //     });
 
-            svg.selectAll(".product-circle-" + d[0].product_category)
-                // .transition()
-                .attr("opacity", function(e) {
-                    if (currentStyle == "growth") {
-                        return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
-                    }
+            // svg.selectAll(".product-circle-" + d[0].product_category)
+            //     // .transition()
+            //     .attr("opacity", function(e) {
+            //         if (currentStyle == "growth") {
+            //             return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
+            //         }
 
-                    return 1;
-                })
-                .attr("r", function(e) {
-                    if (currentStyle == "growth") {
-                        return (d[0].alltime_diff_rank < 6) ? 3 : 1;
-                    }
+            //         return 1;
+            //     })
+            //     .attr("r", function(e) {
+            //         if (currentStyle == "growth") {
+            //             return (d[0].alltime_diff_rank < 6) ? 3 : 1;
+            //         }
 
-                    return 1
-                })
-                .style("fill", function(e) {
-                    if (currentStyle == "growth") {
-                        return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
-                    }
+            //         return 1
+            //     })
+            //     .style("fill", function(e) {
+            //         if (currentStyle == "growth") {
+            //             return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
+            //         }
 
-                    return "rgb(75, 119, 190)"
-                });
+            //         return "rgb(75, 119, 190)"
+            //     });
 
             svg.selectAll(".product-circle-text")
                 .remove()
@@ -288,7 +290,16 @@ d3.csv("data/ecommerce-productgrowth.csv")
         .attr("cy", function(d, i) { return yScale(d.month_order_ct); })
         .attr("r", 1);
 
-    
+
+    $(document).ready(function() {
+        $('#product-select').on("change", function() {
+            purchaseLineChartSelectionStyle(this.value);
+        })
+    });
+
+    $("#product-select").val("health_beauty");
+    purchaseLineChartSelectionStyle("health_beauty")
+        
     
     // var orders_barchart_init = barChartv2()
     // .width(1000)
@@ -314,26 +325,26 @@ var purchaseLineChartDefaultStyle = function() {
 
     d3.selectAll('.product-line')
         // .transition()
-        .attr("opacity", 1)
+        .style("visibility", "visible")
         .style("stroke", "rgb(75, 119, 190)")
         .style("stroke-width", 3);
 
     d3.selectAll('.product-line-topnetgrowth')
         // .transition()
-        .attr("opacity", 1)
+        .style("visibility", "visible")
         .style("stroke", "rgb(75, 119, 190)")
         .style("stroke-width", 3);
 
     d3.selectAll('.product-circle-topnetgrowth')
         // .transition()
-        .attr("opacity", 1)
         .attr("r", 1)
+        .style("visibility", "visible")
         .style("fill", "rgb(75, 119, 190)");
         
     d3.selectAll('.product-circle')
         // .transition()
-        .attr("opacity", 1)
         .attr("r", 1)
+        .style("visibility", "visible")
         .style("fill", "rgb(75, 119, 190)");
 }
 
@@ -342,22 +353,61 @@ var purchaseLineChartGrowthStyle = function() {
 
     d3.selectAll('.product-line')
         // .transition()
-        .attr("opacity", 0.1);
+        .style("visibility", "hidden");
 
     d3.selectAll('.product-line-topnetgrowth')
         // .transition()
-        .attr("opacity", 1)
+        .style("visibility", "visible")
         .style("stroke", "rgb(52, 73, 94)")
         .style("stroke-width", 6);
 
     d3.selectAll(".product-circle")
         // .transition()
-        .attr("opacity", 0.1);
+        .style("visibility", "hidden");
 
     d3.selectAll('.product-circle-topnetgrowth')
         // .transition()
-        .attr("opacity", 1)
         .attr("r", 3)
+        .style("visibility", "visible")
         .style("fill", "rgb(52, 73, 94)");
 
 }
+
+var purchaseLineChartSelectionStyle = function(selectedProduct) {
+    if (selectedProduct == "All Products") {
+        purchaseLineChartDefaultStyle();
+        return;
+    } 
+    
+    if (selectedProduct == "Top 5 Products") {
+        purchaseLineChartGrowthStyle();
+        return;
+    }
+
+    currentStyle = "selection"
+    currentProduct = selectedProduct
+
+    d3.selectAll('.product-line')
+        // .transition()
+        .style("visibility", "hidden");
+
+    d3.selectAll('.product-line-' + selectedProduct)
+        // .transition()
+        .attr("opacity", 1)
+        .style("visibility", "visible")
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
+
+    d3.selectAll(".product-circle")
+        // .transition()
+        .style("visibility", "hidden");
+
+    d3.selectAll('.product-circle-' + selectedProduct)
+        // .transition()
+        .attr("opacity", 1)
+        .attr("r", 3)
+        .style("visibility", "visible")
+        .style("fill", "rgb(52, 73, 94)");
+
+}
+
