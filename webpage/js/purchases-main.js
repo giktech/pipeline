@@ -119,7 +119,7 @@ d3.csv("data/ecommerce-productgrowth.csv")
                 classString += " product-line-topnetgrowth"
             }
 
-            classString += " " + d[0].dt_month
+            classString += " product-line-month-" + d[0].month.getMonth()
 
             return classString;
         })
@@ -148,6 +148,23 @@ d3.csv("data/ecommerce-productgrowth.csv")
             lineData = data.filter(function(ld) {
                 return ld.product_category == d[0].product_category
             });
+
+            if (currentStyle == "season") {
+                var nonHolidayMonths = [8, 0, 1, 2, 3, 4, 5, 6, 7]
+                var holidayMonths = [9, 10, 11, 12]
+                for (month in nonHolidayMonths) {
+                    console.log(".product-line-month-" + month)
+                    svg.selectAll(".product-line-month-" + month)
+                        .style("visibility", "hidden");
+
+                    svg.selectAll(".product-circle-month-" + month)
+                        .style("visibility", "hidden");
+                }
+
+                lineData = lineData.filter(function(ld) {
+                    return holidayMonths.includes(ld.dt_month.getMonth());
+                })
+            }
 
             svg.selectAll(".product-circle-text-line1")
                 .data(lineData)
@@ -208,60 +225,14 @@ d3.csv("data/ecommerce-productgrowth.csv")
         })
         .on("mouseout", function(d) {
             if (currentStyle == "default") {
-                purchaseLineChartDefaultStyle();
+                purchaseLineChartSelectionStyle("All Products");
             } else if (currentStyle == "growth") {
-                purchaseLineChartGrowthStyle();
+                purchaseLineChartSelectionStyle("Top 5 Products");
             } else if (currentStyle == "selection") {
                 purchaseLineChartSelectionStyle($("#product-select").val());
+            } else if (currentStyle == "season") {
+                purchaseLineChartSelectionStyle("Holiday Season");
             }
-
-            // svg.selectAll('.product-line-' + d[0].product_category)
-            //     // .transition()
-            //     .attr("opacity", function(e) {
-            //         if (currentStyle == "growth") {
-            //             return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
-            //         }
-
-            //         return 1;
-            //     })
-            //     .style("stroke", function(e) {
-            //         if (currentStyle == "growth") {
-            //             return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
-            //         }
-
-            //         return "rgb(75, 119, 190)"
-            //     })
-            //     .style("stroke-width", function(e) {
-            //         if (currentStyle == "growth") {
-            //             return (d[0].alltime_diff_rank < 6) ? 6 : 3;
-            //         }
-
-            //         return 3
-            //     });
-
-            // svg.selectAll(".product-circle-" + d[0].product_category)
-            //     // .transition()
-            //     .attr("opacity", function(e) {
-            //         if (currentStyle == "growth") {
-            //             return (d[0].alltime_diff_rank < 6) ? 1 : 0.1;
-            //         }
-
-            //         return 1;
-            //     })
-            //     .attr("r", function(e) {
-            //         if (currentStyle == "growth") {
-            //             return (d[0].alltime_diff_rank < 6) ? 3 : 1;
-            //         }
-
-            //         return 1
-            //     })
-            //     .style("fill", function(e) {
-            //         if (currentStyle == "growth") {
-            //             return (d[0].alltime_diff_rank < 6) ? "rgb(52, 73, 94)" : "rgb(75, 119, 190)";
-            //         }
-
-            //         return "rgb(75, 119, 190)"
-            //     });
 
             svg.selectAll(".product-circle-text")
                 .remove()
@@ -283,6 +254,8 @@ d3.csv("data/ecommerce-productgrowth.csv")
             if (d.alltime_diff_rank < 6) {
                 classString += " product-circle-topnetgrowth"
             }
+
+            classString += " product-circle-month-" + d.dt_month.getMonth()
 
             return classString;
         })
@@ -326,26 +299,26 @@ var purchaseLineChartDefaultStyle = function() {
     d3.selectAll('.product-line')
         // .transition()
         .style("visibility", "visible")
-        .style("stroke", "rgb(75, 119, 190)")
-        .style("stroke-width", 3);
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
 
     d3.selectAll('.product-line-topnetgrowth')
         // .transition()
         .style("visibility", "visible")
-        .style("stroke", "rgb(75, 119, 190)")
-        .style("stroke-width", 3);
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
 
     d3.selectAll('.product-circle-topnetgrowth')
         // .transition()
-        .attr("r", 1)
+        .attr("r", 3)
         .style("visibility", "visible")
-        .style("fill", "rgb(75, 119, 190)");
+        .style("fill", "rgb(52, 73, 94)");
         
     d3.selectAll('.product-circle')
         // .transition()
-        .attr("r", 1)
+        .attr("r", 3)
         .style("visibility", "visible")
-        .style("fill", "rgb(75, 119, 190)");
+        .style("fill", "rgb(52, 73, 94)");
 }
 
 var purchaseLineChartGrowthStyle = function() {
@@ -373,6 +346,67 @@ var purchaseLineChartGrowthStyle = function() {
 
 }
 
+var purchaseLineChartSeasonStyle = function() {
+    currentStyle = "season"
+
+    d3.selectAll('.product-line')
+        // .transition()
+        .style("visibility", "hidden");
+
+    d3.selectAll('.product-line-month-9')
+        // .transition()
+        .style("visibility", "visible")
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
+
+    d3.selectAll('.product-line-month-10')
+        // .transition()
+        .style("visibility", "visible")
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
+
+    d3.selectAll('.product-line-month-11')
+        // .transition()
+        .style("visibility", "visible")
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
+
+    d3.selectAll('.product-line-month-12')
+        // .transition()
+        .style("visibility", "visible")
+        .style("stroke", "rgb(52, 73, 94)")
+        .style("stroke-width", 6);
+
+    d3.selectAll(".product-circle")
+        // .transition()
+        .style("visibility", "hidden");
+
+    d3.selectAll('.product-circle-month-10')
+        // .transition()
+        .attr("r", 3)
+        .style("visibility", "visible")
+        .style("fill", "rgb(52, 73, 94)");
+
+    d3.selectAll('.product-circle-month-11')
+        // .transition()
+        .attr("r", 3)
+        .style("visibility", "visible")
+        .style("fill", "rgb(52, 73, 94)");
+
+    d3.selectAll('.product-circle-month-12')
+        // .transition()
+        .attr("r", 3)
+        .style("visibility", "visible")
+        .style("fill", "rgb(52, 73, 94)");
+
+    d3.selectAll('.product-circle-month-0')
+        // .transition()
+        .attr("r", 3)
+        .style("visibility", "visible")
+        .style("fill", "rgb(52, 73, 94)");
+
+}
+
 var purchaseLineChartSelectionStyle = function(selectedProduct) {
     if (selectedProduct == "All Products") {
         purchaseLineChartDefaultStyle();
@@ -381,6 +415,11 @@ var purchaseLineChartSelectionStyle = function(selectedProduct) {
     
     if (selectedProduct == "Top 5 Products") {
         purchaseLineChartGrowthStyle();
+        return;
+    }
+
+    if (selectedProduct == "Holiday Season") {
+        purchaseLineChartSeasonStyle();
         return;
     }
 

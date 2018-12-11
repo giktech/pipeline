@@ -52,11 +52,11 @@
 				Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.
 			</p>
 			<p>
-				<a href="#" class="btn btn-primary m-2">Overview of all Data</a>
-				<a href="#" class="btn btn-primary m-2">Explore Market Trends</a>
-				<a href="#" class="btn btn-primary m-2">Top Performing Products</a>
-				<a href="#" class="btn btn-primary m-2">Top 15 Customers</a>
-				<a href="#" class="btn btn-primary m-2">Order Processing Times</a>
+				<a href="#" class="btn btn-secondary m-2">Overview of All Data</a>
+				<a href="#" class="btn btn-secondary m-2">Explore Market Trends</a>
+				<a href="#" class="btn btn-secondary m-2">Top Performing Products</a>
+				<a href="#" class="btn btn-secondary m-2">Top 15 Customers</a>
+				<a href="#" class="btn btn-secondary m-2">Order Processing Times</a>
 			</p>
 		</div>
 	</section>
@@ -191,78 +191,38 @@
 			<div class="col-lg-8 col-md-8 px-0"> 
 				<div id="product-viz">
 					<div class="form-group mx-5 px-5" id="product-form">
-						<label for="product-select">Product Selection</label>
+						<label for="product-select">Line Selection</label>
 						<select class="form-control" id="product-select">
 							<option>All Products</option>
 							<option>Top 5 Products</option>
-							<option>agro_industry_and_commerce</option>
-							<option>air_conditioning</option>
-							<option>art</option>
-							<option>arts_and_craftmanship</option>
-							<option>audio</option>
+							<option>Holiday Season</option>
 							<option>auto</option>
 							<option>baby</option>
 							<option>bed_bath_table</option>
 							<option>books_general_interest</option>
-							<option>books_imported</option>
-							<option>books_technical</option>
-							<option>cds_dvds_musicals</option>
-							<option>christmas_supplies</option>
-							<option>cine_photo</option>
-							<option>computers</option>
 							<option>computers_accessories</option>
 							<option>consoles_games</option>
 							<option>construction_tools_construction</option>
-							<option>construction_tools_lights</option>
-							<option>construction_tools_safety</option>
 							<option>cool_stuff</option>
-							<option>costruction_tools_garden</option>
-							<option>costruction_tools_tools</option>
-							<option>diapers_and_hygiene</option>
-							<option>drinks</option>
-							<option>dvds_blu_ray</option>
 							<option>electronics</option>
-							<option>fashio_female_clothing</option>
 							<option>fashion_bags_accessories</option>
-							<option>fashion_childrens_clothes</option>
-							<option>fashion_male_clothing</option>
-							<option>fashion_shoes</option>
-							<option>fashion_sport</option>
-							<option>fashion_underwear_beach</option>
-							<option>fixed_telephony</option>
-							<option>flowers</option>
 							<option>food</option>
-							<option>food_drink</option>
-							<option>furniture_bedroom</option>
 							<option>furniture_decor</option>
 							<option>furniture_living_room</option>
-							<option>furniture_mattress_and_upholstery</option>
 							<option>garden_tools</option>
 							<option>health_beauty</option>
 							<option>home_appliances</option>
-							<option>home_appliances_2</option>
-							<option>home_comfort_2</option>
 							<option>home_confort</option>
 							<option>home_construction</option>
 							<option>housewares</option>
-							<option>industry_commerce_and_business</option>
-							<option>kitchen_dining_laundry_garden_furniture</option>
-							<option>la_cuisine</option>
 							<option>luggage_accessories</option>
-							<option>market_place</option>
-							<option>music</option>
 							<option>musical_instruments</option>
 							<option>office_furniture</option>
-							<option>party_supplies</option>
 							<option>perfumery</option>
 							<option>pet_shop</option>
-							<option>security_and_services</option>
-							<option>signaling_and_security</option>
 							<option>small_appliances</option>
-							<option>small_appliances_home_oven_and_coffee</option>
 							<option>sports_leisure</option>
 							<option>stationery</option>
-							<option>tablets_printing_image</option>
 							<option>telephony</option>
 							<option>toys</option>
 							<option>watches_gifts</option>
@@ -625,28 +585,39 @@
 					new ScrollMagic.Scene({triggerElement: "#market-scroll-anchor-2"})
 					.duration(450)
 					.trigger("enter leave")
-					.on("enter", purchaseLineChartGrowthStyle)
-					.on("leave", purchaseLineChartDefaultStyle)
+					.on("enter", function(event) {
+						$("#product-select").val("Top 5 Products");
+						purchaseLineChartSelectionStyle("Top 5 Products");
+					})
+					.on("leave", function(event) {
+						if (event.scrollDirection == "REVERSE") {
+							$("#product-select").val("health_beauty");
+							purchaseLineChartSelectionStyle("health_beauty")
+						}
+					})
 					// .addIndicators()
 					.addTo(controller);
 					
-					new ScrollMagic.Scene({triggerElement: "#market-scroll-anchor-3"})
-					.duration(450)
+					new ScrollMagic.Scene({triggerElement: "#market-scroll-anchor-3", offset: -100})
+					.duration(550)
 					.trigger("enter leave")
-					// .on("enter", purchaseLineChartGrowthStyle)
-					.on("leave", purchaseLineChartDefaultStyle)
+					.on("enter", function(event) {
+						$("#product-select").val("Holiday Season");
+						purchaseLineChartSelectionStyle("Holiday Season");
+					})
+					.on("leave", function(event) {
+						if (event.scrollDirection == "FORWARD") {
+							$("#product-select").val("All Products");
+							purchaseLineChartSelectionStyle("All Products");
+						}
+					})
 					// .addIndicators()
 					.addTo(controller);
 					
-					new ScrollMagic.Scene({triggerElement: "#market-scroll-anchor-3"})
-					.duration(450)
-					.trigger("enter leave")
-					// .on("enter", purchaseLineChartGrowthStyle)
-					.on("leave", purchaseLineChartDefaultStyle)
-					// .addIndicators()
-					.addTo(controller);
 					
-					// build processing scenes
+					/**
+					 * Processing
+					 **/
 					new ScrollMagic.Scene({triggerElement: "#processing-scroll-anchor-1", offset: 330})
 					.duration(1700)
 					.setPin("#processing-viz1")
