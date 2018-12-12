@@ -108,6 +108,23 @@ body {
     height: 550px;
 }
 
+#overview-viz2 {
+    display: none;
+}
+
+#overview-viz3 {
+    display: none;
+}
+
+#overview-viz4 {
+    display: none;
+}
+
+#overview-viz5 {
+    display: none;
+}
+
+
 /*
 * Market Trends
 */
