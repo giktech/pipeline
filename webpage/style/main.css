@@ -24,25 +24,76 @@ body {
 */
 
 .jumbotron {
-    padding-top: 150px;
-    height: 500px;
+    padding-top: 110px;
+    height: 900px;
+}
+
+.jumbotron-image {
+    width: 800px;
+    padding-bottom: 50px;
 }
 
 .lead {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
+}
+
+/*
+* Customer
+*/
+
+#customer-viz2 {
+    padding-top: 60px;
+}
+
+.customer-row-body {
+    height: 1900px;
+}
+
+.customer-text-block {
+    padding-left: 80px;
+}
+
+.customer-text-intro {
+    padding-top: 240px;
+    height: 800px;
+}
+
+.customer-text-body-1 {
+    height: 450px;
+}
+
+/*
+* Product
+*/
+
+.product-row-body {
+    height: 2000px;
+}
+
+.product-text-block {
+    padding-left: 80px;
+}
+
+.product-text-intro {
+    padding-top: 240px;
+    height: 830px;
+}
+
+.product-text-body-1 {
+    height: 550px;
 }
 
 /*
 * Overview
-*/ 
+*/
 
 .overview-row-body {
-    height: 2600px;
+    height: 1500px;
 }
 
-.overview-text-block {
+/* .overview-text-block {
     padding-left: 80px;
-}
+} */
 
 .overview-text-intro {
     padding-top: 180px;
@@ -142,10 +193,8 @@ line.hover-line {
 .processing-text-season {
     height: 550px;
 }
-
 /* 
-* Gaurav 
-*/
+
 #chart1 .bar {
     fill: grey;
 }
@@ -159,4 +208,4 @@ fill: grey;
 background: yellow;
 margin: -4px;
 padding: 4px;
-}
+} */

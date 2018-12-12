@@ -84,20 +84,20 @@ WITH product_top30 AS (
 	FROM count_withchange
 )
 
-SELECT
+SELECT DISTINCT
 	product_category
-	,dt_month
-	--,month_rank_asc
-	--,month_rank_desc
-	,month_order_ct
+	--,dt_month
+	----,month_rank_asc
+	----,month_rank_desc
+	--,month_order_ct
 
-	,dt_priormonth
-	,priormonth_order_ct
-	,priormonth_order_ct_diff
-	,priormonth_order_ct_pctchange
-	,alltime_order_ct_pctchange
-	,alltime_order_ct_diff
-	,DENSE_RANK() OVER (ORDER BY alltime_order_ct_pctchange DESC, product_category) AS alltime_pctchange_rank
-	,DENSE_RANK() OVER (ORDER BY alltime_order_ct_diff DESC, product_category) AS alltime_diff_rank
+	--,dt_priormonth
+	--,priormonth_order_ct
+	--,priormonth_order_ct_diff
+	--,priormonth_order_ct_pctchange
+	--,alltime_order_ct_pctchange
+	--,alltime_order_ct_diff
+	--,DENSE_RANK() OVER (ORDER BY alltime_order_ct_pctchange DESC, product_category) AS alltime_pctchange_rank
+	--,DENSE_RANK() OVER (ORDER BY alltime_order_ct_diff DESC, product_category) AS alltime_diff_rank
 FROM product_growth
-ORDER BY alltime_diff_rank, dt_month
+ORDER BY product_category

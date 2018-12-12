@@ -1,7 +1,7 @@
 
 function barChart() {
 
-  var margin = {top: 40, right: 40, bottom: 40, left: 80},
+  var margin = {top: 0, right: 20, bottom: 0, left: 0},
     width = 600,
     height = 600,
     innerWidth = width - margin.left - margin.right,
@@ -9,7 +9,7 @@ function barChart() {
     xValue = function(d) { return d[1] },
     yValue = function(d) { return d[0] },
     xScale = d3.scaleLinear(),
-    yScale = d3.scaleBand().padding(0.1);
+    yScale = d3.scaleBand().padding(0.15);
 
   var xAxisLabel = "Numbers";
   var yAxisLabel = "Categories";

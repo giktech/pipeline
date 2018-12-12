@@ -37,7 +37,7 @@ var t = d3.transition().duration(duration);
 
 var chart1M = {top: 40, right: 80, bottom: 40, left: 100};
 var BarChart1 = barChart()
-  .width(1000)
+//   .width(document.getElementById("processing-viz4").clientWidth)
   .height(800)
   .margin(chart1M)
   .xAxisLabel("Processing Time (Hrs)")
@@ -51,8 +51,8 @@ var BarChart1 = barChart()
 var timerInterval = 1500;
 
 var donut1 = donutChart()
-    .width(1000)
-    .height(600)
+    .width(document.getElementById("donut_products").clientWidth - 50)
+    .height(800)
     .transTime(750) // length of transitions in ms
     .cornerRadius(3) // sets how rounded the corners are on each slice
     .padAngle(0.015) // effectively dictates the gap between slices
@@ -76,7 +76,7 @@ var table1 = chartTable();
 var chart2M = {top: 40, right: 80, bottom: 40, left: 220};
 
 var BarChart2 = barChart()
-  .width(1000)
+//   .width(document.getElementById("processing-viz5").clientWidth)
   .height(800)
   .margin(chart2M)
   .xAxisLabel("Processing Time(Hrs)")
@@ -87,7 +87,7 @@ var BarChart2 = barChart()
 var chart3M = {top: 80, right: 100, bottom: 40, left: 350};
 
 var BarChart3 = barChart()
-  .width(1000)
+  .width(document.getElementById("customer-viz1").clientWidth)
   .height(800)
   .margin(chart3M)
   .xAxisLabel("Total of Purchases ($)")
