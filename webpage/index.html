@@ -27,22 +27,19 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Overview</a>
+						<a class="nav-link" href="#customer-section">Customers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Customers</a>
+						<a class="nav-link" href="#product-section">Products</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Products</a>
+						<a class="nav-link" href="#market-section">Market Trends</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Market Trends</a>
+						<a class="nav-link" href="#processing-section">Order Processing</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Order Processing</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Dashboard</a>
+						<a class="nav-link" href="#overview-section">Overview</a>
 					</li>
 				</ul>
 			</div>
@@ -63,19 +60,18 @@
 			</p>
 			<img src="assets/schema.png" class="rounded mx-auto d-block jumbotron-image" alt="...">
 			<p>
-				<a href="#" class="btn btn-secondary m-2">Overview</a>
-				<a href="#" class="btn btn-secondary m-2">Most Valuable Customers</a>
-				<a href="#" class="btn btn-secondary m-2">Top Performing Products</a>
-				<a href="#" class="btn btn-secondary m-2">Explore Market Trends</a>
-				<a href="#" class="btn btn-secondary m-2">Order Processing Times</a>
-				<a href="#" class="btn btn-secondary m-2">Dashboard</a>
+				<a href="#customer-section" class="btn btn-secondary m-2">Most Valuable Customers</a>
+				<a href="#product-section" class="btn btn-secondary m-2">Top Performing Products</a>
+				<a href="#market-section" class="btn btn-secondary m-2">Explore Market Trends</a>
+				<a href="#processing-section" class="btn btn-secondary m-2">Order Processing Times</a>
+				<a href="#overview-section" class="btn btn-secondary m-2">Overiew</a>
 			</p>
 		</div>
 	</section>
 
 	<!-- 	Top 15 Customers -->
 	<div class="container-fluid">
-		<div class="row customer-row-intro">
+		<div id="customer-section" class="row customer-row-intro">
 			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center p-3 mb-3 border-bottom">
 					<h1 class="h2">Most Valuable customers </h1>
@@ -135,7 +131,7 @@
 		</div>
 
 		<!-- Products -->
-		<div class="row">
+		<div id="product-section" class="row">
 			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center p-3 mb-3 border-bottom">
 					<h1 class="h2">Highest Grossing Products</h1>
@@ -196,7 +192,7 @@
 
 
 		<!-- Market Trends -->
-		<div class="row market-row-intro">
+		<div id="market-section"class="row market-row-intro">
 			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Explore Market Trends </h1>
@@ -316,7 +312,7 @@
 
 		<!-- Order Processing -->
 
-		<div class="row">
+		<div id="processing-section"class="row">
 			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Order Processing Times</h1>
@@ -388,7 +384,7 @@
 		</div>
 
 		<!-- Overview -->
-		<div class="row">
+		<div id="overview-section"class="row">
 			<div class="col-12">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Overview</h1>
@@ -801,6 +797,7 @@
 			.on("leave", purchaseLineChartDefaultStyle)
 			// .addIndicators()
 			.addTo(controller);
+
 		/**
 		 * Processing
 		 **/
@@ -856,7 +853,7 @@
 			})
 			.duration(2250)
 			.setPin("#overview-viz-parent")
-			.addIndicators()
+			// .addIndicators()
 			.addTo(controller);
 		new ScrollMagic.Scene({
 				triggerElement: "#overview-scroll-anchor-2"
@@ -877,7 +874,7 @@
 					$("#overview-viz3").show();
 				}
 			})
-			.addIndicators()
+			// .addIndicators()
 			.addTo(controller);
 		new ScrollMagic.Scene({
 				triggerElement: "#overview-scroll-anchor-4"
@@ -899,7 +896,7 @@
 					$("#overview-viz5").show();
 				}
 			})
-			.addIndicators()
+			// .addIndicators()
 			.addTo(controller);
 	</script>
 
