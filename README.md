@@ -6,3 +6,6 @@ https://drive.google.com/drive/folders/1PFHprn6xUm5yzYIMns67IUH8Gtn26iEf
 
 Initial notes etc
 https://drive.google.com/open?id=1MZ9_LrvuSTnfgA_-OkrZe8kfxhbsZJCPHWDa8yZwvCs
+
+Dataset used for the website
+https://www.kaggle.com/olistbr/brazilian-ecommerce#olist_orders_dataset.csv
