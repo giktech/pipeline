@@ -35,9 +35,10 @@ var sortd = function(d) {
 var duration = 1000;
 var t = d3.transition().duration(duration);
 
-var chart1M = {top: 40, right: 80, bottom: 40, left: 100};
+var chart1M = {top: 40, right: 80, bottom: 40, left: 40};
 var BarChart1 = barChart()
-//   .width(document.getElementById("processing-viz4").clientWidth)
+  .width(document.getElementById("processing-viz4").clientWidth)
+  //.width(500)
   .height(800)
   .margin(chart1M)
   .xAxisLabel("Processing Time (Hrs)")
@@ -73,10 +74,11 @@ var i = 0;
 var table1 = chartTable();
 
 
-var chart2M = {top: 40, right: 80, bottom: 40, left: 220};
+var chart2M = {top: 40, right: 80, bottom: 40, left: 200};
 
 var BarChart2 = barChart()
-//   .width(document.getElementById("processing-viz5").clientWidth)
+  .width(document.getElementById("processing-viz5").clientWidth)
+  //.width(500)
   .height(800)
   .margin(chart2M)
   .xAxisLabel("Processing Time(Hrs)")
@@ -84,10 +86,10 @@ var BarChart2 = barChart()
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-var chart3M = {top: 80, right: 50, bottom: 40, left: 250};
+var chart3M = {top: 80, right: 10, bottom: 40, left: 250};
 
 var BarChart3 = barChart()
-  .width(document.getElementById("customer-viz1").clientWidth)
+  .width(document.getElementById("customer-viz1").clientWidth - 50)
   .height(800)
   .margin(chart3M)
   .xAxisLabel("Total of Purchases ($)")
