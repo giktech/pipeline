@@ -84,7 +84,7 @@ var BarChart2 = barChart()
   .x(function (d) { return d.value; })
   .y(function (d) { return d.key; });
 
-var chart3M = {top: 80, right: 100, bottom: 40, left: 350};
+var chart3M = {top: 80, right: 50, bottom: 40, left: 250};
 
 var BarChart3 = barChart()
   .width(document.getElementById("customer-viz1").clientWidth)
