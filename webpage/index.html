@@ -337,7 +337,7 @@
 					</p>
 				</div>
 
-				<div class="processing-text-block processing-text-growth m-2" id="processing-scroll-anchor-2">
+				<div class="processing-text-block processing-text-body-1 m-2" id="processing-scroll-anchor-2">
 					<h4 class="gen-text processing-text">Most worrisome delays</h4>
 
 					<p class="gen-text">
@@ -348,7 +348,7 @@
 					</p>
 				</div>
 
-				<div class="processing-text-block processing-text-season m-2" id="processing-scroll-anchor-3">
+				<div class="processing-text-block processing-text-body-2 m-2" id="processing-scroll-anchor-3">
 					<h4 class="gen-text processing-text">Within States, what products are the bottleneck?</h4>
 
 					<p class="gen-text">
@@ -584,7 +584,7 @@
 				</div>
 
 				<!-- View 1 - 2017 Q4 -->
-				<div class="overview-text-block overview-text-growth pr-5" id="overview-scroll-anchor-2">
+				<div class="overview-text-block overview-text-body-1 pr-5" id="overview-scroll-anchor-2">
 						<h4 class="gen-text overview-text">Drill down to Quarter - 2017 Q4</h4>
 
 						<p class="gen-text">
@@ -600,7 +600,7 @@
 				</div>
 
 				<!-- View 2 - Nov 12 2017 -->
-				<div class="overview-text-block overview-text-season pr-5" id="overview-scroll-anchor-3">
+				<div class="overview-text-block overview-text-body-2 pr-5" id="overview-scroll-anchor-3">
 						<h4 class="gen-text overview-text">Drill down to Day - November 12th, 2017</h4>
 
 						<p class="gen-text">
@@ -616,7 +616,7 @@
 
 
 				<!-- View 3 - Nov 12 2017, Rio De Janiero -->
-				<div class="overview-text-block overview-text-season pr-5" id="overview-scroll-anchor-4">
+				<div class="overview-text-block overview-text-body-3 pr-5" id="overview-scroll-anchor-4">
 						<h4 class="gen-text overview-text">Drill down to City - Rio de Janiero</h4>
 
 					<p class="gen-text">
@@ -634,7 +634,7 @@
 				</div>
 
 				<!-- View 4 - Nov 24 2017 -->
-				<div class="overview-text-block overview-text-season pr-5" id="overview-scroll-anchor-5">
+				<div class="overview-text-block overview-text-conclusion pr-5" id="overview-scroll-anchor-5">
 						<h4 class="gen-text overview-text">Conclusion</h4>
 
                         <p class="gen-text">
@@ -808,10 +808,10 @@
 				triggerElement: "#processing-scroll-anchor-1",
 				offset: 330
 			})
-			.duration(1700)
+			.duration(1820)
 			.setPin("#processing-viz4")
 			// .addIndicators()
-			.addTo(controller);
+			.addTo(controller)
 		new ScrollMagic.Scene({
 				triggerElement: "#processing-scroll-anchor-1",
 				offset: 330
@@ -854,13 +854,13 @@
 				triggerElement: "#overview-scroll-anchor-1",
 				offset: 380
 			})
-			.duration(2400)
+			.duration(2250)
 			.setPin("#overview-viz-parent")
 			.addIndicators()
 			.addTo(controller);
 		new ScrollMagic.Scene({
 				triggerElement: "#overview-scroll-anchor-2"
-				,offset: "-75px"
+				,offset: "-175px"
 			})
 			.duration(450)
 			.trigger("enter leave")

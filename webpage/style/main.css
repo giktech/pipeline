@@ -84,48 +84,6 @@ body {
 }
 
 /*
-* Overview
-*/
-
-.overview-row-body {
-    height: 1500px;
-}
-
-/* .overview-text-block {
-    padding-left: 80px;
-} */
-
-.overview-text-intro {
-    padding-top: 180px;
-    height: 750px;
-}
-
-.overview-text-growth {
-    height: 550px;
-}
-
-.overview-text-season {
-    height: 550px;
-}
-
-#overview-viz2 {
-    display: none;
-}
-
-#overview-viz3 {
-    display: none;
-}
-
-#overview-viz4 {
-    display: none;
-}
-
-#overview-viz5 {
-    display: none;
-}
-
-
-/*
 * Market Trends
 */
 
@@ -200,16 +158,68 @@ line.hover-line {
 
 .processing-text-intro {
     padding-top: 180px;
-    height: 750px;
+    height: 800px;
 }
 
-.processing-text-growth {
+.processing-text-body-1 {
     height: 550px;
 }
 
-.processing-text-season {
+.processing-text-body-2 {
+    height: 650px;
+}
+
+/*
+* Overview
+*/
+
+.overview-row-body {
+    height: 1500px;
+}
+
+/* .overview-text-block {
+    padding-left: 80px;
+} */
+
+.overview-text-intro {
+    padding-top: 220px;
+    height: 850px;
+}
+
+.overview-text-body-1 {
     height: 550px;
 }
+
+.overview-text-body-2 {
+    height: 550px;
+}
+
+.overview-text-body-3 {
+    height: 550px;
+}
+
+.overview-text-conclusion {
+    height: 550px;
+}
+
+
+#overview-viz2 {
+    display: none;
+}
+
+#overview-viz3 {
+    display: none;
+}
+
+#overview-viz4 {
+    display: none;
+}
+
+#overview-viz5 {
+    display: none;
+}
+
+
 /* 
 
 #chart1 .bar {
