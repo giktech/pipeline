@@ -216,7 +216,7 @@ var revByProductCata = d3.nest()
 
 		dtByProductCat = sorta(dtByProductCat).slice(0, 15);
 
-		updateProcessCharts();
+		updateProcessByProduct();
 	});
 
 	BarChart3.onClicked(function(selected) {
@@ -274,15 +274,19 @@ var revByProductCata = d3.nest()
 	// });
 
 
-	function updateProcessCharts() {
-
-		d3.select("#bar_states_process")
-		  .datum(dtByState)
-		  .call(BarChart1);
+	function updateProcessByProduct() {
 
 		d3.select("#bar_products_process")
 		  .datum(dtByProductCat)
 		  .call(BarChart2);
+
+	};
+
+	function updateProcessByState() {
+
+		d3.select("#bar_states_process")
+		  .datum(dtByState)
+		  .call(BarChart1);
 
 	};
 
@@ -313,9 +317,9 @@ var revByProductCata = d3.nest()
 	};
 
 	// Start rendering the graphics
+	updateCustomer();
 	updateProductCharts();
-	updateCustomer()
-	updateProcessCharts();
+	updateProcessByState();
 
 });
 
