@@ -56,17 +56,40 @@ function barChart() {
     yScale.range([0, innerHeight])
       .domain(data.map(yValue));
 
-	  g.select(".x.axis")
-      // .attr("transform", "translate(0," + (innerHeight + 5) + ")")
-      // Removed any hardcoded value for responsiveness
-      .attr("transform", "translate(0," + (innerHeight) + ")")
-      .call(d3.axisBottom(xScale)
+
+
+    var xAxisG = g.selectAll(".x.axis");
+    xAxisG.enter().append("g")
+        .attr("class", "x.axis")
+      .merge(xAxisG)
+        .attr("transform", "translate(0," + (innerHeight) + ")")
+        .call(d3.axisBottom(xScale)
         .ticks(8))
-      .selectAll("text")
-				.attr("y", 0)
-		    .attr("x", 11)
-		    // .attr("transform", "rotate(30)")
-		    .style("text-anchor", "start");
+        .selectAll("text")
+          .attr("y", 0)
+          .attr("x", 11)
+        // .attr("transform", "rotate(30)")
+          .style("text-anchor", "start");
+          
+    var yAxisG = g.selectAll(".y.axis");
+    yAxisG.enter().append("g")
+        .attr("class", "y.axis")
+      .merge(yAxisG)
+        .call(d3.axisLeft(yScale));
+
+	  // g.select(".x.axis")
+   //    // .attr("transform", "translate(0," + (innerHeight + 5) + ")")
+   //    // Removed any hardcoded value for responsiveness
+   //    .attr("transform", "translate(0," + (innerHeight) + ")")
+   //    .call(d3.axisBottom(xScale)
+   //      .ticks(8))
+   //    .selectAll("text")
+			// 	.attr("y", 0)
+		 //    .attr("x", 11)
+		 //    // .attr("transform", "rotate(30)")
+		 //    .style("text-anchor", "start")
+
+    g.selectAll('.axislabel').remove();
 
     g.select(".x.axis")
       .append("g")
@@ -81,13 +104,13 @@ function barChart() {
       .attr("fill", "black");
 
 
-	  g.select(".y.axis")
-        //.attr("transform", "translate(0," + innerHeight + "%" + ")")
-	      .call(d3.axisLeft(yScale));
+	  // g.select(".y.axis")
+   //      //.attr("transform", "translate(0," + innerHeight + "%" + ")")
+	  //     .call(d3.axisLeft(yScale));
 
     g.select(".y.axis")
       .append("g")
-      .attr("class", "axisLabel")
+      .attr("class", "axislabel")
       .append("text")
       .attr("transform", "translate(0, "  + -10 + ")")
         //.attr("transform", "translate(" + -(margin.left)  + "," + -10 + ")")
